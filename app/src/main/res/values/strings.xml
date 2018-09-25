@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">DebateGame</string>
+    <string name="button">Button</string>
+    <string name="create_account">Create Account</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="username">Username</string>
+    <string name="log_in">Log in</string>
+    <string name="play">Play</string>
+    <string name="settings">Settings</string>
+    <string name="debate_mate">Debate Mate</string>
+    <string name="login">Login</string>
+    <string name="ok">OK</string>
+    <string name="change_question_preferences">Change Question Preferences</string>
+    <string name="other_setting">Other Setting</string>
+    <string name="sound_effects">Sound Effects</string>
+    <string name="nickname">Nickname</string>
+    <string name="email">Email</string>
+    <string name="last_name">Last Name</string>
+    <string name="first_name">First Name</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="done">Done</string>
+</resources>
