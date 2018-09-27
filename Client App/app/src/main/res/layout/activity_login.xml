@@ -4,86 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
-    tools:layout_editor_absoluteY="81dp">
+    tools:context=".activities.LoginActivity">
 
-    <TextView
-        android:id="@+id/LogInText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="53dp"
-        android:layout_marginEnd="37dp"
-        android:layout_marginRight="37dp"
-        android:text="@string/log_in"
-        android:textSize="42sp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/loginUsername"
-        app:layout_constraintEnd_toEndOf="@+id/loginUsername" />
 
-    <EditText
-        android:id="@+id/loginUsername"
-        android:layout_width="wrap_content"
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="207dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="192dp"
-        android:ems="10"
-        android:hint="@string/username"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/loginPassword"
+        android:layout_centerInParent="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/loginPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_marginEnd="18dp"
-        android:layout_marginLeft="63dp"
-        android:layout_marginRight="18dp"
-        android:layout_marginStart="63dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toStartOf="@+id/buttonLogOK"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginUsername" />
-
     <TextView
-        android:id="@+id/loginCreateAccount"
+        android:id="@+id/txt_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="27dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:onClick="create"
-        android:text="@string/create_account"
-        app:layout_constraintStart_toStartOf="@+id/loginPassword"
-        app:layout_constraintTop_toBottomOf="@+id/loginPassword" />
-
-    <TextView
-        android:id="@+id/loginForgotPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="43dp"
-        android:layout_marginStart="43dp"
-        android:layout_marginTop="27dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:onClick="forgot"
-        android:text="@string/forgot_password"
-        app:layout_constraintStart_toEndOf="@+id/loginCreateAccount"
-        app:layout_constraintTop_toBottomOf="@+id/loginPassword" />
-
-    <Button
-        android:id="@+id/buttonLogOK"
-        android:layout_width="0dp"
-        android:layout_height="35dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:text="OK"
-        app:layout_constraintBottom_toTopOf="@+id/loginPassword"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/login_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/loginPassword"
-        app:layout_constraintTop_toTopOf="@+id/loginPassword" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--<TextView-->
+        <!--android:id="@+id/textStatus"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:text=""-->
+        <!--tools:layout_editor_absoluteX="151dp"-->
+        <!--tools:layout_editor_absoluteY="135dp" />-->
+
 
 </android.support.constraint.ConstraintLayout>
