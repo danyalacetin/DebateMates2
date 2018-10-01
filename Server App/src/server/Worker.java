@@ -12,7 +12,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.function.Consumer;
 
 /**
  *
@@ -24,15 +23,14 @@ class Worker implements Runnable {
     private final PrintWriter outStream;
     private final BufferedReader inStream;
     
-    private final Consumer<Command> requestHandler;
     private String userID;
     private int chatRoomID;
     
+    private final ServerWorker server;
     
-    
-    Worker(Socket clientSocket, Consumer<Command> requestHandler) throws IOException {
+    Worker(Socket clientSocket) throws IOException {
         client = clientSocket;
-        this.requestHandler = requestHandler;
+        server = Server.getInstance();
         
         outStream = new PrintWriter(new BufferedWriter(
                 new OutputStreamWriter(client.getOutputStream())));
@@ -56,6 +54,10 @@ class Worker implements Runnable {
         return userID;
     }
     
+    private void logout() {
+        if (null != userID) handleInput("logout " + userID);
+    }
+    
     void setLogin(String login) {
         userID = login;
     }
@@ -64,7 +66,7 @@ class Worker implements Runnable {
     public void run() {
         try {
             handleClient();
-            requestHandler.accept(new Command("serverlog handleClient() finished executing", null));
+            server.serverLog("handleClient() finished executing");
         } catch (IOException ex) {
             System.err.println("An error occured");
         } finally {
@@ -73,25 +75,28 @@ class Worker implements Runnable {
             } catch (IOException e) {
                 
             }
-            if (userID != null) handleInput("logout " + userID);
-            handleInput("serverlog Disconnected: " + client);
+            
+            logout();
+            server.serverLog("Disconnected: " + client);
         }
+    }
+    
+    void shutdown() {
+        
     }
     
     private void handleInput(String cmdString) {
         Command command = new Command(cmdString, this);
-        requestHandler.accept(command);
+        server.processCommand(command);
     }
     
     void handleClient() throws IOException {
-        
         String line;
-        
         send(ServerConstants.CONNECTED);
+        
         while((line = inStream.readLine()) != null) {
-            requestHandler.accept(new Command("serverlog CLIENT SENT: " +  line, null));
+            server.serverLog("CLIENT SENT: " +  line);
             handleInput(line);
-            System.out.println("Command processed");
         }
     }
     

@@ -11,11 +11,10 @@ package server;
  */
 class CommandProcessor {
     
-    private final Server server;
-
-    CommandProcessor(Server server)
-    {
-        this.server = server;
+    private Server server;
+    
+    void initialise() {
+        server = Server.getInstance();
     }
     
     void processCommand(Command command) {
@@ -37,8 +36,7 @@ class CommandProcessor {
         else if (command.isCommand("chat")) {
             int room = command.getSource().getChatRoom();
             server.getChatRoomManager().sendMessage(room, command.nextCommand());
-        } else if (command.isCommand("serverlog"))
-            server.printLog(command.getArgs());
+        }
     }
     
 }

@@ -5,10 +5,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
-public class Server {
+public class Server implements ServerWorker, ConnectionInitiator {
+    
+    private static Server currentInstance = null;
     
     private final WorkerManager workerManager;
-    private final CommandProcessor commandManager;
+    private final CommandProcessor commandProcessor;
     private final ConnectionFinder connectionFinder;
     private final MatchManager matchManager;
     private final ChatRoomManager chatRoomManager;
@@ -16,18 +18,15 @@ public class Server {
     private final ExecutorService executor;
     private final Consumer<String> logFunction;
     
-    public Server(int serverPort, Consumer<String> logFunction) {
+    private Server(Consumer<String> logFunction) {
         
         executor = Executors.newCachedThreadPool();
         
         connectionFinder = new ConnectionFinder();
-        connectionFinder.registerConnectionFunction(this::newConnection);
-        
-        commandManager = new CommandProcessor(this);
-        workerManager = new WorkerManager(commandManager::processCommand);
+        commandProcessor = new CommandProcessor();
+        workerManager = new WorkerManager();
         matchManager = new MatchManager();
-        chatRoomManager = new ChatRoomManager(commandManager::processCommand);
-        
+        chatRoomManager = new ChatRoomManager();
         this.logFunction = logFunction;
     }
     
@@ -51,14 +50,6 @@ public class Server {
         executor.execute(connectionFinder::start);
     }
     
-    void printLog(String[] str) {
-        printLog(String.join(" ", str));
-    }
-    
-    void printLog(String str) {
-        logFunction.accept(str);
-    }
-    
     void stopServer() {
         logFunction.accept("Closing server.");
         connectionFinder.stop();
@@ -77,8 +68,44 @@ public class Server {
         connectionFinder.close();
     }
     
-    private void newConnection(Socket socket) {
-        printLog("Accept connection from " + socket);
+    @Override
+    public void newConnection(Socket socket) {
+        serverLog("Accept connection from " + socket);
         executor.execute(() -> workerManager.addWorker(socket));
     }
+    
+    // ========================================================================
+    // Override Methods
+    
+    @Override
+    public void serverLog(String str) {
+        logFunction.accept(str);
+    }
+
+    @Override
+    public void processCommand(Command command)
+    {
+        commandProcessor.processCommand(command);
+    }
+    
+    // ========================================================================
+    // Initialisation Methods
+    
+    private void initialise() {
+        connectionFinder.initialise();
+        commandProcessor.initialise();
+    }
+    
+    public static void initialiseInstance(Consumer<String> loggerFunction) {
+        if (null == currentInstance) {
+            currentInstance = new Server(loggerFunction);
+            currentInstance.initialise();
+        }
+    }
+    
+    public static Server getInstance() {
+        return  currentInstance;
+    }
+    
+    // ========================================================================
 }

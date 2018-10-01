@@ -8,7 +8,6 @@ package server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.function.Consumer;
 
 /**
  *
@@ -18,14 +17,13 @@ class ConnectionFinder {
     
     private final int port = 8818;
     private ServerSocket serverSocket;
-    private Consumer<Socket> newConnection;
+    private ConnectionInitiator connectionInitiator;
     
     private boolean isOpen;
     private boolean isSearching;
-
-    public ConnectionFinder()
-    {
-        newConnection = null;
+    
+    void initialise() {
+        connectionInitiator = Server.getInstance();
     }
     
     void open() {
@@ -50,8 +48,8 @@ class ConnectionFinder {
             Socket newSocket = null;
             try {
                 newSocket = serverSocket.accept();
-                if (isOpen && null != newConnection)
-                    newConnection.accept(newSocket);
+                if (isOpen)
+                    connectionInitiator.newConnection(newSocket);
                 else
                     newSocket.close();
             } catch (IOException ex) {
@@ -75,9 +73,5 @@ class ConnectionFinder {
         }
         
         serverSocket = null;
-    }
-    
-    void registerConnectionFunction(Consumer<Socket> connectionFunction) {
-        if (null != connectionFunction) newConnection = connectionFunction;
     }
 }

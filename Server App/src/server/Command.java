@@ -11,7 +11,7 @@ import java.util.Arrays;
  *
  * @author Demo
  */
-class Command
+public class Command
 {
     private final String label;
     private final String[] args;

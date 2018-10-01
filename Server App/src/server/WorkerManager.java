@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 /**
  *
@@ -17,17 +16,15 @@ import java.util.function.Consumer;
  */
 class WorkerManager {
     
-    private final Consumer<Command> requestHandler;
     private final List<Worker> workers;
     
-    WorkerManager(Consumer<Command> requestHandler) {
-        this.requestHandler = requestHandler;
+    WorkerManager() {
         workers = new ArrayList<>();
     }
     
     void addWorker(Socket socket) {
         try {
-            Worker newWorker = new Worker(socket, requestHandler);
+            Worker newWorker = new Worker(socket);
             workers.add(newWorker);
             newWorker.run();
         } catch (IOException ex) {
@@ -35,4 +32,8 @@ class WorkerManager {
         }
     }
     
+    void removeWorker(Worker worker) {
+        worker.shutdown();
+        workers.remove(worker);
+    }
 }

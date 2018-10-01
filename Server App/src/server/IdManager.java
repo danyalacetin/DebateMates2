@@ -25,7 +25,7 @@ class IdManager
     
     int getId() {
         if (!reusableIDs.isEmpty()) return reusableIDs.pop();
-        else if (nextID < MAX_ID) throw new IllegalStateException("No new ID's");
+        else if (nextID > MAX_ID) throw new IllegalStateException("No new ID's");
         else return nextID++;
     }
     

@@ -8,7 +8,6 @@ package server;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.function.Consumer;
 
 /**
  *
@@ -19,17 +18,17 @@ class ChatRoomManager
     private final Map<Integer, ChatRoom> rooms;
     private final IdManager idManager;
     
-    private final Consumer<Command> commandProcessor;
-    
-    ChatRoomManager(Consumer<Command> commandProcessor) {
+    ChatRoomManager() {
         rooms = new HashMap<>();
         idManager = new IdManager();
-        this.commandProcessor = commandProcessor;
     }
     
-    void createChatRoom() {
-        ChatRoom newRoom = new ChatRoom(5, commandProcessor);
-        rooms.put(idManager.getId(), newRoom);
+    int createChatRoom() {
+        int id = idManager.getId();
+        ChatRoom newRoom = new ChatRoom(5);
+        rooms.put(id, newRoom);
+        
+        return id;
     }
     
     void removeChatRoom(int id) {
@@ -54,6 +53,7 @@ class ChatRoomManager
         for (Entry<Integer, ChatRoom> entry : rooms.entrySet()) {
             if (!entry.getValue().isFull()) return entry.getKey();
         }
-        return -1;
+        
+        return createChatRoom();
     }
 }

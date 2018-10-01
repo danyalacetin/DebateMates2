@@ -14,8 +14,6 @@ import userinterface.MainUI;
  */
 class MainController
 {
-    private static final int SERVER_PORT = 8818;
-    
     private Server server;
     private MainUI window;
     
@@ -28,7 +26,8 @@ class MainController
     }
     
     private void start() {
-        server = new Server(SERVER_PORT, this::log);
+        Server.initialiseInstance(this::log);
+        server = Server.getInstance();
         window = new MainUI();
         window.setVisible(true);
         server.startServer();

@@ -25,6 +25,7 @@ public class MainUI extends javax.swing.JFrame
     public void log(String msg) {
 //        System.out.println(msg);
         logScreen.append(msg + "\n");
+        logScreen.setCaretPosition(logScreen.getDocument().getLength());
     }
 
     /**
