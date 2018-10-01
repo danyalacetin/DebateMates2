@@ -8,7 +8,7 @@ import java.util.function.Consumer;
 public class Server {
     
     private final WorkerManager workerManager;
-    private final CommandManager commandManager;
+    private final CommandProcessor commandManager;
     private final ConnectionFinder connectionFinder;
     private final MatchManager matchManager;
     private final ChatRoomManager chatRoomManager;
@@ -23,7 +23,7 @@ public class Server {
         connectionFinder = new ConnectionFinder();
         connectionFinder.registerConnectionFunction(this::newConnection);
         
-        commandManager = new CommandManager(this);
+        commandManager = new CommandProcessor(this);
         workerManager = new WorkerManager(commandManager::processCommand);
         matchManager = new MatchManager();
         chatRoomManager = new ChatRoomManager();
@@ -35,7 +35,7 @@ public class Server {
         return chatRoomManager;
     }
     
-    void loginUser(String id, Worker source) {
+    void logInUser(String id, Worker source) {
         logFunction.accept("User logged in as: " + id);
         source.setLogin(id);
     }
@@ -48,6 +48,14 @@ public class Server {
     public void startServer() {
         logFunction.accept("Server started.");
         executor.execute(connectionFinder::start);
+    }
+    
+    void printLog(String[] str) {
+        printLog(String.join(" ", str));
+    }
+    
+    void printLog(String str) {
+        logFunction.accept(str);
     }
     
     void stopServer() {
@@ -69,7 +77,7 @@ public class Server {
     }
     
     private void newConnection(Socket socket) {
-        logFunction.accept("Accept connection from " + socket);
+        printLog("Accept connection from " + socket);
         executor.execute(() -> workerManager.addWorker(socket));
     }
 }

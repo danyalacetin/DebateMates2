@@ -1,4 +1,4 @@
-#Sat Sep 29 12:17:48 NZST 2018
+#Mon Oct 01 17:51:54 NZDT 2018
 path.1=classes.dex
 path.0=classes.dex
 renamed.10=classes11.dex
@@ -10,19 +10,19 @@ renamed.5=classes6.dex
 renamed.4=classes5.dex
 renamed.3=classes4.dex
 renamed.2=classes3.dex
-base.9=C\:\\Users\\Demo\\Desktop\\Client App\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\13
+base.9=C\:\\Users\\asteh\\Documents\\GitHub\\DebateMates2\\Client App\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\18
 renamed.1=classes2.dex
-base.8=C\:\\Users\\Demo\\Desktop\\Client App\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\18
+base.8=C\:\\Users\\asteh\\Documents\\GitHub\\DebateMates2\\Client App\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\17
 renamed.0=classes.dex
-base.7=C\:\\Users\\Demo\\Desktop\\Client App\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\15
-base.6=C\:\\Users\\Demo\\Desktop\\Client App\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\17
-base.5=C\:\\Users\\Demo\\Desktop\\Client App\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\19
-base.4=C\:\\Users\\Demo\\Desktop\\Client App\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\21
-base.3=C\:\\Users\\Demo\\Desktop\\Client App\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\12
-base.2=C\:\\Users\\Demo\\Desktop\\Client App\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\20
-base.1=C\:\\Users\\Demo\\Desktop\\Client App\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\14
-base.0=C\:\\Users\\Demo\\Desktop\\Client App\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\11
-base.10=C\:\\Users\\Demo\\Desktop\\Client App\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\16
+base.7=C\:\\Users\\asteh\\Documents\\GitHub\\DebateMates2\\Client App\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\11
+base.6=C\:\\Users\\asteh\\Documents\\GitHub\\DebateMates2\\Client App\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\14
+base.5=C\:\\Users\\asteh\\Documents\\GitHub\\DebateMates2\\Client App\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\13
+base.4=C\:\\Users\\asteh\\Documents\\GitHub\\DebateMates2\\Client App\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\16
+base.3=C\:\\Users\\asteh\\Documents\\GitHub\\DebateMates2\\Client App\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\21
+base.2=C\:\\Users\\asteh\\Documents\\GitHub\\DebateMates2\\Client App\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\20
+base.1=C\:\\Users\\asteh\\Documents\\GitHub\\DebateMates2\\Client App\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\12
+base.0=C\:\\Users\\asteh\\Documents\\GitHub\\DebateMates2\\Client App\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\19
+base.10=C\:\\Users\\asteh\\Documents\\GitHub\\DebateMates2\\Client App\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\15
 path.10=classes.dex
 path.9=classes.dex
 path.8=classes.dex

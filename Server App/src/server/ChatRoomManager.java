@@ -23,7 +23,7 @@ class ChatRoomManager
     }
     
     void createChatRoom() {
-        ChatRoom newRoom = new ChatRoom();
+        ChatRoom newRoom = new ChatRoom(5);
         rooms.put(idManager.getId(), newRoom);
     }
     

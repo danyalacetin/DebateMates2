@@ -14,7 +14,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author Demo
  */
 class ChatRoom {
-    private static final int MAX_MEMBERS = 5;
+    private final int maxMembers;
     private final List<Worker> members;
     private final ReentrantLock membersLock;
     private final ReentrantLock historyLock;
@@ -22,16 +22,18 @@ class ChatRoom {
     private final List<Command> history;
     private final IdManager idManager;
     
-    ChatRoom() {
+    ChatRoom(int max) {
         members = new ArrayList<>();
         membersLock = new ReentrantLock();
         historyLock = new ReentrantLock();
         history = new ArrayList<>();
         idManager = new IdManager();
+        
+        maxMembers = max;
     }
     
     boolean isFull() {
-        return MAX_MEMBERS == members.size();
+        return maxMembers == members.size();
     }
     
     boolean addMember(Worker member) {
@@ -58,13 +60,15 @@ class ChatRoom {
     }
     
     void sendMessage(Command msg) {
-        String senderString = msg.getLabel();
         String command = "chat";
-        String newCommand = command + " " + idManager.getId()
+        String newCommandString = command + " " + idManager.getId()
                 + " " + msg.toString();
         
+        Command newCommand = new Command(newCommandString, msg.getSource());
+        
+        storeMessage(newCommand);
         members.forEach((worker) -> {
-            worker.sendCommand(new Command(newCommand, msg.getSource()));
+            worker.send(newCommand);
         });
     }
     

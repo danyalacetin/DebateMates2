@@ -18,7 +18,7 @@ import java.util.function.Consumer;
  *
  * @author Demo
  */
-class Worker implements Runnable{
+class Worker implements Runnable {
     
     private final Socket client;
     private final PrintWriter outStream;
@@ -59,9 +59,11 @@ class Worker implements Runnable{
     @Override
     public void run() {
         try {
-            handleClient();
+            handleClient(); // this is finishing instead of throwing exception
         } catch (IOException ex) {
+            System.out.println("hello");
             handleInput("logout " + userID);
+            handleInput("serverlog Disconnected: " + client);
             try {
                 client.close(); 
             } catch (IOException e) {
@@ -79,18 +81,22 @@ class Worker implements Runnable{
         
         String line;
         
-        sendResponse(StringCommands.CONNECTED);
+        send(StringCommands.CONNECTED);
         while((line = inStream.readLine()) != null) {
             handleInput(line);
-        } 
+        }
     }
     
-    void sendCommand(Command msg) {
-        
+    void send(Command msg) {
+        send(msg.toString());
     }
     
-    void sendResponse(StringCommands msg) {
-        outStream.println(msg.toString());
+    void send(String msg) {
+        outStream.println(msg);
         outStream.flush();
+    }
+    
+    void send(StringCommands msg) {
+        send(msg.toString());
     }
 }
