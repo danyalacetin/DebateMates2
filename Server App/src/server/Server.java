@@ -1,59 +1,75 @@
 package server;
 
-import java.io.IOException;
-import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.function.Consumer;
 
-public class Server extends Thread {
-    private final int serverPort;
-    private ServerSocket serverSocket;
+public class Server {
     
-    private final ArrayList<ServerWorker> workerList= new ArrayList<>();
+    private final WorkerManager workerManager;
+    private final CommandManager commandManager;
+    private final ConnectionFinder connectionFinder;
+    private final MatchManager matchManager;
+    private final ChatRoomManager chatRoomManager;
     
-    public Server(int serverPort) {
-        this.serverPort = serverPort;
-        serverSocket = null;
-    }
+    private final ExecutorService executor;
+    private final Consumer<String> logFunction;
     
-    public List<ServerWorker> getWorkerList() {
-        return workerList;
-    }
-    
-    @Override
-    public void run() {
-        try {
-            serverSocket = new ServerSocket(serverPort);
-            while(true) {
-                Socket clientSocket = serverSocket.accept();
-                System.out.println("Accept connection from " + clientSocket);
-                ServerWorker worker = new ServerWorker(this, clientSocket);
-                workerList.add(worker);
-                worker.start();
-            }
-        } catch (IOException e) {
-            System.out.println("Server Closed");
-        }
+    public Server(int serverPort, Consumer<String> logFunction) {
         
-        serverSocket = null;
-    }
-
-    void removeWorker(ServerWorker serverWorker) {
-        workerList.remove(serverWorker);
+        executor = Executors.newCachedThreadPool();
+        
+        connectionFinder = new ConnectionFinder();
+        connectionFinder.registerConnectionFunction(this::newConnection);
+        
+        commandManager = new CommandManager(this);
+        workerManager = new WorkerManager(commandManager::processCommand);
+        matchManager = new MatchManager();
+        chatRoomManager = new ChatRoomManager();
+        
+        this.logFunction = logFunction;
     }
     
-    /**
-     * Temporary
-     */
-    public void end()
-    {
-        try {
-            serverSocket.close();
-        } catch (IOException ex) {
-            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    ChatRoomManager getChatRoomManager() {
+        return chatRoomManager;
+    }
+    
+    void loginUser(String id, Worker source) {
+        logFunction.accept("User logged in as: " + id);
+        source.setLogin(id);
+    }
+    
+    void logOutUser(String id, Worker source) {
+        logFunction.accept(id + " logged out.");
+        source.setLogin(null);
+    }
+    
+    public void startServer() {
+        logFunction.accept("Server started.");
+        executor.execute(connectionFinder::start);
+    }
+    
+    void stopServer() {
+        logFunction.accept("Closing server.");
+        connectionFinder.stop();
+        executor.shutdown();
+    }
+    
+    void printServerConnectionStatus() {
+        
+    }
+    
+    void acceptClients() {
+        connectionFinder.open();
+    }
+    
+    void rejectClients() {
+        connectionFinder.close();
+    }
+    
+    private void newConnection(Socket socket) {
+        logFunction.accept("Accept connection from " + socket);
+        executor.execute(() -> workerManager.addWorker(socket));
     }
 }
