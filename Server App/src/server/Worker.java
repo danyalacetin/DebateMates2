@@ -52,6 +52,10 @@ class Worker implements Runnable {
         chatRoomID = -1;
     }
     
+    String getLogin() {
+        return userID;
+    }
+    
     void setLogin(String login) {
         userID = login;
     }
@@ -59,16 +63,18 @@ class Worker implements Runnable {
     @Override
     public void run() {
         try {
-            handleClient(); // this is finishing instead of throwing exception
+            handleClient();
+            requestHandler.accept(new Command("serverlog handleClient() finished executing", null));
         } catch (IOException ex) {
-            System.out.println("hello");
-            handleInput("logout " + userID);
-            handleInput("serverlog Disconnected: " + client);
+            System.err.println("An error occured");
+        } finally {
             try {
                 client.close(); 
             } catch (IOException e) {
                 
             }
+            if (userID != null) handleInput("logout " + userID);
+            handleInput("serverlog Disconnected: " + client);
         }
     }
     
@@ -81,9 +87,11 @@ class Worker implements Runnable {
         
         String line;
         
-        send(StringCommands.CONNECTED);
+        send(ServerConstants.CONNECTED);
         while((line = inStream.readLine()) != null) {
+            requestHandler.accept(new Command("serverlog CLIENT SENT: " +  line, null));
             handleInput(line);
+            System.out.println("Command processed");
         }
     }
     
@@ -96,7 +104,7 @@ class Worker implements Runnable {
         outStream.flush();
     }
     
-    void send(StringCommands msg) {
+    void send(ServerConstants msg) {
         send(msg.toString());
     }
 }

@@ -23,7 +23,6 @@ public class LoginActivity extends AppCompatActivity {
     private ClientApp app;
 
     private CallbackManager callbackManager;
-    private TextView txtStatus;
     private LoginButton loginButton;
 
     private AccessTokenTracker accessTokenTracker;
@@ -36,7 +35,6 @@ public class LoginActivity extends AppCompatActivity {
         app = ClientApp.getClientApp();
 
         callbackManager = CallbackManager.Factory.create();
-        txtStatus = (TextView) findViewById(R.id.txt_status);
         loginButton =(LoginButton) findViewById(R.id.login_button);
         loginButton.setReadPermissions("public_profile");
 
@@ -51,28 +49,19 @@ public class LoginActivity extends AppCompatActivity {
 
                 app.setAccessToken(loginResult.getAccessToken());
 
-                Thread loginToServer = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ClientApp.getClientApp().login();
-                    }
-                });
-
-                loginToServer.start();
-
-                Toast.makeText(getApplicationContext(), "Login Success with facebook", Toast.LENGTH_SHORT).show();
-                txtStatus.setText("Login Sucesss: " + loginResult.getAccessToken());
-//                nextActivity();
+                if (ClientApp.getClientApp().login()) {
+                    nextActivity();
+                }
             }
 
             @Override
             public void onCancel() {
-                txtStatus.setText("Login Canceled");
+
             }
 
             @Override
             public void onError(FacebookException exception) {
-                txtStatus.setText("Login Error: " + exception);
+
             }
         });
     }

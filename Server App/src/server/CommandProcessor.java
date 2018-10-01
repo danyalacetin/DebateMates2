@@ -32,6 +32,8 @@ class CommandProcessor {
             server.logInUser(command.getArg(0), command.getSource());
         else if (command.isCommand("logout", 1))
             server.logOutUser(command.getArg(0), command.getSource());
+        else if (command.isCommand("join", 0))
+            server.getChatRoomManager().joinChatRoom(command.getSource());
         else if (command.isCommand("chat")) {
             int room = command.getSource().getChatRoom();
             server.getChatRoomManager().sendMessage(room, command.nextCommand());

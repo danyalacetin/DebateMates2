@@ -26,7 +26,7 @@ public class Server {
         commandManager = new CommandProcessor(this);
         workerManager = new WorkerManager(commandManager::processCommand);
         matchManager = new MatchManager();
-        chatRoomManager = new ChatRoomManager();
+        chatRoomManager = new ChatRoomManager(commandManager::processCommand);
         
         this.logFunction = logFunction;
     }
@@ -38,6 +38,7 @@ public class Server {
     void logInUser(String id, Worker source) {
         logFunction.accept("User logged in as: " + id);
         source.setLogin(id);
+        source.send("login success");
     }
     
     void logOutUser(String id, Worker source) {

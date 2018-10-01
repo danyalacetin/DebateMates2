@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-56:12
-INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-56:12
-INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-56:12
-INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-56:12
+ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-57:12
+INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-57:12
+INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-57:12
+INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-57:12
 MERGED from [com.facebook.android:facebook-login:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-login-4.37.0.aar\4299e7e9aa78c49d1e58528666bd64b2\AndroidManifest.xml:21:1-31:12
 MERGED from [com.facebook.android:facebook-common:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-common-4.37.0.aar\f9714c2ec3ed3e92859165cb54d812ff\AndroidManifest.xml:21:1-37:12
 MERGED from [com.android.support:appcompat-v7:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0-rc02.aar\9ce48206d7e07bb65dbeabe6f9047ff6\AndroidManifest.xml:17:1-22:12
@@ -37,20 +37,20 @@ MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\asteh\.gradle\
 MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\8e88419e88cb79c193767d40f76fb9ce\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.core:runtime:1.1.1] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\8a87325dffc6949632d7a3e8c591e24a\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:interpolator:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0-rc02.aar\0ea7e4b85fbc05814d2588891b550738\AndroidManifest.xml:17:1-22:12
-INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-56:12
-INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-56:12
-INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-56:12
+INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-57:12
+INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-57:12
+INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-57:12
 	package
 		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:3:5-50
 		INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-56:12
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-57:12
 		INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-56:12
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-57:12
 		INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:11-69
@@ -59,7 +59,7 @@ ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\
 	android:name
 		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:5:22-64
 application
-ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:7:5-54:19
+ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:7:5-55:19
 MERGED from [com.facebook.android:facebook-login:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-login-4.37.0.aar\4299e7e9aa78c49d1e58528666bd64b2\AndroidManifest.xml:28:5-29:19
 MERGED from [com.facebook.android:facebook-login:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-login-4.37.0.aar\4299e7e9aa78c49d1e58528666bd64b2\AndroidManifest.xml:28:5-29:19
 MERGED from [com.facebook.android:facebook-common:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-common-4.37.0.aar\f9714c2ec3ed3e92859165cb54d812ff\AndroidManifest.xml:28:5-35:19
@@ -173,9 +173,13 @@ ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\
 	android:name
 		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:52:19-58
 activity#com.example.aleczhong.myapplication.activities.SettingsActivity
-ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:53:9-74
+ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:53:9-65
 	android:name
 		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:53:19-62
+activity#com.example.aleczhong.myapplication.activities.PrototypeChatRoomActivity
+ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:54:9-83
+	android:name
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:54:19-71
 uses-sdk
 INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml

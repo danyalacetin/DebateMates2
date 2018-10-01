@@ -8,6 +8,7 @@ package server;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.function.Consumer;
 
 /**
  *
@@ -21,14 +22,16 @@ class ChatRoom {
     
     private final List<Command> history;
     private final IdManager idManager;
+    private final Consumer<Command> commandProcessor;
     
-    ChatRoom(int max) {
+    ChatRoom(int max, Consumer<Command> commandProcessor) {
         members = new ArrayList<>();
         membersLock = new ReentrantLock();
         historyLock = new ReentrantLock();
         history = new ArrayList<>();
         idManager = new IdManager();
         
+        this.commandProcessor = commandProcessor;
         maxMembers = max;
     }
     
@@ -42,7 +45,11 @@ class ChatRoom {
         membersLock.lock();
         try {
             isSuccessful = !isFull();
-            if (isSuccessful) members.add(member);
+            if (isSuccessful) {
+                members.add(member);
+                sendMessage(new Command(ServerConstants.SERVER_DISPLAY_NAME
+                        + " " + member.getLogin() + " just entered chat", null));
+            }
         } finally {
             membersLock.unlock();
         }
@@ -54,6 +61,7 @@ class ChatRoom {
         historyLock.lock();
         try {
             history.add(msg);
+            commandProcessor.accept(msg);
         } finally {
             historyLock.unlock();
         }

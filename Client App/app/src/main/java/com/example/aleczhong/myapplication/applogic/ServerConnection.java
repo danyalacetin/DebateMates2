@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.function.Consumer;
 
 class ServerConnection {
     private static final String SERVER_ADDRESS = "172.28.60.240";
@@ -19,25 +20,48 @@ class ServerConnection {
     private BufferedReader inStream;
     private PrintWriter outStream;
 
-    ServerConnection() {
+    private ClientApp app;
+
+    ServerConnection(ClientApp app) {
+        this.app = app;
         connection = null;
         inStream = null;
         outStream = null;
     }
 
+    boolean joinChatRoom() {
+        try {
+            String line;
+            while (null != (line = inStream.readLine())) {
+                app.userInput(line);
+            }
+        } catch (IOException ex) {
+
+        }
+
+        return true;
+    }
+
+//    void handleServer() {
+//
+//    }
+
+    void sendString(String str) {
+        Log.d("SEND_STRING_TAG", str);
+        outStream.println(str);
+        outStream.flush();
+    }
+
     boolean login(String userID) {
         boolean isSuccessful = false;
-        Log.d("TAG_LOGIN_ATTEMPT", "logging in with: " + userID);
         try {
-            outStream.println("login " + userID);
-            outStream.flush();
-            isSuccessful = inStream.readLine().equals("Logged In Successfully");
+            sendString("login " + userID);
+            isSuccessful = inStream.readLine().equals("login success");
 
         } catch (IOException ex) {
 
         }
 
-        Log.d("TAG_LOGIN_SUCCESS_T_F", String.valueOf(isSuccessful));
         return isSuccessful;
     }
 

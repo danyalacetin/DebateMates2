@@ -773,6 +773,7 @@ id bottom
 id box_count
 id button
 id button2
+id button3
 id buttonPanel
 id cancel_action
 id cancel_button
@@ -827,6 +828,7 @@ id image
 id imageView
 id info
 id inline
+id inputArea
 id invisible
 id italic
 id large
@@ -842,6 +844,7 @@ id mainButtonSettings
 id mainTitle
 id media_actions
 id message
+id messageArea
 id middle
 id multiply
 id never
@@ -922,7 +925,6 @@ id title_template
 id toolbar
 id top
 id topPanel
-id txt_status
 id uniform
 id unknown
 id up
@@ -969,6 +971,7 @@ layout activity_loading
 layout activity_login
 layout activity_main_menu
 layout activity_play
+layout activity_prototype_chat_room
 layout activity_settings
 layout com_facebook_activity_layout
 layout com_facebook_device_auth_dialog_fragment
