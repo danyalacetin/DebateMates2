@@ -5,7 +5,9 @@
  */
 package server;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -23,9 +25,24 @@ class ChatRoomManager
         idManager = new IdManager();
     }
     
+    String getChatRoomInfo() {
+        String info = "";
+        if (rooms.isEmpty()) {
+            info += "There are no chat rooms open";
+        } else {
+            info += "Chat Room info:";
+            for (Entry<Integer, ChatRoom> entry : rooms.entrySet())
+            {
+                info += "    >> ID: " + entry.getKey() + ", Number of members: "
+                        + entry.getValue().getNumMembers() + "\n";
+            }
+        }
+        return info;
+    }
+    
     int createChatRoom() {
         int id = idManager.getId();
-        ChatRoom newRoom = new ChatRoom(5);
+        ChatRoom newRoom = new ChatRoom(id, 5);
         rooms.put(id, newRoom);
         
         return id;
@@ -41,12 +58,25 @@ class ChatRoomManager
         joinChatRoom(player, findChatRoom());
     }
     
-    void sendMessage(int room, Command msg) {
+    void sendAnnouncement(Command msg) {
+        int room = msg.getSource().getChatRoom();
+        rooms.get(room).sendAnnouncement(msg);
+    }
+    
+    void sendMessage(Command msg) {
+        int room = msg.getSource().getChatRoom();
         rooms.get(room).sendMessage(msg);
     }
     
     void joinChatRoom(Worker player, int id) {
-        if (-1 != id) rooms.get(id).addMember(player);
+        if (-1 != id) {
+            if (rooms.get(id).addMember(player)) // deal with null pointer
+                player.setChatRoom(id);
+        } 
+    }
+    
+    void leaveChat(Worker player) {
+        rooms.get(player.getChatRoom()).removeMember(player);
     }
     
     int findChatRoom() {

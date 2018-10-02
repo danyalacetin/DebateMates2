@@ -831,6 +831,7 @@ id inline
 id inputArea
 id invisible
 id italic
+id itemContent
 id large
 id left
 id line1
@@ -978,6 +979,7 @@ layout com_facebook_device_auth_dialog_fragment
 layout com_facebook_login_fragment
 layout com_facebook_smart_device_dialog_fragment
 layout com_facebook_tooltip_bubble
+layout item_layout
 layout notification_action
 layout notification_action_tombstone
 layout notification_media_action

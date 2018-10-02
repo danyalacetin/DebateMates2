@@ -15,6 +15,7 @@ public class ConnectingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connecting);connect();
         connect();
+//        runLogin();
     }
 
     private void connect() {

@@ -1,5 +1,6 @@
 package com.example.aleczhong.myapplication.applogic;
 
+import android.os.AsyncTask;
 import android.util.Log;
 
 import java.io.BufferedInputStream;
@@ -8,12 +9,13 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.function.Consumer;
 
 class ServerConnection {
-    private static final String SERVER_ADDRESS = "172.28.60.240";
+    private static final String SERVER_ADDRESS = "192.168.0.3";
     private static final int SERVER_PORT = 8818;
 
     private Socket connection;
@@ -29,40 +31,32 @@ class ServerConnection {
         outStream = null;
     }
 
-    boolean joinChatRoom() {
-        try {
-            String line;
-            while (null != (line = inStream.readLine())) {
-                app.userInput(line);
-            }
-        } catch (IOException ex) {
-
-        }
-
-        return true;
+    void joinChatRoom() {
+        sendString("join");
     }
 
-//    void handleServer() {
-//
-//    }
+    private void handleServer(){
+        String input;
+        try {
+            while (null != (input = inStream.readLine())) {
+                app.handleInput(input);
+            }
+        } catch (IOException error) {
+            ClientApp.log("error");
+        }
+
+        ClientApp.log("finished executing");
+    }
 
     void sendString(String str) {
-        Log.d("SEND_STRING_TAG", str);
-        outStream.println(str);
-        outStream.flush();
+        ClientApp.log(str);
+        new SendTask(outStream).execute(str);
+        ClientApp.log("string sent");
     }
 
-    boolean login(String userID) {
-        boolean isSuccessful = false;
-        try {
-            sendString("login " + userID);
-            isSuccessful = inStream.readLine().equals("login success");
-
-        } catch (IOException ex) {
-
-        }
-
-        return isSuccessful;
+    void login(String userID) {
+        sendString("login " + userID);
+        ClientApp.log("login command sent");
     }
 
     boolean connect() {
@@ -73,8 +67,15 @@ class ServerConnection {
             inStream = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             outStream = new PrintWriter(new BufferedWriter(new OutputStreamWriter(connection.getOutputStream())));
 
-            String confirmationMessage = inStream.readLine();
-            isSuccessful = confirmationMessage.equals("Connected");
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    handleServer();
+                }
+            }).start();
+
+            isSuccessful = true;
+
         } catch (IOException ex) {
             if (null != connection) {
                 try {
@@ -89,5 +90,24 @@ class ServerConnection {
         }
 
         return isSuccessful;
+    }
+
+    private class SendTask extends AsyncTask<String, Void, Void> {
+
+        private PrintWriter out;
+
+        private SendTask(PrintWriter stream) {
+            out = stream;
+        }
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            for (String s : strings) {
+                outStream.println(s);
+                outStream.flush();
+            }
+
+            return null;
+        }
     }
 }

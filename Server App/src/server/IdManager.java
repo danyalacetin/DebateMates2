@@ -6,6 +6,7 @@
 package server;
 
 import java.util.Stack;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  *
@@ -17,19 +18,32 @@ class IdManager
     
     private int nextID;
     private final Stack<Integer> reusableIDs;
+    private final ReentrantLock lock;
     
     IdManager() {
         nextID = 0;
         reusableIDs = new Stack<>();
+        lock = new ReentrantLock();
     }
     
     int getId() {
-        if (!reusableIDs.isEmpty()) return reusableIDs.pop();
-        else if (nextID > MAX_ID) throw new IllegalStateException("No new ID's");
-        else return nextID++;
+        lock.lock();
+        try {
+            if (!reusableIDs.isEmpty()) return reusableIDs.pop();
+            else if (nextID > MAX_ID) throw new IllegalStateException("No new ID's");
+            else return nextID++;
+        } finally {
+            lock.unlock();
+        }
+        
     }
     
     void recycleID(int id) {
-        reusableIDs.add(id);
+        lock.lock();
+        try {
+            reusableIDs.add(id);
+        } finally {
+            lock.unlock();
+        }
     }
 }

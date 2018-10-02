@@ -35,25 +35,30 @@ public class Server implements ServerWorker, ConnectionInitiator {
     }
     
     void logInUser(String id, Worker source) {
-        logFunction.accept("User logged in as: " + id);
+        serverLog("User logged in as: " + id);
         source.setLogin(id);
-        source.send("login success");
+        source.send(ServerConstants.LOGIN);
     }
     
-    void logOutUser(String id, Worker source) {
-        logFunction.accept(id + " logged out.");
+    void logOutUser(Worker source) {
+        if (source.isInChat()) {
+            Command cmd = new Command("leave", source);
+            processCommand(cmd);
+        }
+        serverLog(source.getLogin() + " logged out.");
         source.setLogin(null);
     }
     
     public void startServer() {
-        logFunction.accept("Server started.");
+        serverLog("Server started.");
         executor.execute(connectionFinder::start);
     }
     
     void stopServer() {
-        logFunction.accept("Closing server.");
-        connectionFinder.stop();
-        executor.shutdown();
+//        serverLog("Closing server.");
+//        connectionFinder.stop();
+//        executor.shutdown();
+        serverLog("Not yet implemented"); // not implemented
     }
     
     void printServerConnectionStatus() {
@@ -61,17 +66,18 @@ public class Server implements ServerWorker, ConnectionInitiator {
     }
     
     void acceptClients() {
-        connectionFinder.open();
+//        connectionFinder.open();
+        serverLog("Not yet implemented"); // not implemented
     }
     
     void rejectClients() {
-        connectionFinder.close();
+//        connectionFinder.close();
+        serverLog("Not yet implemented"); // not implemented
     }
-    
-    @Override
-    public void newConnection(Socket socket) {
-        serverLog("Accept connection from " + socket);
-        executor.execute(() -> workerManager.addWorker(socket));
+
+    void viewChatRoomInfo()
+    {
+        serverLog(chatRoomManager.getChatRoomInfo());
     }
     
     // ========================================================================
@@ -86,6 +92,12 @@ public class Server implements ServerWorker, ConnectionInitiator {
     public void processCommand(Command command)
     {
         commandProcessor.processCommand(command);
+    }
+    
+    @Override
+    public void newConnection(Socket socket) {
+        serverLog("Accept connection from " + socket);
+        executor.execute(() -> workerManager.addWorker(socket));
     }
     
     // ========================================================================

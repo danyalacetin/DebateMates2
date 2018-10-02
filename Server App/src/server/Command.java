@@ -18,13 +18,17 @@ public class Command
     private final Worker source;
     
     Command(String[] command, Worker source) {
-        label = command[0];
+        label = command[0]; // make unable to send empty string
         args = Arrays.copyOfRange(command, 1, command.length);
         this.source = source;
     }
     
     Command(String command, Worker source) {
         this(command.split(" "), source);
+    }
+    
+    public static Command serverCommand(String command) {
+        return new Command(command.split(" "), null);
     }
     
     Worker getSource() {

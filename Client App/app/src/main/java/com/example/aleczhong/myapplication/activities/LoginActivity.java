@@ -48,10 +48,9 @@ public class LoginActivity extends AppCompatActivity {
             public void onSuccess(LoginResult loginResult) {
 
                 app.setAccessToken(loginResult.getAccessToken());
-
-                if (ClientApp.getClientApp().login()) {
-                    nextActivity();
-                }
+                app.login();
+                Log.d("send_string_tag", "login done");
+                nextActivity();
             }
 
             @Override

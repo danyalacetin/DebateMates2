@@ -10,8 +10,9 @@ package server;
  * @author Demo
  */
 enum ServerConstants {
-    CONNECTED("Connected"),
-    SERVER_DISPLAY_NAME("!Server");
+    JOINED("join success"),
+    LOGIN("login success"),
+    CONNECTED("connect success");
     
     
     private final String msg;

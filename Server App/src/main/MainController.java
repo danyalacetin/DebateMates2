@@ -23,6 +23,7 @@ class MainController
     
     private void log(String msg) {
         if (null != window) window.log(msg);
+        System.out.println(msg);
     }
     
     private void start() {

@@ -20,8 +20,27 @@ public class ClientApp {
         token = null;
     }
 
-    boolean joinChatRoom() {
-        return serverConnection.joinChatRoom();
+    public void joinChatRoom() {
+        serverConnection.joinChatRoom();
+    }
+
+    String joinString(String[] tokens) {
+        String output = tokens[0];
+        for (int i = 1; i < tokens.length; ++i) {
+            output += " " + tokens[i];
+        }
+        return output;
+    }
+
+    void handleInput(String msg) {
+        String[] tokens = msg.split(" ");
+        if (tokens[0].equals("chat")) {
+            displayListener.displayMessage(tokens[2]
+                    + ": " + joinString(Arrays.copyOfRange(tokens, 3, tokens.length)));
+        } else if (tokens[0].equals("announce")) {
+            displayListener.displayMessage(joinString(
+                    Arrays.copyOfRange(tokens, 2, tokens.length)));
+        }
     }
 
     public void setMessageListener(PrototypeChatRoomActivity.DisplayAreaListener listener) {
@@ -29,22 +48,8 @@ public class ClientApp {
     }
 
     public void sendChatMessage(String message) {
-        String sendString = "chat " + token.getUserId() + " " + message;
+        String sendString = "chat " + message;
         serverConnection.sendString(sendString);
-    }
-
-    void userInput(String str) {
-        String[] tokens = str.split(" ");
-        if (tokens.length > 3 && tokens[0].equals("chat")) {
-            String sendername = tokens[2].equals(token.getUserId()) ? "You" : tokens[2];
-
-            String outputString = sendername + ":";
-            for (int i = 3; i < tokens.length; ++i) {
-                outputString += " " + tokens[i];
-            }
-
-            if (null != displayListener) displayListener.displayMessage(outputString);
-        }
     }
 
     public boolean establishServerConnection() {
@@ -55,13 +60,16 @@ public class ClientApp {
         this.token = token;
     }
 
-    public boolean login() {
-        Log.d("USER_ID", token.getUserId());
-        return serverConnection.login(token.getUserId());
+    public void login() {
+        serverConnection.login(token.getUserId());
     }
 
     public static ClientApp getClientApp() {
         if (null == currentApp) currentApp = new ClientApp();
         return currentApp;
+    }
+
+    public static void log(String msg) {
+        Log.d("APP_DEBUG_TAG", msg);
     }
 }

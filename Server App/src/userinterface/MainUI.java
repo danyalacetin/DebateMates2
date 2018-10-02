@@ -5,12 +5,17 @@
  */
 package userinterface;
 
+import server.Command;
+import server.ServerWorker;
+import server.Server;
+
 /**
  *
  * @author Demo
  */
 public class MainUI extends javax.swing.JFrame
 {
+    private ServerWorker server;
 
     /**
      * Creates new form MainUI
@@ -20,10 +25,10 @@ public class MainUI extends javax.swing.JFrame
         super("Server");
         setResizable(false);
         initComponents();
+        server = Server.getInstance();
     }
     
     public void log(String msg) {
-//        System.out.println(msg);
         logScreen.append(msg + "\n");
         logScreen.setCaretPosition(logScreen.getDocument().getLength());
     }
@@ -51,7 +56,22 @@ public class MainUI extends javax.swing.JFrame
         logScreen.setRows(5);
         jScrollPane1.setViewportView(logScreen);
 
+        inputField.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                inputFieldKeyPressed(evt);
+            }
+        });
+
         enterButton.setText("Enter");
+        enterButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                enterButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -94,6 +114,24 @@ public class MainUI extends javax.swing.JFrame
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void handleCommandGiven() {
+        String cmd = inputField.getText();
+        inputField.setText("");
+        
+        Command command = Command.serverCommand(cmd);
+        server.processCommand(command);
+    }
+    
+    private void enterButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_enterButtonActionPerformed
+    {//GEN-HEADEREND:event_enterButtonActionPerformed
+        handleCommandGiven();
+    }//GEN-LAST:event_enterButtonActionPerformed
+
+    private void inputFieldKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_inputFieldKeyPressed
+    {//GEN-HEADEREND:event_inputFieldKeyPressed
+        if (evt.getKeyChar() == '\n') handleCommandGiven();
+    }//GEN-LAST:event_inputFieldKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton enterButton;

@@ -1,5 +1,6 @@
 package com.example.aleczhong.myapplication.activities;
 
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,11 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PrototypeChatRoomActivity extends AppCompatActivity {
-    private ListView textDisplay;
+    private EditText textDisplay;
     private EditText userInput;
-
-    private ArrayAdapter<String> arrayAdapter;
-    private List<String> messagses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,24 +26,23 @@ public class PrototypeChatRoomActivity extends AppCompatActivity {
         textDisplay = findViewById(R.id.messageArea);
         userInput = findViewById(R.id.inputArea);
 
-        messagses = new ArrayList<>();
-        arrayAdapter = new ArrayAdapter<>(this, R.layout.activity_prototype_chat_room, messagses);
-
-        textDisplay.setAdapter(arrayAdapter);
-
         ClientApp.getClientApp().setMessageListener(new DisplayAreaListener());
+
+        joinRoom();
 
     }
 
+    void joinRoom() {
+        ClientApp.getClientApp().joinChatRoom();
+    }
+
     void setDisplayText(String txt) {
-        messagses.add(txt);
-        arrayAdapter.notifyDataSetChanged();
+        textDisplay.getText().append(txt + "\n");
     }
 
     public void sendText(View view) {
         String text = userInput.getText().toString();
         userInput.getText().clear();
-
         ClientApp.getClientApp().sendChatMessage(text);
     }
 

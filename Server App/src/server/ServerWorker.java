@@ -11,7 +11,7 @@ package server;
  * 
  * @author Aidan Stehbens
  */
-interface ServerWorker { // needs a new name
+public interface ServerWorker { // needs a new name
     /**
      * Displays a message to the main server screen.
      * @param txt Text to be displayed.

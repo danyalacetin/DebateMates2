@@ -36,6 +36,7 @@ class Worker implements Runnable {
                 new OutputStreamWriter(client.getOutputStream())));
         inStream = new BufferedReader(new InputStreamReader(client.getInputStream()));
         userID = null;
+        chatRoomID = -1;
     }
     
     int getChatRoom() {
@@ -50,12 +51,21 @@ class Worker implements Runnable {
         chatRoomID = -1;
     }
     
+    boolean isLoggedIn() {
+        return null !=  userID;
+    }
+    
+    boolean isInChat() {
+        return -1 != chatRoomID;
+    }
+    
     String getLogin() {
         return userID;
     }
     
     private void logout() {
-        if (null != userID) handleInput("logout " + userID);
+        if (isLoggedIn())
+            handleInput("logout");
     }
     
     void setLogin(String login) {
@@ -66,23 +76,21 @@ class Worker implements Runnable {
     public void run() {
         try {
             handleClient();
-            server.serverLog("handleClient() finished executing");
         } catch (IOException ex) {
-            System.err.println("An error occured");
+            System.err.println("An error occured while handling clint");
         } finally {
+            logout();
             try {
                 client.close(); 
             } catch (IOException e) {
                 
             }
-            
-            logout();
             server.serverLog("Disconnected: " + client);
         }
     }
     
     void shutdown() {
-        
+        // in case some tear down is needed
     }
     
     private void handleInput(String cmdString) {
@@ -101,7 +109,14 @@ class Worker implements Runnable {
     }
     
     void send(Command msg) {
-        send(msg.toString());
+        if (msg.getSource().getLogin().equals(userID)) {
+            String msgString = msg.toString();
+            if (msgString.contains(userID))
+                send(msgString.replace(userID, "You"));
+        }
+        else {
+            send(msg.toString());
+        }
     }
     
     void send(String msg) {

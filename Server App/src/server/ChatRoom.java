@@ -15,6 +15,8 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author Demo
  */
 class ChatRoom {
+    private final int id;
+    
     private final int maxMembers;
     private final List<Worker> members;
     private final ReentrantLock membersLock;
@@ -24,7 +26,9 @@ class ChatRoom {
     private final IdManager idManager;
     private final ServerWorker server;
     
-    ChatRoom(int max) {
+    ChatRoom(int id, int max) {
+        this.id = id;
+        
         members = new ArrayList<>();
         membersLock = new ReentrantLock();
         historyLock = new ReentrantLock();
@@ -39,6 +43,61 @@ class ChatRoom {
         return maxMembers == members.size();
     }
     
+    void storeMessage(Command msg) {
+        historyLock.lock();
+        try {
+            history.add(msg); 
+        } finally {
+            historyLock.unlock();
+        }
+    }
+    
+    void sendAnnouncement(Command msg) {
+        String newCommandString = "announce " + idManager.getId()
+                + " " + msg.toString();
+        Command newCommand = new Command(newCommandString, msg.getSource());
+        post(newCommand);
+    }
+    
+    void sendToServer(Command msg) {
+        Worker worker = msg.getSource();
+        String tempString = "";
+        if (null != worker) tempString += "Room: " + id + " | ";
+        if (msg.isCommand("chat")) {
+            tempString += msg.getSource().getLogin();
+            tempString += ": " + String.join(" ", Arrays.copyOfRange(msg.getArgs(), 2, msg.getArgs().length));
+        }else if (msg.isCommand("announce")) {
+            tempString += String.join(" ", Arrays.copyOfRange(msg.getArgs(), 1, msg.getArgs().length));
+        }
+        
+        if (!tempString.equals("")) server.serverLog(tempString);
+    }
+    
+    void post(Command msg) {
+        storeMessage(msg);
+        
+        // temp
+        sendToServer(msg);
+        // end temp
+        
+        members.forEach((worker) -> {
+            worker.send(msg);
+        });
+    }
+    
+    int getNumMembers() {
+        return members.size();
+    }
+    
+    void sendMessage(Command msg) {
+        String newCommandString = "chat " + idManager.getId()
+                + " " + msg.getSource().getLogin() + " " + msg.toString();
+        
+        Command newCommand = new Command(newCommandString, msg.getSource());
+        
+        post(newCommand);
+    }
+    
     boolean addMember(Worker member) {
         boolean isSuccessful = false;
         
@@ -47,8 +106,8 @@ class ChatRoom {
             isSuccessful = !isFull();
             if (isSuccessful) {
                 members.add(member);
-                sendMessage(new Command(ServerConstants.SERVER_DISPLAY_NAME
-                        + " " + member.getLogin() + " just entered chat", null));
+                member.send(ServerConstants.JOINED);
+                sendAnnouncement(new Command(member.getLogin() + " just entered chat", member));
             }
         } finally {
             membersLock.unlock();
@@ -57,43 +116,17 @@ class ChatRoom {
         return isSuccessful;
     }
     
-    void storeMessage(Command msg) {
-        historyLock.lock();
-        try {
-            history.add(msg); 
-            
-            // temp
-            String tempString = msg.getArg(2);
-            tempString += ":   " + String.join(" ", Arrays.copyOfRange(msg.getArgs(), 3, msg.getArgs().length));
-            
-            server.serverLog(tempString);
-            
-            // end temp
-        } finally {
-            historyLock.unlock();
-        }
-    }
-    
-    void sendMessage(Command msg) {
-        String command = "chat";
-        String newCommandString = command + " " + idManager.getId()
-                + " " + msg.toString();
-        
-        Command newCommand = new Command(newCommandString, msg.getSource());
-        
-        storeMessage(newCommand);
-        members.forEach((worker) -> {
-            worker.send(newCommand);
-        });
-    }
-    
     boolean removeMember(Worker member) {
         boolean isSuccessful = false;
         
         membersLock.lock();
         try {
             isSuccessful = members.contains(member);
-            if (isSuccessful) members.remove(member);
+            if (isSuccessful) {
+                members.remove(member);
+                member.leaveChatRoom();
+                sendAnnouncement(new Command(member.getLogin() + " just left chat", member));
+            }
         } finally {
             membersLock.unlock();
         }
