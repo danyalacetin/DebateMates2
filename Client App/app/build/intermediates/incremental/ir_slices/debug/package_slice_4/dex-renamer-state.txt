@@ -1,1 +1,4 @@
-#Thu Sep 27 17:53:50 NZST 2018
+#Tue Oct 02 14:05:03 NZDT 2018
+base.0=C\:\\Users\\Demo\\Documents\\GitHub\\DebateMates2\\Client App\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\4
+path.0=classes.dex
+renamed.0=classes.dex

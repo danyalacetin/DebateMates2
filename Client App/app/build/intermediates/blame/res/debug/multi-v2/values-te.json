@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Demo\\Desktop\\Aaron\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-te\\values-te.xml",
+            "outputFile": "C:\\Users\\Demo\\Documents\\GitHub\\DebateMates2\\Client App\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-te\\values-te.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Demo\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0-rc02.aar\\ed47c06a9012800c59c65a4a6a5d98c8\\res\\values-te\\values-te.xml",
@@ -38,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Demo\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-login-4.36.1.aar\\acd761d8329f13458c24a0bd51840180\\res\\values-te\\values-te.xml",
+                    "source": "C:\\Users\\Demo\\.gradle\\caches\\transforms-1\\files-1.1\\facebook-login-4.37.0.aar\\921f415c3b3072987f2e33545bc27263\\res\\values-te\\values-te.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

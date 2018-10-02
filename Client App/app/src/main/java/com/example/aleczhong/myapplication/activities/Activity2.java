@@ -26,7 +26,7 @@ public class Activity2 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(this);
+//        FacebookSdk.sdkInitialize(this);
         setContentView(R.layout.activity_2);
         shareDialog=new ShareDialog(this);
 

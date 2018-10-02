@@ -1,59 +1,123 @@
 package server;
 
-import java.io.IOException;
-import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.function.Consumer;
 
-public class Server extends Thread {
-    private final int serverPort;
-    private ServerSocket serverSocket;
+public class Server implements ServerWorker, ConnectionInitiator {
     
-    private final ArrayList<ServerWorker> workerList= new ArrayList<>();
+    private static Server currentInstance = null;
     
-    public Server(int serverPort) {
-        this.serverPort = serverPort;
-        serverSocket = null;
+    private final WorkerManager workerManager;
+    private final CommandProcessor commandProcessor;
+    private final ConnectionFinder connectionFinder;
+    private final MatchManager matchManager;
+    private final ChatRoomManager chatRoomManager;
+    
+    private final ExecutorService executor;
+    private final Consumer<String> logFunction;
+    
+    private Server(Consumer<String> logFunction) {
+        
+        executor = Executors.newCachedThreadPool();
+        
+        connectionFinder = new ConnectionFinder();
+        commandProcessor = new CommandProcessor();
+        workerManager = new WorkerManager();
+        matchManager = new MatchManager();
+        chatRoomManager = new ChatRoomManager();
+        this.logFunction = logFunction;
     }
     
-    public List<ServerWorker> getWorkerList() {
-        return workerList;
+    ChatRoomManager getChatRoomManager() {
+        return chatRoomManager;
+    }
+    
+    void logInUser(String id, Worker source) {
+        serverLog("User logged in as: " + id);
+        source.setLogin(id);
+        source.send(ServerConstants.LOGIN);
+    }
+    
+    void logOutUser(Worker source) {
+        if (source.isInChat()) {
+            Command cmd = new Command("leave", source);
+            processCommand(cmd);
+        }
+        serverLog(source.getLogin() + " logged out.");
+        source.setLogin(null);
+    }
+    
+    public void startServer() {
+        serverLog("Server started.");
+        executor.execute(connectionFinder::start);
+    }
+    
+    void stopServer() {
+//        serverLog("Closing server.");
+//        connectionFinder.stop();
+//        executor.shutdown();
+        serverLog("Not yet implemented"); // not implemented
+    }
+    
+    void printServerConnectionStatus() {
+        
+    }
+    
+    void acceptClients() {
+//        connectionFinder.open();
+        serverLog("Not yet implemented"); // not implemented
+    }
+    
+    void rejectClients() {
+//        connectionFinder.close();
+        serverLog("Not yet implemented"); // not implemented
+    }
+
+    void viewChatRoomInfo()
+    {
+        serverLog(chatRoomManager.getChatRoomInfo());
+    }
+    
+    // ========================================================================
+    // Override Methods
+    
+    @Override
+    public void serverLog(String str) {
+        logFunction.accept(str);
+    }
+
+    @Override
+    public void processCommand(Command command)
+    {
+        commandProcessor.processCommand(command);
     }
     
     @Override
-    public void run() {
-        try {
-            serverSocket = new ServerSocket(serverPort);
-            while(true) {
-                Socket clientSocket = serverSocket.accept();
-                System.out.println("Accept connection from " + clientSocket);
-                ServerWorker worker = new ServerWorker(this, clientSocket);
-                workerList.add(worker);
-                worker.start();
-            }
-        } catch (IOException e) {
-            System.out.println("Server Closed");
-        }
-        
-        serverSocket = null;
-    }
-
-    void removeWorker(ServerWorker serverWorker) {
-        workerList.remove(serverWorker);
+    public void newConnection(Socket socket) {
+        serverLog("Accept connection from " + socket);
+        executor.execute(() -> workerManager.addWorker(socket));
     }
     
-    /**
-     * Temporary
-     */
-    public void end()
-    {
-        try {
-            serverSocket.close();
-        } catch (IOException ex) {
-            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+    // ========================================================================
+    // Initialisation Methods
+    
+    private void initialise() {
+        connectionFinder.initialise();
+        commandProcessor.initialise();
+    }
+    
+    public static void initialiseInstance(Consumer<String> loggerFunction) {
+        if (null == currentInstance) {
+            currentInstance = new Server(loggerFunction);
+            currentInstance.initialise();
         }
     }
+    
+    public static Server getInstance() {
+        return  currentInstance;
+    }
+    
+    // ========================================================================
 }
