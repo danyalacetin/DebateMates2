@@ -5,6 +5,7 @@
  */
 package main;
 
+import database.Database;
 import server.Server;
 import userinterface.MainUI;
 
@@ -16,6 +17,7 @@ class MainController
 {
     private Server server;
     private MainUI window;
+    private Database database;
     
     MainController() {
         
@@ -27,12 +29,18 @@ class MainController
     }
     
     private void start() {
+        
+        
+        
         Server.initialiseInstance(this::log);
         server = Server.getInstance();
         window = new MainUI();
         window.setVisible(true);
-        server.startServer();
         
+        database = new Database();
+        database.establishConnection();
+        
+        server.startServer();
     }
     
     
@@ -42,6 +50,9 @@ class MainController
     
     public static void main(String[] args) {
         MainController mainApp = new MainController();
+        
+        
+        
         mainApp.start();
     }
 }
