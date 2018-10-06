@@ -14,12 +14,12 @@ import java.util.logging.Logger;
 public class Database {
     
     
-    String newTableName = "Players";
+    String newTableName = "users";
     
-    String url="jdbc:derby://localhost:1527//home/pascal/derbyDBs/PlayersDB;create=true";
+    String url="jdbc:derby://localhost:1527/Players;"; // create=true
 
-    String usernameDerby="pdc";
-    String passwordDerby="pdc";
+    String usernameDerby="debatemates";
+    String passwordDerby="mates";
     Connection conn;
     
     public Database() 
@@ -39,25 +39,34 @@ public class Database {
     
     }
     
-    public void createTable()
+    public void createTable() // creates the table for the data
     {
-        try {
-            Statement statement = conn.createStatement();
+        String sqlCreate = "CREATE TABLE " + newTableName + " (\n"
+                    + " facebookID int,\n"
+                    + " nickname varchar(20),\n"
+                    + " wins int,\n"
+                    + " loses int,\n"
+                    + " rankscore int\n"
+                    + ")";
+        
+        try (Connection conn = DriverManager.getConnection(url);
             
-            String sqlCreate = "create table " + newTableName + " (ID int) ";
-            statement.executeUpdate(sqlCreate);
-            System.out.println("Table created");
+            Statement stmt = conn.createStatement()) {
+            stmt.execute(sqlCreate);
+            
+            System.out.println("tablecreated");
             
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public void additem(int id) {
+    public void additem(int id, String nickname, int wins, int loses, int rankscore) { // adds item (new player)
         try {
-            Statement statement=conn.createStatement();
+            Statement statement = conn.createStatement();
             
-            String sqlUpdateTable = "insert into " + newTableName + " (ID) values (" + id + ")";
+            String sqlUpdateTable = "insert into " + newTableName + "(facebookID, nickname, wins, loses, rankscore) VALUES (" + id + "," + nickname + "," + wins + "," + loses + "," + rankscore + ")";
+            
             statement.executeUpdate(sqlUpdateTable);
             
             //statement.close();
@@ -68,38 +77,12 @@ public class Database {
         }
     }
     
-    public void getQuery()
+    public void getQuery() //returns a value 
     {
-        ResultSet rs = null;
         
-        try {
-
-            System.out.println(" getting query ");
-            Statement statement = conn.createStatement(
-            ResultSet.TYPE_SCROLL_INSENSITIVE, 
-            ResultSet.CONCUR_READ_ONLY);
-            
-            String sqlQuery = "select ID from cases";
-            
-            rs=statement.executeQuery(sqlQuery);
-            rs.beforeFirst();
-            while(rs.next())
-            {
-                int caseid = rs.getInt("ID");                
-                System.out.println("Cases picked so far: ");              
-                System.out.println(caseid + ",");        
-            }
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        //return(rs);  
-        
-        //return(rs);  
     }
     
-    public void closeConnections()
+    public void closeConnections() //ends the connection
     {
         if(conn!=null)
         {
