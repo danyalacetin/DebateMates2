@@ -19,9 +19,9 @@ public class Database {
     
     Connection conn = null;
     String url = "jdbc:derby:DebatemateDB;create=true";
-    //String url="jdbc:derby://localhost:1527/Players;create=true";
-    String usernameDerby="debatemates";
-    String passwordDerby="mates";
+    //String url = "jdbc:derby://localhost:1527/Players;create=true";
+    String usernameDerby = "debatemates";
+    String passwordDerby = "mates";
     Statement statement;
     ResultSet rs;
     
@@ -34,14 +34,29 @@ public class Database {
     public void establishConnection()
     {
         try {
-            conn=DriverManager.getConnection(url, usernameDerby, passwordDerby);
+            conn = DriverManager.getConnection(url, usernameDerby, passwordDerby);
             checkTableExisting(newTableName);
             System.out.println(url+"   connected....");
             
         } catch (SQLException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("could not connect: " + ex.getMessage());
         }
     
+    }
+    
+    public void closeConnection()
+    {
+        if(conn != null)
+        {
+            try
+            {
+                conn.close();
+                conn = null;
+            }
+            catch (SQLException ex) {
+                System.out.println("Could not close connection: " + ex.getMessage());
+            }
+        }
     }
     
     public void createTable() // creates the table for the data
@@ -53,27 +68,32 @@ public class Database {
                     + "loses int, "
                     + "rankscore int)";
         
-        try (Connection conn = DriverManager.getConnection(url);
-            
-            Statement stmt = conn.createStatement()) {
-            stmt.execute(sqlCreate);
+        try {
+            statement = conn.createStatement();
+            statement.execute(sqlCreate);
+            statement.close();
+            statement = null;
             
             System.out.println("tablecreated");
             
         } catch (SQLException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Problem creating table: " + ex.getMessage());
         }
     }
     
     public void additem(int id, String nickname, int wins, int loses, int rankscore) { // adds item (new player)
         try {
-            Statement statement = conn.createStatement();
+            statement = conn.createStatement();
             
-            String sqlUpdateTable = "insert into " + newTableName + "(facebookID, nickname, wins, loses, rankscore) VALUES (" + id + "," + nickname + "," + wins + "," + loses + "," + rankscore + ")";
+            String sqlUpdateTable = "insert into " + newTableName
+                    + " VALUES "
+                    + "(" + id + ", '" + nickname + "', " + wins + ", " + loses
+                    + ", " + rankscore + ")";
             
             statement.executeUpdate(sqlUpdateTable);
+            statement.close();
+            statement = null;
             
-            //statement.close();
             System.out.println("Item Added");
             
         } catch (SQLException ex) {
