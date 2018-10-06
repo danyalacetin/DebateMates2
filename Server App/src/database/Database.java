@@ -59,11 +59,14 @@ public class Database {
     public void createTable() // creates the table for the data
     {
         String sqlCreate = "CREATE TABLE " + newTableName + " "
-                    + "(facebookID int,"
-                    + "nickname varchar(20), "
-                    + "wins int, "
-                    + "loses int, "
-                    + "rankscore int)";
+                         + "(FACEBOOKID INT ,"
+                         + "NICKNAME VARCHAR(20), "
+                         + "WINS INT, "
+                         + "LOSSES INT, "
+                         + "RANKSCORE INT, "
+                         + "ONLINESTATUS INT, "
+                         + "QUESTION1 INT, QUESTION2 INT, QUESTION3 INT, QUESTION4 INT, QUESTION5 INT, QUESTION6 INT, QUESTION7 INT, QUESTION8 INT, "
+                         + "QUESTION9 INT, QUESTION10 INT, QUESTION11 INT, QUESTION12 INT, QUESTION13 INT, QUESTION14 INT, QUESTION15 INT)";
         
         try {
             statement = conn.createStatement();
@@ -78,14 +81,18 @@ public class Database {
         }
     }
     
-    public void additem(int id, String nickname, int wins, int loses, int rankscore) { // adds item (new player)
+    public void addItem(int id, String nickname, int wins, int loses, int rankscore, int onlinestatus) { //adds item (new user)
         try {
             statement = conn.createStatement();
             
-            String sqlUpdateTable = "insert into " + newTableName
-                    + " VALUES "
-                    + "(" + id + ", '" + nickname + "', " + wins + ", " + loses
-                    + ", " + rankscore + ")";
+            String sqlUpdateTable = "insert into " + newTableName + " VALUES ("
+                    + id + ", '" 
+                    + nickname + "', " 
+                    + wins + ", " 
+                    + loses + ", " 
+                    + rankscore + ", "
+                    + onlinestatus + ", "
+                    + "NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)"; //Question Values
             
             statement.executeUpdate(sqlUpdateTable);
             statement.close();
@@ -98,9 +105,35 @@ public class Database {
         }
     }
     
-    public void getQuery() //returns a value 
+    public void updateItem(int facebookID, String field, String value){
+        try {
+            statement = conn.createStatement();
+            
+            String sqlUpdateTable = "UPDATE " + newTableName 
+                                 + " SET " + field + " = '" + value + "'"
+                                 + " WHERE FACEBOOKID = " + facebookID + ";";
+
+            statement.executeUpdate(sqlUpdateTable);
+            statement.close();
+            statement = null;
+            
+            System.out.println("Item Updated");
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public String getQuery(int facebookID, String field) //returns a value 
     {
-        
+        try {
+            rs = statement.executeQuery("SELECT " + field 
+                                     + " FROM " + newTableName 
+                                     + " WHERE FACEBOOKID = " + facebookID);
+            return rs.getString(field);
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
     
     private void checkTableExisting(String newTableName) {
@@ -131,7 +164,6 @@ public class Database {
 
         } catch (SQLException ex) {
         }
-
     }
     
     public void closeConnections() //ends the connection

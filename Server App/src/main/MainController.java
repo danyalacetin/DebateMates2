@@ -38,15 +38,9 @@ class MainController
         database = new Database();
         database.establishConnection();
         database.createTable();
-        database.additem(1, "test", 1, 1, 1250);
-        
+        database.addItem(1, "test", 1, 1, 1250, 1);
         server.startServer();
     }
-    
-    
-    
-    
-    
     
     public static void main(String[] args) {
         MainController mainApp = new MainController();
