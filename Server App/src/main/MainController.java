@@ -30,8 +30,6 @@ class MainController
     
     private void start() {
         
-        
-        
         Server.initialiseInstance(this::log);
         server = Server.getInstance();
         window = new MainUI();
@@ -52,9 +50,7 @@ class MainController
     
     public static void main(String[] args) {
         MainController mainApp = new MainController();
-        
-        
-        
+
         mainApp.start();
     }
 }

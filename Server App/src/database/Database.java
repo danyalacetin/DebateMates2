@@ -2,6 +2,7 @@
 package database;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,13 +15,16 @@ import java.util.logging.Logger;
 public class Database {
     
     
-    String newTableName = "users";
+    String newTableName = "USERS";
     
-    String url="jdbc:derby://localhost:1527/Players;"; // create=true
-
+    Connection conn = null;
+    String url = "jdbc:derby:DebatemateDB;create=true";
+    //String url="jdbc:derby://localhost:1527/Players;create=true";
     String usernameDerby="debatemates";
     String passwordDerby="mates";
-    Connection conn;
+    Statement statement;
+    ResultSet rs;
+    
     
     public Database() 
     {
@@ -31,8 +35,9 @@ public class Database {
     {
         try {
             conn=DriverManager.getConnection(url, usernameDerby, passwordDerby);
+            checkTableExisting(newTableName);
             System.out.println(url+"   connected....");
-        
+            
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -41,13 +46,12 @@ public class Database {
     
     public void createTable() // creates the table for the data
     {
-        String sqlCreate = "CREATE TABLE " + newTableName + " (\n"
-                    + " facebookID int,\n"
-                    + " nickname varchar(20),\n"
-                    + " wins int,\n"
-                    + " loses int,\n"
-                    + " rankscore int\n"
-                    + ")";
+        String sqlCreate = "CREATE TABLE " + newTableName + " "
+                    + "(facebookID int,"
+                    + "nickname varchar(20), "
+                    + "wins int, "
+                    + "loses int, "
+                    + "rankscore int)";
         
         try (Connection conn = DriverManager.getConnection(url);
             
@@ -80,6 +84,37 @@ public class Database {
     public void getQuery() //returns a value 
     {
         
+    }
+    
+    private void checkTableExisting(String newTableName) {
+        try {
+            //System.out.println("check existing tables.... ");
+            String[] types = {"TABLE"};
+            DatabaseMetaData dbmd = conn.getMetaData();
+            ResultSet rsDBMeta = dbmd.getTables(null, null, null, null);//types);
+            Statement dropStatement = null;
+
+            while (rsDBMeta.next()) {
+                String tableName = rsDBMeta.getString("TABLE_NAME");
+                //System.out.println("found: " + tableName);
+                if (tableName.compareToIgnoreCase(newTableName) == 0) {
+                    //System.out.println(tableName + "  needs to be deleted");
+                    String sqlDropTable = "DROP TABLE " + newTableName;
+                    dropStatement = conn.createStatement();
+                    dropStatement.executeUpdate(sqlDropTable);
+                    //System.out.println("table deleted");
+                }
+            }
+            if (rsDBMeta != null) {
+                rsDBMeta.close();
+            }
+            if (dropStatement != null) {
+                dropStatement.close();
+            }
+
+        } catch (SQLException ex) {
+        }
+
     }
     
     public void closeConnections() //ends the connection
