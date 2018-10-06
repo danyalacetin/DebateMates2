@@ -37,8 +37,8 @@ class MainController
         
         database = new Database();
         database.establishConnection();
-        //database.createTable();
-        //database.additem(1, "test", 1, 1, 1250);
+        database.createTable();
+        database.additem(1, "test", 1, 1, 1250);
         
         server.startServer();
     }
