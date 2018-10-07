@@ -57,6 +57,9 @@ class CommandProcessor {
                 System.out.println("logging out user");
                     server.logOutUser(worker);
             }
+            else if (command.isCommand("nickname", 1)){
+                server.changeNickname(command.getArg(0), worker);
+            }
             else if (worker.inMatch()) // in match
             {
                 if (command.isCommand("leave", 0))

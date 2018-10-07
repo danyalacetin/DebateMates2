@@ -44,6 +44,10 @@ public class Server implements ServerWorker, ConnectionInitiator {
         return workerManager;
     }
     
+    void changeNickname(String nickname, Worker source){
+        database.updateItem(source.getLogin(), "NICKNAME", "'"+nickname+"'");
+    }
+    
     void logInUser(String id, Worker source) {
         serverLog("User logged in as: " + id);
         source.setLogin(id);
