@@ -31,11 +31,7 @@ public class ServerConnectionTest
         System.out.print(">>> ");
     }
     
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args)
-    {
+    static void run() {
         try
         {
             handler = new ConnectionHandler(ServerConnectionTest::displayData);
@@ -73,4 +69,11 @@ public class ServerConnectionTest
         handler.stop();
     }
     
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args)
+    {
+        run();
+    }
 }

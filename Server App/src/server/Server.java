@@ -14,7 +14,6 @@ public class Server implements ServerWorker, ConnectionInitiator {
     private final CommandProcessor commandProcessor;
     private final ConnectionFinder connectionFinder;
     private final MatchManager matchManager;
-    private final ChatRoomManager chatRoomManager;
     
     private final ExecutorService executor;
     private final Consumer<String> logFunction;
@@ -30,7 +29,6 @@ public class Server implements ServerWorker, ConnectionInitiator {
         commandProcessor = new CommandProcessor();
         workerManager = new WorkerManager();
         matchManager = new MatchManager();
-        chatRoomManager = new ChatRoomManager();
         this.logFunction = logFunction;
     }
     
@@ -50,8 +48,12 @@ public class Server implements ServerWorker, ConnectionInitiator {
         database.droptable();
     }
     
-    ChatRoomManager getChatRoomManager() {
-        return chatRoomManager;
+    MatchManager getMatchManager() {
+        return matchManager;
+    }
+    
+    WorkerManager getWorkerManager() {
+        return workerManager;
     }
     
     void logInUser(String id, Worker source) {
@@ -61,7 +63,7 @@ public class Server implements ServerWorker, ConnectionInitiator {
     }
     
     void logOutUser(Worker source) {
-        if (source.isInChat()) {
+        if (source.inMatch()) {
             Command cmd = new Command("leave", source);
             processCommand(cmd);
         }
@@ -79,7 +81,10 @@ public class Server implements ServerWorker, ConnectionInitiator {
 //        serverLog("Closing server.");
 //        connectionFinder.stop();
 //        executor.shutdown();
-        serverLog("Not yet implemented"); // not implemented
+    }
+    
+    void unsupportedCommand() {
+        serverLog("Not yet implemented");
     }
     
     void printServerConnectionStatus() {
@@ -88,17 +93,15 @@ public class Server implements ServerWorker, ConnectionInitiator {
     
     void acceptClients() {
 //        connectionFinder.open();
-        serverLog("Not yet implemented"); // not implemented
     }
     
     void rejectClients() {
 //        connectionFinder.close();
-        serverLog("Not yet implemented"); // not implemented
     }
 
     void viewChatRoomInfo()
     {
-        serverLog(chatRoomManager.getChatRoomInfo());
+        serverLog(matchManager.getMatchInfo());
     }
     
     // ========================================================================
@@ -117,7 +120,7 @@ public class Server implements ServerWorker, ConnectionInitiator {
     
     @Override
     public void newConnection(Socket socket) {
-        serverLog("Accept connection from " + socket);
+        serverLog("Accept connection from " + socket.getInetAddress());
         executor.execute(() -> workerManager.addWorker(socket));
     }
     

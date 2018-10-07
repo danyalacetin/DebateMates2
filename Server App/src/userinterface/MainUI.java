@@ -119,7 +119,7 @@ public class MainUI extends javax.swing.JFrame
         String cmd = inputField.getText();
         inputField.setText("");
         
-        Command command = Command.serverCommand(cmd);
+        Command command = Command.anonymousCommand(cmd);
         server.processCommand(command);
     }
     

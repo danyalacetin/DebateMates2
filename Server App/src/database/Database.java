@@ -37,7 +37,6 @@ public class Database {
         } catch (SQLException ex) {
             System.out.println("could not connect: " + ex.getMessage());
         }
-    
     }
     
     public void closeConnection()
