@@ -18,7 +18,7 @@ public class Command
     private final Worker source;
     
     Command(String[] command, Worker source) {
-        label = command[0]; // make unable to send empty string
+        label = 0 == command.length ? null : command[0];
         args = Arrays.copyOfRange(command, 1, command.length);
         this.source = source;
     }
@@ -27,7 +27,7 @@ public class Command
         this(command.split(" "), source);
     }
     
-    public static Command serverCommand(String command) {
+    public static Command anonymousCommand(String command) {
         return new Command(command.split(" "), null);
     }
     

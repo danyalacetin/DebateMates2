@@ -13,6 +13,8 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.function.Consumer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -39,11 +41,13 @@ class ConnectionHandler implements Runnable
     {
         try
         {
+//            sendMessage("disconnect");
+            outStream.close();
             socket.close();
         }
-        catch (IOException error)
+        catch (IOException ex)
         {
-            System.err.println("Error closing socket\n" + error.getMessage());
+            Logger.getLogger(ConnectionHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

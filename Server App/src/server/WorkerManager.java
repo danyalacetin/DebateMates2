@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  *
@@ -17,23 +18,44 @@ import java.util.List;
 class WorkerManager {
     
     private final List<Worker> workers;
+    private final ReentrantLock accessLock;
     
     WorkerManager() {
         workers = new ArrayList<>();
+        accessLock = new ReentrantLock();
     }
     
     void addWorker(Socket socket) {
+        accessLock.lock();
+        Worker newWorker = null;
         try {
-            Worker newWorker = new Worker(socket);
+            newWorker = new Worker(socket);
             workers.add(newWorker);
-            newWorker.run();
         } catch (IOException ex) {
             
+        } finally {
+            accessLock.unlock();
+            if (null != newWorker) newWorker.run();
         }
     }
     
     void removeWorker(Worker worker) {
         worker.shutdown();
-        workers.remove(worker);
+        accessLock.lock();
+        try {
+            workers.remove(worker);
+        } finally {
+            accessLock.unlock();
+        }
+    }
+    
+    void sendBroadcast(Command cmd) {
+        String sendString = "serverannounce " + cmd.toString();
+        accessLock.lock();
+        try {
+            for (Worker worker : workers) worker.send(sendString);
+        } finally {
+            accessLock.unlock();
+        }
     }
 }

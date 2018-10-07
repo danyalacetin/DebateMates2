@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package server;
+package utilities;
 
 import java.util.Stack;
 import java.util.concurrent.locks.ReentrantLock;
@@ -12,7 +12,7 @@ import java.util.concurrent.locks.ReentrantLock;
  *
  * @author Demo
  */
-class IdManager
+public class IdManager
 {
     private static final int MAX_ID = Integer.MAX_VALUE;
     
@@ -20,13 +20,13 @@ class IdManager
     private final Stack<Integer> reusableIDs;
     private final ReentrantLock lock;
     
-    IdManager() {
+    public IdManager() {
         nextID = 0;
         reusableIDs = new Stack<>();
         lock = new ReentrantLock();
     }
     
-    int getId() {
+    public int getId() {
         lock.lock();
         try {
             if (!reusableIDs.isEmpty()) return reusableIDs.pop();
@@ -38,7 +38,7 @@ class IdManager
         
     }
     
-    void recycleID(int id) {
+    public void recycleID(int id) {
         lock.lock();
         try {
             reusableIDs.add(id);

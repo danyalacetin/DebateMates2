@@ -9,3 +9,4 @@
 /captures
 .externalNativeBuild
 /Server App/build/
+/ServerConnectionTest/dist/

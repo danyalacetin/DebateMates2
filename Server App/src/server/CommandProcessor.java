@@ -6,8 +6,9 @@
 package server;
 
 /**
- *
- * @author Demo
+ * Processes all Server and Client Commands
+ *  
+ * @author Aidan Stehbens
  */
 class CommandProcessor {
     
@@ -21,45 +22,49 @@ class CommandProcessor {
         
         Worker worker = command.getSource();
         
-        if (null == worker)
+        if (null == worker) // server commands
         {
             if (command.isCommand("open", 0))
-                server.acceptClients();
+                server.unsupportedCommand();
             else if (command.isCommand("close", 0))
-                server.rejectClients();
+                server.unsupportedCommand();
             else if (command.isCommand("exit", 0))
-                server.stopServer();
+                server.unsupportedCommand();
             else if (command.isCommand("start", 0))
-                server.startServer();
-            else if (command.isCommand("chatroominfo", 0))
+                server.unsupportedCommand();
+            else if (command.isCommand("matchinfo", 0))
                 server.viewChatRoomInfo();
+            else if (command.isCommand("post") && 0 != command.getArgs().length)
+                server.getWorkerManager().sendBroadcast(command.nextCommand());
         }
-        else if (worker.isLoggedIn())
+        else if (command.isCommand("disconnect", 0)) { // close connection
+            server.getWorkerManager().removeWorker(worker);
+        }
+        else if (worker.isLoggedIn()) // logged in
         {
             if (command.isCommand("logout", 0)) {
                 System.out.println("logging out user");
                     server.logOutUser(worker);
             }
-            else if (worker.isInChat())
+            else if (worker.inMatch()) // in match
             {
                 if (command.isCommand("leave", 0))
-                    server.getChatRoomManager().leaveChat(worker);
-                else if (command.isCommand("chat"))
-                    server.getChatRoomManager().sendMessage(command.nextCommand());
-                else if (command.isCommand("announce"))
-                    server.getChatRoomManager().sendAnnouncement(command.nextCommand());
+                    server.getMatchManager().leaveMatch(worker);
+                else if (command.isCommand("match"))
+                    server.getMatchManager().process(command.nextCommand());
             }
-            else
+            else // not in match
             {
-                if (command.isCommand("join", 0))
-                    server.getChatRoomManager().joinChatRoom(worker);
+                if (command.isCommand("join", 1)) {
+                    String type = command.getArg(0);
+                    server.getMatchManager().joinMatch(worker, type);
+                }
             }
         }
-        else
+        else // not logged in
         {
             if (command.isCommand("login", 1))
                 server.logInUser(command.getArg(0), worker);
         }   
     }
-    
 }

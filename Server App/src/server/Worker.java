@@ -24,7 +24,7 @@ class Worker implements Runnable {
     private final BufferedReader inStream;
     
     private String userID;
-    private int chatRoomID;
+    private int matchID;
     
     private final ServerWorker server;
     
@@ -36,27 +36,27 @@ class Worker implements Runnable {
                 new OutputStreamWriter(client.getOutputStream())));
         inStream = new BufferedReader(new InputStreamReader(client.getInputStream()));
         userID = null;
-        chatRoomID = -1;
+        matchID = -1;
     }
     
-    int getChatRoom() {
-        return chatRoomID;
+    int getMatchID() {
+        return matchID;
     }
     
-    void setChatRoom(int id) {
-        chatRoomID = id;
+    void enterMatch(int id) {
+        matchID = id;
     }
     
-    void leaveChatRoom() {
-        chatRoomID = -1;
+    void leaveMatch() {
+        matchID = -1;
     }
     
     boolean isLoggedIn() {
         return null !=  userID;
     }
     
-    boolean isInChat() {
-        return -1 != chatRoomID;
+    boolean inMatch() {
+        return -1 != matchID;
     }
     
     String getLogin() {
@@ -77,20 +77,20 @@ class Worker implements Runnable {
         try {
             handleClient();
         } catch (IOException ex) {
-            System.err.println("An error occured while handling clint");
+            System.err.println("Connection Closed");
         } finally {
-            logout();
-            try {
-                client.close(); 
-            } catch (IOException e) {
-                
-            }
-            server.serverLog("Disconnected: " + client);
+            handleInput("disconnect");
+            server.serverLog("Disconnected: " + client.getInetAddress());
         }
     }
     
     void shutdown() {
-        // in case some tear down is needed
+        try {
+            logout();
+            client.close(); 
+        } catch (IOException e) {
+
+        }
     }
     
     private void handleInput(String cmdString) {
@@ -103,7 +103,7 @@ class Worker implements Runnable {
         send(ServerConstants.CONNECTED);
         
         while((line = inStream.readLine()) != null) {
-            server.serverLog("CLIENT SENT: " +  line);
+//            server.serverLog("CLIENT SENT: " +  line);
             handleInput(line);
         }
     }
