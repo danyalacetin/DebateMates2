@@ -1,5 +1,6 @@
 package server;
 
+import database.Database;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -18,9 +19,12 @@ public class Server implements ServerWorker, ConnectionInitiator {
     private final ExecutorService executor;
     private final Consumer<String> logFunction;
     
+    private final Database database;
+    
     private Server(Consumer<String> logFunction) {
         
         executor = Executors.newCachedThreadPool();
+        database = new Database();
         
         connectionFinder = new ConnectionFinder();
         commandProcessor = new CommandProcessor();
@@ -28,6 +32,22 @@ public class Server implements ServerWorker, ConnectionInitiator {
         matchManager = new MatchManager();
         chatRoomManager = new ChatRoomManager();
         this.logFunction = logFunction;
+    }
+    
+    void addDBItem(String facebookID, String nickname, int wins, int losses, int rankscore, int onlinestatus){
+        database.addItem(facebookID, nickname, wins, losses, rankscore, onlinestatus);
+    }
+    
+    void viewDBItem(String facebookID, String field){
+        System.out.println(database.getQuery(facebookID, field));
+    }
+    
+    void updateDBItem(String facebookID, String field, String value){
+        database.updateItem(facebookID, field, value);
+    }
+    
+    void dropDBtable(){
+        database.droptable();
     }
     
     ChatRoomManager getChatRoomManager() {
@@ -51,6 +71,7 @@ public class Server implements ServerWorker, ConnectionInitiator {
     
     public void startServer() {
         serverLog("Server started.");
+        database.establishConnection();
         executor.execute(connectionFinder::start);
     }
     

@@ -17,7 +17,6 @@ class MainController
 {
     private Server server;
     private MainUI window;
-    private Database database;
     
     MainController() {
         
@@ -35,10 +34,6 @@ class MainController
         window = new MainUI();
         window.setVisible(true);
         
-        database = new Database();
-        database.establishConnection();
-        database.createTable();
-        database.addItem(1, "test", 1, 1, 1250, 1);
         server.startServer();
     }
     

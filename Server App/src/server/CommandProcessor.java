@@ -33,6 +33,17 @@ class CommandProcessor {
                 server.startServer();
             else if (command.isCommand("chatroominfo", 0))
                 server.viewChatRoomInfo();
+            
+            //Testing commands
+            else if (command.isCommand("addDB", 0))
+                server.addDBItem("123", "Nickname123", 1, 1, 1234, 1);
+            else if (command.isCommand("viewDB", 0))
+                server.viewDBItem("123", "NICKNAME");
+            else if (command.isCommand("updateDB", 0))
+                server.updateDBItem("123", "NICKNAME", "'jamjam'");
+            else if (command.isCommand("dropDB", 0))
+                server.dropDBtable();
+            
         }
         else if (worker.isLoggedIn())
         {
