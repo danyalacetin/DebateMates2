@@ -10,6 +10,7 @@
     <string name="find_game">Finding Game</string>
     <string name="find_match">FIND A MATCH</string>
     <string name="judge_match">JUDGE A MATCH</string>
+    <string name="spectate_match">WATCH A MATCH</string>
 
     <string name="change_question_preferences">Change Question Preferences</string>
     <string name="other_setting">Other Setting</string>

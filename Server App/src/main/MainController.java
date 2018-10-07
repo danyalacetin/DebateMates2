@@ -5,7 +5,6 @@
  */
 package main;
 
-import database.Database;
 import server.Server;
 import userinterface.MainUI;
 

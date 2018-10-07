@@ -61,8 +61,8 @@ class CommandProcessor {
             {
                 if (command.isCommand("leave", 0))
                     server.getMatchManager().leaveMatch(worker);
-                else if (command.isCommand("match"))
-                    server.getMatchManager().process(command.nextCommand());
+                else if (command.isCommand("chat") && 0 != command.getArgs().length)
+                    server.getMatchManager().process(command);
             }
             else // not in match
             {

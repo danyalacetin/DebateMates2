@@ -2,7 +2,7 @@ Join Request = join type
 Leave Request = leave
 Announcement Request = announce msg
 Announcement Response = announce msgID msg
-Chat Request = match chat msg
+Chat Request = chat msg
 Chat Response = chat msgID userID msg
 
 Login = login userID

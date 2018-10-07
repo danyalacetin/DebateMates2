@@ -739,7 +739,6 @@ id META
 id SHIFT
 id SYM
 id SettingsButtonOK
-id Textview
 id action0
 id action_bar
 id action_bar_activity_content
@@ -772,7 +771,6 @@ id blocking
 id bottom
 id box_count
 id button
-id button2
 id button3
 id buttonPanel
 id cancel_action
@@ -825,13 +823,11 @@ id icon
 id icon_group
 id ifRoom
 id image
-id imageView
 id info
 id inline
 id inputArea
 id invisible
 id italic
-id itemContent
 id large
 id left
 id line1
@@ -839,6 +835,7 @@ id line3
 id listMode
 id list_item
 id loadingTitle
+id loginFailMessage
 id login_button
 id mainButtonPlay
 id mainButtonSettings
@@ -847,6 +844,7 @@ id media_actions
 id message
 id messageArea
 id middle
+id mockUserID
 id multiply
 id never
 id never_display
@@ -863,6 +861,7 @@ id parentPanel
 id percent
 id playButtonFind
 id playButtonJudge
+id playButtonSpectator
 id progressBar
 id progress_bar
 id progress_circular
@@ -918,12 +917,10 @@ id textSpacerNoButtons
 id textSpacerNoTitle
 id textView
 id textView2
-id textView3
 id time
 id title
 id titleDividerNoCustom
 id title_template
-id toolbar
 id top
 id topPanel
 id uniform
@@ -966,11 +963,11 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
-layout activity_2
 layout activity_connecting
 layout activity_loading
 layout activity_login
 layout activity_main_menu
+layout activity_mock_login
 layout activity_play
 layout activity_prototype_chat_room
 layout activity_settings
@@ -979,7 +976,6 @@ layout com_facebook_device_auth_dialog_fragment
 layout com_facebook_login_fragment
 layout com_facebook_smart_device_dialog_fragment
 layout com_facebook_tooltip_bubble
-layout item_layout
 layout notification_action
 layout notification_action_tombstone
 layout notification_media_action
@@ -1079,6 +1075,7 @@ string play
 string search_menu_title
 string settings
 string sound_effects
+string spectate_match
 string status_bar_notification_info_overflow
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light

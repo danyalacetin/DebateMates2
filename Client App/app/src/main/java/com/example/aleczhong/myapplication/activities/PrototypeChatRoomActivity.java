@@ -7,15 +7,17 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.aleczhong.myapplication.R;
 import com.example.aleczhong.myapplication.applogic.ClientApp;
+import com.example.aleczhong.myapplication.applogic.DelayedReturn;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PrototypeChatRoomActivity extends AppCompatActivity {
-    private EditText textDisplay;
+    private TextView textDisplay;
     private EditText userInput;
 
     @Override
@@ -32,18 +34,34 @@ public class PrototypeChatRoomActivity extends AppCompatActivity {
 
     }
 
-    void joinRoom() {
-        ClientApp.getClientApp().joinChatRoom();
+    void joinRoom() { // move this to loading screen
+        ClientApp.getClientApp().joinChatRoom(new DelayedReturn("join success",
+                "join failed") {
+            @Override
+            public void onSuccess() {
+
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        });
     }
 
-    void setDisplayText(String txt) {
-        textDisplay.getText().append(txt + "\n");
+    void setDisplayText(final String txt) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                textDisplay.append(txt + "\n");
+            }
+        });
     }
 
     public void sendText(View view) {
         String text = userInput.getText().toString();
         userInput.getText().clear();
-        ClientApp.getClientApp().sendChatMessage(text);
+        if (!text.equals("")) ClientApp.getClientApp().sendChatMessage(text);
     }
 
     public class DisplayAreaListener {

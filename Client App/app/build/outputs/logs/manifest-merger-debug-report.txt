@@ -1,286 +1,286 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-57:12
-INJECTED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-57:12
-INJECTED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-57:12
-INJECTED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-57:12
-MERGED from [com.facebook.android:facebook-login:4.37.0] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\facebook-login-4.37.0.aar\921f415c3b3072987f2e33545bc27263\AndroidManifest.xml:21:1-31:12
-MERGED from [com.facebook.android:facebook-common:4.37.0] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\facebook-common-4.37.0.aar\6cd55e6b965c086ee0074a65381a7665\AndroidManifest.xml:21:1-37:12
-MERGED from [com.android.support:appcompat-v7:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0-rc02.aar\ed47c06a9012800c59c65a4a6a5d98c8\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\197ee85036e1f2933f5865cb70b74233\AndroidManifest.xml:2:1-11:12
-MERGED from [com.facebook.android:facebook-core:4.37.0] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\facebook-core-4.37.0.aar\1793e477c2f8505742224e0dcb15eb1d\AndroidManifest.xml:21:1-53:12
-MERGED from [com.android.support:cardview-v7:27.0.2] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\cardview-v7-27.0.2.aar\b23e6e245bfcc96d908e8a65b51f5e8e\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:customtabs:27.0.2] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\customtabs-27.0.2.aar\d790bd8d8bbb6641ae409fd12f24ebb8\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-v4:27.0.2] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\support-v4-27.0.2.aar\14de4f53198de363ed5d0750fe78348c\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-media-compat:27.0.2] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.0.2.aar\d37518a079d64f81de27a384e33fee09\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:animated-vector-drawable:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0-rc02.aar\67d6933096415ede14dc9ad99cd388d6\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-vector-drawable:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-28.0.0-rc02.aar\e945983e7ce51f3bf2f66debf8db6db9\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-fragment:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0-rc02.aar\d0084e37f21ee42ea016462e9bb9afdc\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-core-ui:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0-rc02.aar\88a5b107cd3ba36087cc7ce373db9dbd\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-core-utils:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0-rc02.aar\28a3cef2a86863fc1e469684396dbc12\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:loader:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\loader-28.0.0-rc02.aar\267259bafdbe750df742589b3cc49bcd\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:viewpager:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0-rc02.aar\b315e2f4e6073768386a22f29b1031c6\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:coordinatorlayout:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0-rc02.aar\a7d0bc01218a5a7662c7a6c9ae9b27da\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:drawerlayout:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0-rc02.aar\3cc93d100b3f8b734a6222df3698aa28\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:slidingpanelayout:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0-rc02.aar\7ca513b5e8ee42884a3610c23ea52934\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:customview:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\customview-28.0.0-rc02.aar\ecde6473adae7fe30d0f8c69da00b866\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:swiperefreshlayout:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0-rc02.aar\70242205aea506d84e7039bb22b4044f\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:asynclayoutinflater:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0-rc02.aar\4bcdb4221573fea06d1263732da7f642\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-compat:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0-rc02.aar\b5ca21ece226443ab84996d9c9888475\AndroidManifest.xml:17:1-24:12
-MERGED from [com.android.support:versionedparcelable:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0-rc02.aar\80520a24961849d56c93ad7ef26d1cba\AndroidManifest.xml:17:1-25:12
-MERGED from [com.android.support:cursoradapter:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0-rc02.aar\5152ee282abfb103afaafae818069ea5\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:documentfile:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0-rc02.aar\592a6f7fb217e4aa6785319356527a17\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:localbroadcastmanager:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0-rc02.aar\8e68d781e7ad87e90b7539adb4638fb6\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:print:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\print-28.0.0-rc02.aar\f99907f10831bf8ae68523c020e82ff8\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\412615d5f74737611939a096a4cf574d\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\c6b36503b808d6d181c7b11f40f7ccc6\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\b32a1027a2937df561a0565312ae6cf2\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\e6c7b9fb016c4a8acef0d852840dc6fa\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:interpolator:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0-rc02.aar\25eed0d2721517eebdd73ba1e97cc7f4\AndroidManifest.xml:17:1-22:12
-INJECTED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-57:12
-INJECTED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-57:12
-INJECTED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-57:12
+ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-57:12
+INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-57:12
+INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-57:12
+INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-57:12
+MERGED from [com.facebook.android:facebook-login:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-login-4.37.0.aar\4299e7e9aa78c49d1e58528666bd64b2\AndroidManifest.xml:21:1-31:12
+MERGED from [com.facebook.android:facebook-common:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-common-4.37.0.aar\f9714c2ec3ed3e92859165cb54d812ff\AndroidManifest.xml:21:1-37:12
+MERGED from [com.android.support:appcompat-v7:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0-rc02.aar\9ce48206d7e07bb65dbeabe6f9047ff6\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\247cdd651f0b16c4a0fb33efb0da8797\AndroidManifest.xml:2:1-11:12
+MERGED from [com.facebook.android:facebook-core:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-core-4.37.0.aar\a2db5dd07d86e559285fc6827a95e14f\AndroidManifest.xml:21:1-53:12
+MERGED from [com.android.support:cardview-v7:27.0.2] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\cardview-v7-27.0.2.aar\011135f488a218b1b68a58a44216e256\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customtabs:27.0.2] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\customtabs-27.0.2.aar\2fd65d636c75fd43da5a692361793d22\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-v4:27.0.2] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\support-v4-27.0.2.aar\9b48bacedd498bf1337428ebfc6d235c\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-media-compat:27.0.2] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.0.2.aar\6264bf077054bf816c0e3596d2aa316d\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0-rc02.aar\b331bb4ad08a7da418fc5e0730938e30\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-28.0.0-rc02.aar\a0ce60dd9e39dfbcb00280722fc2c763\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-fragment:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0-rc02.aar\f2e26d7cc5c1e69eee891363e108fd1f\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0-rc02.aar\316421194f3836a6281e1106c0900af6\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0-rc02.aar\45473a51b251708578de04a538488ee0\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:loader:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\loader-28.0.0-rc02.aar\3201936ca81df0889c1cfc32f048d994\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:viewpager:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0-rc02.aar\5b254ea952c1afc3e04f55483869b6bc\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:coordinatorlayout:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0-rc02.aar\8dd885cd42e5c59deb04d0d42a1d6f1b\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:drawerlayout:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0-rc02.aar\b7f3c00a533048d028b8a59eb8e60fee\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:slidingpanelayout:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0-rc02.aar\6a21605bc9ca572d249fa3799cd89f18\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customview:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\customview-28.0.0-rc02.aar\989f4d7e1f305c4e500436bb3562c0de\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:swiperefreshlayout:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0-rc02.aar\5b43a4c192d2d9cdaa19d1185f2e4475\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:asynclayoutinflater:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0-rc02.aar\1c68152fde633be627afbd42e3112cbc\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0-rc02.aar\cdef2e242995c80fd254ca27b02e9e50\AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:versionedparcelable:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0-rc02.aar\f272737c6fbab041183a7b941741d782\AndroidManifest.xml:17:1-25:12
+MERGED from [com.android.support:cursoradapter:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0-rc02.aar\318da64b154a8a5016e7edecb9302822\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:documentfile:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0-rc02.aar\0154dfe8d560f918a548224aa02adcc0\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:localbroadcastmanager:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0-rc02.aar\63498d3588f928a3baa27fa1c85e43d8\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:print:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\print-28.0.0-rc02.aar\0dd15cdd0dfce8d85724acadb912f701\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\b8b53864114eb2049d7deb930c549215\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\6ca8010f318629733763694a862e20bc\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\8e88419e88cb79c193767d40f76fb9ce\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\8a87325dffc6949632d7a3e8c591e24a\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:interpolator:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0-rc02.aar\0ea7e4b85fbc05814d2588891b550738\AndroidManifest.xml:17:1-22:12
+INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-57:12
+INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-57:12
+INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-57:12
 	package
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:3:5-50
-		INJECTED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:3:5-50
+		INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
 	android:versionName
-		INJECTED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-57:12
-		INJECTED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-57:12
+		INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
 	android:versionCode
-		INJECTED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-57:12
-		INJECTED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:1-57:12
+		INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:11-69
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:2:11-69
 uses-permission#android.permission.INTERNET
-ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:5:5-67
+ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:5:5-67
 	android:name
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:5:22-64
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:5:22-64
 application
-ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:7:5-55:19
-MERGED from [com.facebook.android:facebook-login:4.37.0] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\facebook-login-4.37.0.aar\921f415c3b3072987f2e33545bc27263\AndroidManifest.xml:28:5-29:19
-MERGED from [com.facebook.android:facebook-login:4.37.0] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\facebook-login-4.37.0.aar\921f415c3b3072987f2e33545bc27263\AndroidManifest.xml:28:5-29:19
-MERGED from [com.facebook.android:facebook-common:4.37.0] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\facebook-common-4.37.0.aar\6cd55e6b965c086ee0074a65381a7665\AndroidManifest.xml:28:5-35:19
-MERGED from [com.facebook.android:facebook-common:4.37.0] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\facebook-common-4.37.0.aar\6cd55e6b965c086ee0074a65381a7665\AndroidManifest.xml:28:5-35:19
-MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\197ee85036e1f2933f5865cb70b74233\AndroidManifest.xml:9:5-20
-MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\197ee85036e1f2933f5865cb70b74233\AndroidManifest.xml:9:5-20
-MERGED from [com.facebook.android:facebook-core:4.37.0] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\facebook-core-4.37.0.aar\1793e477c2f8505742224e0dcb15eb1d\AndroidManifest.xml:28:5-51:19
-MERGED from [com.facebook.android:facebook-core:4.37.0] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\facebook-core-4.37.0.aar\1793e477c2f8505742224e0dcb15eb1d\AndroidManifest.xml:28:5-51:19
-MERGED from [com.android.support:support-compat:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0-rc02.aar\b5ca21ece226443ab84996d9c9888475\AndroidManifest.xml:22:5-94
-MERGED from [com.android.support:support-compat:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0-rc02.aar\b5ca21ece226443ab84996d9c9888475\AndroidManifest.xml:22:5-94
-MERGED from [com.android.support:versionedparcelable:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0-rc02.aar\80520a24961849d56c93ad7ef26d1cba\AndroidManifest.xml:22:5-23:19
-MERGED from [com.android.support:versionedparcelable:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0-rc02.aar\80520a24961849d56c93ad7ef26d1cba\AndroidManifest.xml:22:5-23:19
+ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:7:5-55:19
+MERGED from [com.facebook.android:facebook-login:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-login-4.37.0.aar\4299e7e9aa78c49d1e58528666bd64b2\AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-login:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-login-4.37.0.aar\4299e7e9aa78c49d1e58528666bd64b2\AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-common:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-common-4.37.0.aar\f9714c2ec3ed3e92859165cb54d812ff\AndroidManifest.xml:28:5-35:19
+MERGED from [com.facebook.android:facebook-common:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-common-4.37.0.aar\f9714c2ec3ed3e92859165cb54d812ff\AndroidManifest.xml:28:5-35:19
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\247cdd651f0b16c4a0fb33efb0da8797\AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\247cdd651f0b16c4a0fb33efb0da8797\AndroidManifest.xml:9:5-20
+MERGED from [com.facebook.android:facebook-core:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-core-4.37.0.aar\a2db5dd07d86e559285fc6827a95e14f\AndroidManifest.xml:28:5-51:19
+MERGED from [com.facebook.android:facebook-core:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-core-4.37.0.aar\a2db5dd07d86e559285fc6827a95e14f\AndroidManifest.xml:28:5-51:19
+MERGED from [com.android.support:support-compat:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0-rc02.aar\cdef2e242995c80fd254ca27b02e9e50\AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:support-compat:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0-rc02.aar\cdef2e242995c80fd254ca27b02e9e50\AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:versionedparcelable:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0-rc02.aar\f272737c6fbab041183a7b941741d782\AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:versionedparcelable:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0-rc02.aar\f272737c6fbab041183a7b941741d782\AndroidManifest.xml:22:5-23:19
 	android:appComponentFactory
-		ADDED from [com.android.support:support-compat:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0-rc02.aar\b5ca21ece226443ab84996d9c9888475\AndroidManifest.xml:22:18-91
+		ADDED from [com.android.support:support-compat:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0-rc02.aar\cdef2e242995c80fd254ca27b02e9e50\AndroidManifest.xml:22:18-91
 	android:supportsRtl
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:12:9-35
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:12:9-35
 	android:label
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:10:9-41
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:10:9-41
 	android:roundIcon
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:11:9-54
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:11:9-54
 	android:icon
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:9:9-43
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:9:9-43
 	android:allowBackup
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:8:9-35
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:8:9-35
 	android:theme
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:13:9-40
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:13:9-40
 activity#com.example.aleczhong.myapplication.activities.ConnectingActivity
-ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:14:9-20:20
+ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:14:9-20:20
 	android:name
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:14:19-64
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:14:19-64
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:15:13-19:29
+ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:15:13-19:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:16:17-69
+ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:16:17-69
 	android:name
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:16:25-66
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:16:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:18:17-77
+ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:18:17-77
 	android:name
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:18:27-74
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:18:27-74
 meta-data#com.facebook.sdk.ApplicationId
-ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:22:9-24:55
+ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:22:9-24:55
 	android:value
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:24:13-52
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:24:13-52
 	android:name
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:23:13-58
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:23:13-58
 activity#com.facebook.FacebookActivity
-ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:26:9-29:48
-MERGED from [com.facebook.android:facebook-common:4.37.0] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\facebook-common-4.37.0.aar\6cd55e6b965c086ee0074a65381a7665\AndroidManifest.xml:29:9-32:66
-MERGED from [com.facebook.android:facebook-common:4.37.0] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\facebook-common-4.37.0.aar\6cd55e6b965c086ee0074a65381a7665\AndroidManifest.xml:29:9-32:66
+ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:26:9-29:48
+MERGED from [com.facebook.android:facebook-common:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-common-4.37.0.aar\f9714c2ec3ed3e92859165cb54d812ff\AndroidManifest.xml:29:9-32:66
+MERGED from [com.facebook.android:facebook-common:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-common-4.37.0.aar\f9714c2ec3ed3e92859165cb54d812ff\AndroidManifest.xml:29:9-32:66
 	android:label
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:29:13-45
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:29:13-45
 	android:configChanges
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:28:13-96
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:28:13-96
 	android:theme
-		ADDED from [com.facebook.android:facebook-common:4.37.0] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\facebook-common-4.37.0.aar\6cd55e6b965c086ee0074a65381a7665\AndroidManifest.xml:32:13-63
+		ADDED from [com.facebook.android:facebook-common:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-common-4.37.0.aar\f9714c2ec3ed3e92859165cb54d812ff\AndroidManifest.xml:32:13-63
 	android:name
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:27:13-57
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:27:13-57
 activity#com.facebook.CustomTabActivity
-ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:30:9-41:20
-MERGED from [com.facebook.android:facebook-common:4.37.0] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\facebook-common-4.37.0.aar\6cd55e6b965c086ee0074a65381a7665\AndroidManifest.xml:34:9-67
-MERGED from [com.facebook.android:facebook-common:4.37.0] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\facebook-common-4.37.0.aar\6cd55e6b965c086ee0074a65381a7665\AndroidManifest.xml:34:9-67
+ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:30:9-41:20
+MERGED from [com.facebook.android:facebook-common:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-common-4.37.0.aar\f9714c2ec3ed3e92859165cb54d812ff\AndroidManifest.xml:34:9-67
+MERGED from [com.facebook.android:facebook-common:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-common-4.37.0.aar\f9714c2ec3ed3e92859165cb54d812ff\AndroidManifest.xml:34:9-67
 	android:exported
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:32:13-36
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:32:13-36
 	android:name
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:31:13-58
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:31:13-58
 intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:scheme:@string/fb_login_protocol_scheme
-ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:33:13-40:29
+ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:33:13-40:29
 action#android.intent.action.VIEW
-ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:34:17-69
+ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:34:17-69
 	android:name
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:34:25-66
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:34:25-66
 category#android.intent.category.DEFAULT
-ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:36:17-76
+ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:36:17-76
 	android:name
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:36:27-73
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:36:27-73
 category#android.intent.category.BROWSABLE
-ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:37:17-78
+ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:37:17-78
 	android:name
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:37:27-75
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:37:27-75
 data
-ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:39:17-75
+ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:39:17-75
 	android:scheme
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:39:23-72
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:39:23-72
 provider#com.facebook.FacebookContentProvider
-ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:43:9-46:39
+ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:43:9-46:39
 	android:authorities
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:45:13-75
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:45:13-75
 	android:exported
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:46:13-36
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:46:13-36
 	android:name
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:44:13-64
-activity#com.example.aleczhong.myapplication.activities.Activity2
-ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:48:9-58
-	android:name
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:48:19-55
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:44:13-64
 activity#com.example.aleczhong.myapplication.activities.LoginActivity
-ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:49:9-62
+ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:48:9-62
 	android:name
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:49:19-59
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:48:19-59
 activity#com.example.aleczhong.myapplication.activities.MainMenuActivity
-ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:50:9-65
+ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:49:9-65
 	android:name
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:50:19-62
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:49:19-62
 activity#com.example.aleczhong.myapplication.activities.LoadingActivity
-ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:51:9-64
+ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:50:9-64
 	android:name
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:51:19-61
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:50:19-61
 activity#com.example.aleczhong.myapplication.activities.PlayActivity
-ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:52:9-61
+ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:51:9-61
 	android:name
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:52:19-58
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:51:19-58
 activity#com.example.aleczhong.myapplication.activities.SettingsActivity
-ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:53:9-65
+ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:52:9-65
 	android:name
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:53:19-62
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:52:19-62
 activity#com.example.aleczhong.myapplication.activities.PrototypeChatRoomActivity
-ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:54:9-83
+ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:53:9-74
 	android:name
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:54:19-71
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:53:19-71
+activity#com.example.aleczhong.myapplication.activities.MockLoginActivity
+ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:54:9-75
+	android:name
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:54:19-63
 uses-sdk
-INJECTED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
-INJECTED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
-MERGED from [com.facebook.android:facebook-login:4.37.0] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\facebook-login-4.37.0.aar\921f415c3b3072987f2e33545bc27263\AndroidManifest.xml:24:5-26:41
-MERGED from [com.facebook.android:facebook-login:4.37.0] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\facebook-login-4.37.0.aar\921f415c3b3072987f2e33545bc27263\AndroidManifest.xml:24:5-26:41
-MERGED from [com.facebook.android:facebook-common:4.37.0] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\facebook-common-4.37.0.aar\6cd55e6b965c086ee0074a65381a7665\AndroidManifest.xml:24:5-26:41
-MERGED from [com.facebook.android:facebook-common:4.37.0] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\facebook-common-4.37.0.aar\6cd55e6b965c086ee0074a65381a7665\AndroidManifest.xml:24:5-26:41
-MERGED from [com.android.support:appcompat-v7:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0-rc02.aar\ed47c06a9012800c59c65a4a6a5d98c8\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:appcompat-v7:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0-rc02.aar\ed47c06a9012800c59c65a4a6a5d98c8\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\197ee85036e1f2933f5865cb70b74233\AndroidManifest.xml:5:5-7:41
-MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\197ee85036e1f2933f5865cb70b74233\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.android:facebook-core:4.37.0] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\facebook-core-4.37.0.aar\1793e477c2f8505742224e0dcb15eb1d\AndroidManifest.xml:24:5-26:41
-MERGED from [com.facebook.android:facebook-core:4.37.0] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\facebook-core-4.37.0.aar\1793e477c2f8505742224e0dcb15eb1d\AndroidManifest.xml:24:5-26:41
-MERGED from [com.android.support:cardview-v7:27.0.2] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\cardview-v7-27.0.2.aar\b23e6e245bfcc96d908e8a65b51f5e8e\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:cardview-v7:27.0.2] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\cardview-v7-27.0.2.aar\b23e6e245bfcc96d908e8a65b51f5e8e\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:customtabs:27.0.2] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\customtabs-27.0.2.aar\d790bd8d8bbb6641ae409fd12f24ebb8\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:customtabs:27.0.2] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\customtabs-27.0.2.aar\d790bd8d8bbb6641ae409fd12f24ebb8\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-v4:27.0.2] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\support-v4-27.0.2.aar\14de4f53198de363ed5d0750fe78348c\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-v4:27.0.2] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\support-v4-27.0.2.aar\14de4f53198de363ed5d0750fe78348c\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-media-compat:27.0.2] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.0.2.aar\d37518a079d64f81de27a384e33fee09\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-media-compat:27.0.2] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.0.2.aar\d37518a079d64f81de27a384e33fee09\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:animated-vector-drawable:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0-rc02.aar\67d6933096415ede14dc9ad99cd388d6\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:animated-vector-drawable:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0-rc02.aar\67d6933096415ede14dc9ad99cd388d6\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-28.0.0-rc02.aar\e945983e7ce51f3bf2f66debf8db6db9\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-28.0.0-rc02.aar\e945983e7ce51f3bf2f66debf8db6db9\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-fragment:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0-rc02.aar\d0084e37f21ee42ea016462e9bb9afdc\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-fragment:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0-rc02.aar\d0084e37f21ee42ea016462e9bb9afdc\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0-rc02.aar\88a5b107cd3ba36087cc7ce373db9dbd\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0-rc02.aar\88a5b107cd3ba36087cc7ce373db9dbd\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-utils:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0-rc02.aar\28a3cef2a86863fc1e469684396dbc12\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-utils:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0-rc02.aar\28a3cef2a86863fc1e469684396dbc12\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:loader:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\loader-28.0.0-rc02.aar\267259bafdbe750df742589b3cc49bcd\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:loader:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\loader-28.0.0-rc02.aar\267259bafdbe750df742589b3cc49bcd\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:viewpager:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0-rc02.aar\b315e2f4e6073768386a22f29b1031c6\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:viewpager:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0-rc02.aar\b315e2f4e6073768386a22f29b1031c6\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:coordinatorlayout:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0-rc02.aar\a7d0bc01218a5a7662c7a6c9ae9b27da\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:coordinatorlayout:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0-rc02.aar\a7d0bc01218a5a7662c7a6c9ae9b27da\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:drawerlayout:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0-rc02.aar\3cc93d100b3f8b734a6222df3698aa28\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:drawerlayout:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0-rc02.aar\3cc93d100b3f8b734a6222df3698aa28\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:slidingpanelayout:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0-rc02.aar\7ca513b5e8ee42884a3610c23ea52934\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:slidingpanelayout:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0-rc02.aar\7ca513b5e8ee42884a3610c23ea52934\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:customview:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\customview-28.0.0-rc02.aar\ecde6473adae7fe30d0f8c69da00b866\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:customview:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\customview-28.0.0-rc02.aar\ecde6473adae7fe30d0f8c69da00b866\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:swiperefreshlayout:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0-rc02.aar\70242205aea506d84e7039bb22b4044f\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:swiperefreshlayout:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0-rc02.aar\70242205aea506d84e7039bb22b4044f\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:asynclayoutinflater:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0-rc02.aar\4bcdb4221573fea06d1263732da7f642\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:asynclayoutinflater:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0-rc02.aar\4bcdb4221573fea06d1263732da7f642\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-compat:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0-rc02.aar\b5ca21ece226443ab84996d9c9888475\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-compat:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0-rc02.aar\b5ca21ece226443ab84996d9c9888475\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:versionedparcelable:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0-rc02.aar\80520a24961849d56c93ad7ef26d1cba\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:versionedparcelable:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0-rc02.aar\80520a24961849d56c93ad7ef26d1cba\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:cursoradapter:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0-rc02.aar\5152ee282abfb103afaafae818069ea5\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:cursoradapter:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0-rc02.aar\5152ee282abfb103afaafae818069ea5\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:documentfile:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0-rc02.aar\592a6f7fb217e4aa6785319356527a17\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:documentfile:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0-rc02.aar\592a6f7fb217e4aa6785319356527a17\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:localbroadcastmanager:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0-rc02.aar\8e68d781e7ad87e90b7539adb4638fb6\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:localbroadcastmanager:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0-rc02.aar\8e68d781e7ad87e90b7539adb4638fb6\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:print:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\print-28.0.0-rc02.aar\f99907f10831bf8ae68523c020e82ff8\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:print:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\print-28.0.0-rc02.aar\f99907f10831bf8ae68523c020e82ff8\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\412615d5f74737611939a096a4cf574d\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\412615d5f74737611939a096a4cf574d\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\c6b36503b808d6d181c7b11f40f7ccc6\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\c6b36503b808d6d181c7b11f40f7ccc6\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\b32a1027a2937df561a0565312ae6cf2\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\b32a1027a2937df561a0565312ae6cf2\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\e6c7b9fb016c4a8acef0d852840dc6fa\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\e6c7b9fb016c4a8acef0d852840dc6fa\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:interpolator:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0-rc02.aar\25eed0d2721517eebdd73ba1e97cc7f4\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:interpolator:28.0.0-rc02] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0-rc02.aar\25eed0d2721517eebdd73ba1e97cc7f4\AndroidManifest.xml:20:5-44
-INJECTED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
-INJECTED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
+MERGED from [com.facebook.android:facebook-login:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-login-4.37.0.aar\4299e7e9aa78c49d1e58528666bd64b2\AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-login:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-login-4.37.0.aar\4299e7e9aa78c49d1e58528666bd64b2\AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-common:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-common-4.37.0.aar\f9714c2ec3ed3e92859165cb54d812ff\AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-common:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-common-4.37.0.aar\f9714c2ec3ed3e92859165cb54d812ff\AndroidManifest.xml:24:5-26:41
+MERGED from [com.android.support:appcompat-v7:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0-rc02.aar\9ce48206d7e07bb65dbeabe6f9047ff6\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0-rc02.aar\9ce48206d7e07bb65dbeabe6f9047ff6\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\247cdd651f0b16c4a0fb33efb0da8797\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\247cdd651f0b16c4a0fb33efb0da8797\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.android:facebook-core:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-core-4.37.0.aar\a2db5dd07d86e559285fc6827a95e14f\AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-core:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-core-4.37.0.aar\a2db5dd07d86e559285fc6827a95e14f\AndroidManifest.xml:24:5-26:41
+MERGED from [com.android.support:cardview-v7:27.0.2] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\cardview-v7-27.0.2.aar\011135f488a218b1b68a58a44216e256\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cardview-v7:27.0.2] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\cardview-v7-27.0.2.aar\011135f488a218b1b68a58a44216e256\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customtabs:27.0.2] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\customtabs-27.0.2.aar\2fd65d636c75fd43da5a692361793d22\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customtabs:27.0.2] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\customtabs-27.0.2.aar\2fd65d636c75fd43da5a692361793d22\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:27.0.2] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\support-v4-27.0.2.aar\9b48bacedd498bf1337428ebfc6d235c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:27.0.2] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\support-v4-27.0.2.aar\9b48bacedd498bf1337428ebfc6d235c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.0.2] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.0.2.aar\6264bf077054bf816c0e3596d2aa316d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.0.2] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.0.2.aar\6264bf077054bf816c0e3596d2aa316d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0-rc02.aar\b331bb4ad08a7da418fc5e0730938e30\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0-rc02.aar\b331bb4ad08a7da418fc5e0730938e30\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-28.0.0-rc02.aar\a0ce60dd9e39dfbcb00280722fc2c763\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-28.0.0-rc02.aar\a0ce60dd9e39dfbcb00280722fc2c763\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0-rc02.aar\f2e26d7cc5c1e69eee891363e108fd1f\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0-rc02.aar\f2e26d7cc5c1e69eee891363e108fd1f\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0-rc02.aar\316421194f3836a6281e1106c0900af6\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0-rc02.aar\316421194f3836a6281e1106c0900af6\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0-rc02.aar\45473a51b251708578de04a538488ee0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0-rc02.aar\45473a51b251708578de04a538488ee0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\loader-28.0.0-rc02.aar\3201936ca81df0889c1cfc32f048d994\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\loader-28.0.0-rc02.aar\3201936ca81df0889c1cfc32f048d994\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0-rc02.aar\5b254ea952c1afc3e04f55483869b6bc\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0-rc02.aar\5b254ea952c1afc3e04f55483869b6bc\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0-rc02.aar\8dd885cd42e5c59deb04d0d42a1d6f1b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0-rc02.aar\8dd885cd42e5c59deb04d0d42a1d6f1b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0-rc02.aar\b7f3c00a533048d028b8a59eb8e60fee\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0-rc02.aar\b7f3c00a533048d028b8a59eb8e60fee\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0-rc02.aar\6a21605bc9ca572d249fa3799cd89f18\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0-rc02.aar\6a21605bc9ca572d249fa3799cd89f18\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\customview-28.0.0-rc02.aar\989f4d7e1f305c4e500436bb3562c0de\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\customview-28.0.0-rc02.aar\989f4d7e1f305c4e500436bb3562c0de\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0-rc02.aar\5b43a4c192d2d9cdaa19d1185f2e4475\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0-rc02.aar\5b43a4c192d2d9cdaa19d1185f2e4475\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0-rc02.aar\1c68152fde633be627afbd42e3112cbc\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0-rc02.aar\1c68152fde633be627afbd42e3112cbc\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0-rc02.aar\cdef2e242995c80fd254ca27b02e9e50\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0-rc02.aar\cdef2e242995c80fd254ca27b02e9e50\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0-rc02.aar\f272737c6fbab041183a7b941741d782\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0-rc02.aar\f272737c6fbab041183a7b941741d782\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0-rc02.aar\318da64b154a8a5016e7edecb9302822\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0-rc02.aar\318da64b154a8a5016e7edecb9302822\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0-rc02.aar\0154dfe8d560f918a548224aa02adcc0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0-rc02.aar\0154dfe8d560f918a548224aa02adcc0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0-rc02.aar\63498d3588f928a3baa27fa1c85e43d8\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0-rc02.aar\63498d3588f928a3baa27fa1c85e43d8\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\print-28.0.0-rc02.aar\0dd15cdd0dfce8d85724acadb912f701\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\print-28.0.0-rc02.aar\0dd15cdd0dfce8d85724acadb912f701\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\b8b53864114eb2049d7deb930c549215\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\b8b53864114eb2049d7deb930c549215\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\6ca8010f318629733763694a862e20bc\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\6ca8010f318629733763694a862e20bc\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\8e88419e88cb79c193767d40f76fb9ce\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\8e88419e88cb79c193767d40f76fb9ce\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\8a87325dffc6949632d7a3e8c591e24a\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\8a87325dffc6949632d7a3e8c591e24a\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0-rc02.aar\0ea7e4b85fbc05814d2588891b550738\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0-rc02] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0-rc02.aar\0ea7e4b85fbc05814d2588891b550738\AndroidManifest.xml:20:5-44
+INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\asteh\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml
 activity#com.facebook.CustomTabMainActivity
-ADDED from [com.facebook.android:facebook-common:4.37.0] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\facebook-common-4.37.0.aar\6cd55e6b965c086ee0074a65381a7665\AndroidManifest.xml:33:9-71
+ADDED from [com.facebook.android:facebook-common:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-common-4.37.0.aar\f9714c2ec3ed3e92859165cb54d812ff\AndroidManifest.xml:33:9-71
 	android:name
-		ADDED from [com.facebook.android:facebook-common:4.37.0] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\facebook-common-4.37.0.aar\6cd55e6b965c086ee0074a65381a7665\AndroidManifest.xml:33:19-68
+		ADDED from [com.facebook.android:facebook-common:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-common-4.37.0.aar\f9714c2ec3ed3e92859165cb54d812ff\AndroidManifest.xml:33:19-68
 provider#com.facebook.internal.FacebookInitProvider
-ADDED from [com.facebook.android:facebook-core:4.37.0] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\facebook-core-4.37.0.aar\1793e477c2f8505742224e0dcb15eb1d\AndroidManifest.xml:39:9-42:40
+ADDED from [com.facebook.android:facebook-core:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-core-4.37.0.aar\a2db5dd07d86e559285fc6827a95e14f\AndroidManifest.xml:39:9-42:40
 	android:authorities
-		ADDED from [com.facebook.android:facebook-core:4.37.0] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\facebook-core-4.37.0.aar\1793e477c2f8505742224e0dcb15eb1d\AndroidManifest.xml:41:13-72
+		ADDED from [com.facebook.android:facebook-core:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-core-4.37.0.aar\a2db5dd07d86e559285fc6827a95e14f\AndroidManifest.xml:41:13-72
 	android:exported
-		ADDED from [com.facebook.android:facebook-core:4.37.0] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\facebook-core-4.37.0.aar\1793e477c2f8505742224e0dcb15eb1d\AndroidManifest.xml:42:13-37
+		ADDED from [com.facebook.android:facebook-core:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-core-4.37.0.aar\a2db5dd07d86e559285fc6827a95e14f\AndroidManifest.xml:42:13-37
 	android:name
-		ADDED from [com.facebook.android:facebook-core:4.37.0] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\facebook-core-4.37.0.aar\1793e477c2f8505742224e0dcb15eb1d\AndroidManifest.xml:40:13-70
+		ADDED from [com.facebook.android:facebook-core:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-core-4.37.0.aar\a2db5dd07d86e559285fc6827a95e14f\AndroidManifest.xml:40:13-70
 receiver#com.facebook.CurrentAccessTokenExpirationBroadcastReceiver
-ADDED from [com.facebook.android:facebook-core:4.37.0] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\facebook-core-4.37.0.aar\1793e477c2f8505742224e0dcb15eb1d\AndroidManifest.xml:44:9-50:20
+ADDED from [com.facebook.android:facebook-core:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-core-4.37.0.aar\a2db5dd07d86e559285fc6827a95e14f\AndroidManifest.xml:44:9-50:20
 	android:exported
-		ADDED from [com.facebook.android:facebook-core:4.37.0] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\facebook-core-4.37.0.aar\1793e477c2f8505742224e0dcb15eb1d\AndroidManifest.xml:46:13-37
+		ADDED from [com.facebook.android:facebook-core:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-core-4.37.0.aar\a2db5dd07d86e559285fc6827a95e14f\AndroidManifest.xml:46:13-37
 	android:name
-		ADDED from [com.facebook.android:facebook-core:4.37.0] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\facebook-core-4.37.0.aar\1793e477c2f8505742224e0dcb15eb1d\AndroidManifest.xml:45:13-86
+		ADDED from [com.facebook.android:facebook-core:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-core-4.37.0.aar\a2db5dd07d86e559285fc6827a95e14f\AndroidManifest.xml:45:13-86
 intent-filter#action:name:com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED
-ADDED from [com.facebook.android:facebook-core:4.37.0] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\facebook-core-4.37.0.aar\1793e477c2f8505742224e0dcb15eb1d\AndroidManifest.xml:47:13-49:29
+ADDED from [com.facebook.android:facebook-core:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-core-4.37.0.aar\a2db5dd07d86e559285fc6827a95e14f\AndroidManifest.xml:47:13-49:29
 action#com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED
-ADDED from [com.facebook.android:facebook-core:4.37.0] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\facebook-core-4.37.0.aar\1793e477c2f8505742224e0dcb15eb1d\AndroidManifest.xml:48:17-95
+ADDED from [com.facebook.android:facebook-core:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-core-4.37.0.aar\a2db5dd07d86e559285fc6827a95e14f\AndroidManifest.xml:48:17-95
 	android:name
-		ADDED from [com.facebook.android:facebook-core:4.37.0] C:\Users\Demo\.gradle\caches\transforms-1\files-1.1\facebook-core-4.37.0.aar\1793e477c2f8505742224e0dcb15eb1d\AndroidManifest.xml:48:25-92
+		ADDED from [com.facebook.android:facebook-core:4.37.0] C:\Users\asteh\.gradle\caches\transforms-1\files-1.1\facebook-core-4.37.0.aar\a2db5dd07d86e559285fc6827a95e14f\AndroidManifest.xml:48:25-92
