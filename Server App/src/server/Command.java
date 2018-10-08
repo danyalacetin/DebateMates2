@@ -18,8 +18,13 @@ public class Command
     private final Worker source;
     
     Command(String[] command, Worker source) {
-        label = 0 == command.length ? null : command[0];
-        args = Arrays.copyOfRange(command, 1, command.length);
+        if (0 == command.length) {
+            label = null;
+            args = null;
+        } else {
+            label = command[0];
+            args = Arrays.copyOfRange(command, 1, command.length);
+        }
         this.source = source;
     }
     
@@ -49,7 +54,7 @@ public class Command
     }
     
     boolean isCommand(String command) {
-        return label.equalsIgnoreCase(command);
+        return null != label && label.equalsIgnoreCase(command);
     }
     
     Command nextCommand() {
@@ -57,7 +62,7 @@ public class Command
     }
     
     boolean isCommand(String command, int numArgs) {
-        return isCommand(command) && args.length== numArgs;
+        return isCommand(command) && args.length == numArgs;
     }
     
     @Override

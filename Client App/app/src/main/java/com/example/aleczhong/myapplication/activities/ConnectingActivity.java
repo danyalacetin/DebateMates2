@@ -13,7 +13,7 @@ public class ConnectingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_connecting);connect();
+        setContentView(R.layout.activity_connecting);
         connect();
 //        runLogin();
     }
@@ -32,7 +32,7 @@ public class ConnectingActivity extends AppCompatActivity {
     }
 
     private void runLogin() {
-        Intent intent = new Intent(ConnectingActivity.this, LoginActivity.class);
+        Intent intent = new Intent(ConnectingActivity.this, MockLoginActivity.class);
         startActivity(intent);
     }
 

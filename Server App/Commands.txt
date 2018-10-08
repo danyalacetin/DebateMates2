@@ -1,5 +1,6 @@
 Join Request = join <type>
 Leave Request = leave
+
 Announcement Request = announce <msg>
 Announcement Response = announce <msgID> <msg>
 Chat Request = match chat <msg>
