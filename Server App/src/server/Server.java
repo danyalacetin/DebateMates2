@@ -23,7 +23,7 @@ public class Server implements ServerWorker, ConnectionInitiator {
     private Server(Consumer<String> logFunction) {
         
         executor = Executors.newCachedThreadPool();
-        database = new Database();
+        database = new Database(); //Testing Purposes Only
         
         connectionFinder = new ConnectionFinder();
         commandProcessor = new CommandProcessor();
@@ -32,20 +32,8 @@ public class Server implements ServerWorker, ConnectionInitiator {
         this.logFunction = logFunction;
     }
     
-    void addDBItem(String facebookID, String nickname, int wins, int losses, int rankscore, int onlinestatus){
-        database.addItem(facebookID, nickname, wins, losses, rankscore, onlinestatus);
-    }
-    
-    void viewDBItem(String facebookID, String field){
-        System.out.println(database.getQuery(facebookID, field));
-    }
-    
-    void updateDBItem(String facebookID, String field, String value){
-        database.updateItem(facebookID, field, value);
-    }
-    
-    void dropDBtable(){
-        database.droptable();
+    public Database getDB(){
+        return database;
     }
     
     MatchManager getMatchManager() {
@@ -56,10 +44,22 @@ public class Server implements ServerWorker, ConnectionInitiator {
         return workerManager;
     }
     
+    void changeNickname(String nickname, Worker source){
+        database.updateItem(source.getLogin(), "NICKNAME", "'"+nickname+"'");
+    }
+    
     void logInUser(String id, Worker source) {
         serverLog("User logged in as: " + id);
         source.setLogin(id);
         source.send(ServerConstants.LOGIN);
+        //Checks if user is new
+        if(database.getQuery(id, "FACEBOOKID") == null){
+            //Adds user to database
+            database.addItem(id, "Nickname", 0, 0, 1000, 1);
+        }
+        else{
+            database.updateItem(source.getLogin(), "ONLINESTATUS", "1");
+        }
     }
     
     void logOutUser(Worker source) {
@@ -69,6 +69,7 @@ public class Server implements ServerWorker, ConnectionInitiator {
         }
         serverLog(source.getLogin() + " logged out.");
         source.setLogin(null);
+        database.updateItem(source.getLogin(), "ONLINESTATUS", "0");
     }
     
     public void startServer() {

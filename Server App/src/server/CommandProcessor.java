@@ -37,13 +37,13 @@ class CommandProcessor {
             
             //Testing commands
             else if (command.isCommand("addDB", 0))
-                server.addDBItem("123", "Nickname123", 1, 1, 1234, 1);
+                server.getDB().addItem("123", "Nickname123", 1, 1, 1234, 1);
             else if (command.isCommand("viewDB", 0))
-                server.viewDBItem("123", "NICKNAME");
+                server.getDB().getQuery("123", "NICKNAME");
             else if (command.isCommand("updateDB", 0))
-                server.updateDBItem("123", "NICKNAME", "'jamjam'");
+                server.getDB().updateItem("123", "NICKNAME", "'jamjam'");
             else if (command.isCommand("dropDB", 0))
-                server.dropDBtable();
+                server.getDB().droptable();
             
             else if (command.isCommand("post") && 0 != command.getArgs().length)
                 server.getWorkerManager().sendBroadcast(command.nextCommand());
@@ -56,6 +56,9 @@ class CommandProcessor {
             if (command.isCommand("logout", 0)) {
                 System.out.println("logging out user");
                     server.logOutUser(worker);
+            }
+            else if (command.isCommand("nickname", 1)){
+                server.changeNickname(command.getArg(0), worker);
             }
             else if (worker.inMatch()) // in match
             {

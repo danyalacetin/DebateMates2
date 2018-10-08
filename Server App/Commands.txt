@@ -1,11 +1,12 @@
-Join Request = join type
+Join Request = join <type>
 Leave Request = leave
-Announcement Request = announce msg
-Announcement Response = announce msgID msg
-Chat Request = chat msg
-Chat Response = chat msgID userID msg
 
-Login = login userID
+Announcement Request = announce <msg>
+Announcement Response = announce <msgID> <msg>
+Chat Request = match chat <msg>
+Chat Response = chat <msgID> <userID> <msg>
+
+Login = login <userID>
 Logout = logout
 
 Open server = open
@@ -13,4 +14,6 @@ Close server = close
 Start server = start
 Stop server = exit
 Restart Server = restart
-Server announcement = serverannounce msg
+Server announcement = serverannounce <msg>
+
+Change Nickname = nickname <nickname>
