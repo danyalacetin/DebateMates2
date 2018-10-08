@@ -1,20 +1,14 @@
 package com.example.aleczhong.myapplication.activities;
 
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.aleczhong.myapplication.R;
 import com.example.aleczhong.myapplication.applogic.ClientApp;
 import com.example.aleczhong.myapplication.applogic.DelayedReturn;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class PrototypeChatRoomActivity extends AppCompatActivity {
     private TextView textDisplay;
