@@ -2,7 +2,6 @@ package com.example.aleczhong.myapplication.applogic;
 
 import android.util.Log;
 
-import com.example.aleczhong.myapplication.R;
 import com.example.aleczhong.myapplication.activities.PrototypeChatRoomActivity;
 import com.facebook.AccessToken;
 
@@ -96,7 +95,7 @@ public class ClientApp {
 
     public void sendChatMessage(String message) {
         String sendString = "chat " + message;
-        serverConnection.sendString(sendString);
+        serverConnection.send(sendString);
     }
 
     public boolean establishServerConnection() {

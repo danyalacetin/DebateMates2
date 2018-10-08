@@ -1,4 +1,5 @@
 ----------------------------------------------------------------
+<<<<<<< HEAD
 Mon Oct 08 15:41:57 NZDT 2018:
 Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0166-518d-75b6-000006d4d638 
 on database directory C:\Users\Danyal Cetin\Documents\GitHub\DebateMates2\Server App\DebatemateDB with class loader sun.misc.Launcher$AppClassLoader@3d4eac69 
@@ -6,6 +7,15 @@ Loaded from file:/C:/Users/Danyal%20Cetin/Documents/GitHub/DebateMates2/Server%2
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_161-b12
 user.dir=C:\Users\Danyal Cetin\Documents\GitHub\DebateMates2\Server App
+=======
+Mon Oct 08 16:19:44 NZDT 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0166-51b0-0e1d-000006df7a68 
+on database directory C:\Users\Demo\Documents\GitHub\DebateMates2\Server App\DebatemateDB with class loader sun.misc.Launcher$AppClassLoader@55f96302 
+Loaded from file:/C:/Users/Demo/Documents/GitHub/DebateMates2/Server%20App/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_141-b15
+user.dir=C:\Users\Demo\Documents\GitHub\DebateMates2\Server App
+>>>>>>> Aidan
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0

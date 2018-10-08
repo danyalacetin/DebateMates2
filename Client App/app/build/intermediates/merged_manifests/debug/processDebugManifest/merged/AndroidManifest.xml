@@ -62,6 +62,7 @@
         <activity android:name="com.example.aleczhong.myapplication.activities.SettingsActivity" />
         <activity android:name="com.example.aleczhong.myapplication.activities.PrototypeChatRoomActivity" />
         <activity android:name="com.example.aleczhong.myapplication.activities.MockLoginActivity" />
+        <activity android:name="com.example.aleczhong.myapplication.activities.SetQuestionsActivity" />
         <activity android:name="com.facebook.CustomTabMainActivity" />
         <!--
          The initialization ContentProvider will call FacebookSdk.sdkInitialize automatically

@@ -1,21 +1,21 @@
 package com.example.aleczhong.myapplication.applogic;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.function.Consumer;
 
 class ServerConnection {
+<<<<<<< HEAD
     private static final String SERVER_ADDRESS = "192.168.18.49";
+=======
+    private static final String SERVER_ADDRESS = "192.168.0.3";
+>>>>>>> Aidan
     private static final int SERVER_PORT = 8818;
 
     private Socket connection;
@@ -34,7 +34,7 @@ class ServerConnection {
 
 
     void joinChatRoom() {
-        sendString("join player");
+        send("join player");
     }
 
     private void handleServer(){
@@ -50,14 +50,14 @@ class ServerConnection {
         ClientApp.log("finished executing");
     }
 
-    void sendString(String str) {
+    void send(String str) {
         ClientApp.log(str);
         new SendTask(outStream).execute(str);
         ClientApp.log("string sent");
     }
 
     void login(String userID) {
-        sendString("login " + userID);
+        send("login " + userID);
         ClientApp.log("login command sent");
     }
 

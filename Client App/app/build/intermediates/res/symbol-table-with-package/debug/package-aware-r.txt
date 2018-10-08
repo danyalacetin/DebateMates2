@@ -773,6 +773,7 @@ id box_count
 id button
 id button3
 id buttonPanel
+id cancelQuestionnaire
 id cancel_action
 id cancel_button
 id center
@@ -794,6 +795,7 @@ id com_facebook_smart_instructions_or
 id com_facebook_tooltip_bubble_view_bottom_pointer
 id com_facebook_tooltip_bubble_view_text_body
 id com_facebook_tooltip_bubble_view_top_pointer
+id confirmQuestionnaire
 id confirmation_code
 id content
 id contentPanel
@@ -866,6 +868,7 @@ id progressBar
 id progress_bar
 id progress_circular
 id progress_horizontal
+id questionnaireControlBar
 id radio
 id right
 id right_icon
@@ -884,6 +887,7 @@ id search_mag_icon
 id search_plate
 id search_src_text
 id search_voice_btn
+id seekBar
 id select_dialog_listview
 id settingsButtonQuestions
 id settingsNickname
@@ -911,6 +915,7 @@ id tabMode
 id tag_transition_group
 id tag_unhandled_key_event_manager
 id tag_unhandled_key_listeners
+id tempItem
 id text
 id text2
 id textSpacerNoButtons
@@ -970,6 +975,7 @@ layout activity_main_menu
 layout activity_mock_login
 layout activity_play
 layout activity_prototype_chat_room
+layout activity_set_questions
 layout activity_settings
 layout com_facebook_activity_layout
 layout com_facebook_device_auth_dialog_fragment
@@ -991,6 +997,7 @@ layout notification_template_media
 layout notification_template_media_custom
 layout notification_template_part_chronometer
 layout notification_template_part_time
+layout question_layout
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
@@ -1037,6 +1044,7 @@ string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
 string app_name
+string cancel_questions
 string change_question_preferences
 string com_facebook_device_auth_instructions
 string com_facebook_image_download_unknown_error
@@ -1061,6 +1069,7 @@ string com_facebook_smart_login_confirmation_cancel
 string com_facebook_smart_login_confirmation_continue_as
 string com_facebook_smart_login_confirmation_title
 string com_facebook_tooltip_default
+string confirm_questions
 string connecting_label
 string debate_mate
 string facebook_app_id
