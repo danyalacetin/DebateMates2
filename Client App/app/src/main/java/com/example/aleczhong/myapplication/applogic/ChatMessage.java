@@ -1,14 +1,16 @@
 package com.example.aleczhong.myapplication.applogic;
 
-public class ChatMessage {
-    private final String content;
-    private final int id;
-    private final boolean isUser;
+import android.support.annotation.NonNull;
 
-    public ChatMessage(String content, int id, boolean isUser) {
+public class ChatMessage implements Comparable<Integer> {
+    private final String content;
+    private final Integer id;
+    private final MessageType type;
+
+    public ChatMessage(String content, int id, MessageType type) {
         this.content = content;
         this.id = id;
-        this.isUser = isUser;
+        this.type = type;
     }
 
     public String getContent() {
@@ -19,7 +21,12 @@ public class ChatMessage {
         return id;
     }
 
-    public boolean isUser() {
-        return isUser;
+    public MessageType getType() {
+        return type;
+    }
+
+    @Override
+    public int compareTo(@NonNull Integer integer) {
+        return id.compareTo(integer);
     }
 }

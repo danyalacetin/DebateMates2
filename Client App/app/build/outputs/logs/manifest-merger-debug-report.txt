@@ -172,10 +172,10 @@ activity#com.example.aleczhong.myapplication.activities.SettingsActivity
 ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:52:9-65
 	android:name
 		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:52:19-62
-activity#com.example.aleczhong.myapplication.activities.PrototypeChatRoomActivity
-ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:53:9-74
+activity#com.example.aleczhong.myapplication.activities.PlayerViewActivity
+ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:53:9-67
 	android:name
-		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:53:19-71
+		ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:53:19-64
 activity#com.example.aleczhong.myapplication.activities.MockLoginActivity
 ADDED from C:\Users\Demo\Documents\GitHub\DebateMates2\Client App\app\src\main\AndroidManifest.xml:54:9-66
 	android:name

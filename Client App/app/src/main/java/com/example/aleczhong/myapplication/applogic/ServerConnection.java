@@ -42,19 +42,14 @@ class ServerConnection {
         } catch (IOException error) {
             ClientApp.log("error");
         }
-
-        ClientApp.log("finished executing");
     }
 
     void send(String str) {
-        ClientApp.log(str);
         new SendTask(outStream).execute(str);
-        ClientApp.log("string sent");
     }
 
     void login(String userID) {
         send("login " + userID);
-        ClientApp.log("login command sent");
     }
 
     boolean connect() {
