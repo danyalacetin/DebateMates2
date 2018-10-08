@@ -51,7 +51,7 @@ public class Server implements ServerWorker, ConnectionInitiator {
     void logInUser(String id, Worker source) {
         serverLog("User logged in as: " + id);
         source.setLogin(id);
-        source.send(ServerConstants.LOGIN);
+        source.send(ServerConstants.LOGIN_SUCCESS);
         //Checks if user is new
         if(database.getQuery(id, "FACEBOOKID") == null){
             //Adds user to database

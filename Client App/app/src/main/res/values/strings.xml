@@ -3,6 +3,7 @@
     <string name="facebook_app_id">1557647357715015</string>
     <string name="fb_login_protocol_scheme">fb1557647357715015</string>
     <string name="connecting_label">Connecting</string>
+    <string name="finding_match">FINDING MATCH</string>
 
     <string name="play">Play</string>
     <string name="settings">Settings</string>

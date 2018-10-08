@@ -10,9 +10,10 @@ package server;
  * @author Demo
  */
 enum ServerConstants {
-    JOINED("join success"),
-    LOGIN("login success"),
-    CONNECTED("connect success");
+    JOIN_SUCCESS("join success"),
+    JOIN_FAILED("join failed"),
+    LOGIN_SUCCESS("login success"),
+    LOGIN_FAILED("login failed");
     
     
     private final String msg;

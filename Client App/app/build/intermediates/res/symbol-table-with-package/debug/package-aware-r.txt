@@ -865,6 +865,7 @@ id playButtonFind
 id playButtonJudge
 id playButtonSpectator
 id progressBar
+id progressBar2
 id progress_bar
 id progress_circular
 id progress_horizontal
@@ -925,6 +926,7 @@ id textSpacerNoButtons
 id textSpacerNoTitle
 id textView
 id textView2
+id textView3
 id time
 id title
 id titleDividerNoCustom
@@ -972,6 +974,7 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_connecting
+layout activity_joining_match
 layout activity_loading
 layout activity_login
 layout activity_main_menu
@@ -1082,6 +1085,7 @@ string facebook_app_id
 string fb_login_protocol_scheme
 string find_game
 string find_match
+string finding_match
 string judge_match
 string nickname
 string ok

@@ -49,7 +49,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 app.setAccessToken(loginResult.getAccessToken());
                 app.login();
-                Log.d("send_string_tag", "login done");
                 nextActivity();
             }
 
