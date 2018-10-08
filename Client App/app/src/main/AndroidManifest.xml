@@ -52,7 +52,8 @@
         <activity android:name=".activities.SettingsActivity" />
         <activity android:name=".activities.PlayerViewActivity" />
         <activity android:name=".activities.MockLoginActivity" />
-        <activity android:name=".activities.SetQuestionsActivity"></activity>
+        <activity android:name=".activities.SetQuestionsActivity" />
+        <activity android:name=".activities.JoiningMatchActivity" />
     </application>
 
 </manifest>

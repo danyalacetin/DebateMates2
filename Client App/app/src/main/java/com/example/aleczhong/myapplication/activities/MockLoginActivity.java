@@ -28,8 +28,7 @@ public class MockLoginActivity extends AppCompatActivity {
         String id = idInput.getText().toString();
         idInput.getText().clear();
         if (!id.equalsIgnoreCase("User ID")) {
-            ClientApp.getClientApp().login(id, new DelayedReturn("login success",
-                    "login failure") {
+            ClientApp.getClientApp().login(id, new DelayedReturn() {
                 @Override
                 public void onSuccess() {
                     goToGame();
@@ -38,6 +37,15 @@ public class MockLoginActivity extends AppCompatActivity {
                 @Override
                 public void onFailure() {
                     displayFailMessage();
+                }
+
+                @Override
+                public int testString(String toTest) {
+                    int compare;
+                    if ("login success".equalsIgnoreCase(toTest)) compare = 1;
+                    else if ("login failed".equalsIgnoreCase(toTest)) compare = -1;
+                    else compare = 0;
+                    return compare;
                 }
             });
         }

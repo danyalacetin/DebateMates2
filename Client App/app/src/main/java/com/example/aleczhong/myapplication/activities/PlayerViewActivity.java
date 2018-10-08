@@ -8,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.aleczhong.myapplication.R;
 import com.example.aleczhong.myapplication.applogic.ChatMessage;
@@ -28,11 +27,9 @@ public class PlayerViewActivity extends AppCompatActivity {
         userInput = findViewById(R.id.inputArea);
         ListView listView = findViewById(R.id.messageArea);
 
-//        ClientApp.getClientApp().setMessageListener(new DisplayAreaListener());
-
         final List<ChatMessage> messages = ClientApp.getClientApp().getMessages();
 
-        BaseAdapter adapter = new BaseAdapter() {
+        final BaseAdapter adapter = new BaseAdapter() {
             @Override
             public int getCount() {
                 return messages.size();
@@ -81,43 +78,23 @@ public class PlayerViewActivity extends AppCompatActivity {
         };
 
         listView.setAdapter(adapter);
-        joinRoom();
 
+       ClientApp.getClientApp().addMessageChangeListener(new Runnable() {
+           @Override
+           public void run() {
+               runOnUiThread(new Runnable() {
+                   @Override
+                   public void run() {
+                       adapter.notifyDataSetChanged();
+                   }
+               });
+           }
+       });
     }
-
-    void joinRoom() { // move this to loading screen
-        ClientApp.getClientApp().joinChatRoom(new DelayedReturn("join success",
-                "join failed") {
-            @Override
-            public void onSuccess() {
-
-            }
-
-            @Override
-            public void onFailure() {
-
-            }
-        });
-    }
-
-//    void setDisplayText(final String txt) {
-//        runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                textDisplay.append(txt + "\n");
-//            }
-//        });
-//    }
 
     public void sendText(View view) {
         String text = userInput.getText().toString();
         userInput.getText().clear();
         if (!text.equals("")) ClientApp.getClientApp().sendChatMessage(text);
     }
-
-//    public class DisplayAreaListener {
-//        public void displayMessage(String text) {
-//            setDisplayText(text);
-//        }
-//    }
 }

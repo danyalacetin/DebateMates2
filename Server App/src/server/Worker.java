@@ -100,7 +100,6 @@ class Worker implements Runnable {
     
     void handleClient() throws IOException {
         String line;
-        send(ServerConstants.CONNECTED);
         
         while((line = inStream.readLine()) != null) {
 //            server.serverLog("CLIENT SENT: " +  line);

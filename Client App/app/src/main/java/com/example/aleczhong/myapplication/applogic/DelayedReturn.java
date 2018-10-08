@@ -1,27 +1,15 @@
 package com.example.aleczhong.myapplication.applogic;
 
 public abstract class DelayedReturn {
-    private String failureString;
-    private String successString;
-
-    public DelayedReturn(String success, String fail) {
-        failureString = fail;
-        successString = success;
-    }
 
     public abstract void onSuccess();
     public abstract void onFailure();
+    public abstract int testString(String toTest);
 
-    public boolean check(String toCompare) {
-        boolean isSuccessful = false;
-        if (toCompare.equalsIgnoreCase(successString)) {
-            isSuccessful = true;
-            onSuccess();
-        }
-        else if (toCompare.equalsIgnoreCase(failureString)) {
-            isSuccessful = true;
-            onFailure();
-        }
-        return isSuccessful;
+    public boolean check(String toTest) {
+        int compare = testString(toTest);
+        if (1 == compare) onSuccess();
+        else if (-1 == compare) onFailure();
+        return 0 != compare;
     }
 }

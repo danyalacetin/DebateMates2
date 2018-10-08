@@ -38,6 +38,13 @@ class Match {
         matchID = id;
     }
     
+    /**
+     * returns the number of members in the match based on the string value given
+     * @param type type of member to search for, if empty string given then
+     * the total members is returned
+     * @return  number of certain type of members depending on the string value
+     * given
+     */
     int getNumMembers(String type) {
         int number;
         switch (type) {
@@ -128,7 +135,7 @@ class Match {
                 if (null != toAdd) {
                     toAdd.add(member);
                     member.enterMatch(matchID);
-                    member.send(ServerConstants.JOINED);
+                    member.send(ServerConstants.JOIN_SUCCESS);
                     processCommand(Command.anonymousCommand("announce "
                             + member.getLogin() + " has entered as a " + type));
                 }

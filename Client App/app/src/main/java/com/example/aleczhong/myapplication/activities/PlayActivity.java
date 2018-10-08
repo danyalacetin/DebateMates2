@@ -34,24 +34,17 @@ public class PlayActivity extends AppCompatActivity {
     public void judge(View view) {
 //        Intent intent = new Intent(this, JudgeActivity.class);
 //        startActivity(intent);
-        loading();
     }
 
     public void watch(View view) {
 //        Intent intent = new Intent(this, SpectateActivity.class);
 //        startActivity(intent);
-        loading();
     }
 
     public void find(View view) {
-        Intent intent = new Intent(this, PlayerViewActivity.class);
+        Intent intent = new Intent(this, JoiningMatchActivity.class);
+        Bundle bun = new Bundle();
+        intent.putExtra("type", PlayerViewActivity.class);
         startActivity(intent);
-//        loading();
-    }
-
-    public void loading() {
-        Intent intent = new Intent(this, LoadingActivity.class);
-        startActivity(intent);
-
     }
 }

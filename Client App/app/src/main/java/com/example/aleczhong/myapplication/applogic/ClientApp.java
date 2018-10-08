@@ -25,6 +25,7 @@ public class ClientApp {
     private String userID;
     private final List<Question> questions;
     private final List<ChatMessage> messages;
+    private Runnable messageChangeListener;
 
     private ClientApp() {
         serverConnection = new ServerConnection(this);
@@ -50,13 +51,22 @@ public class ClientApp {
                         new Question("Question 15")
                 );
         messages = new ArrayList<>();
+        messageChangeListener = null;
     }
 
+<<<<<<< HEAD
     //public int getScores(int i){
     //    return scores[i];
     //}
 
     public void joinChatRoom(DelayedReturn waitFunc) {
+=======
+    public void addMessageChangeListener(Runnable messageChangeListener) {
+        this.messageChangeListener = messageChangeListener;
+    }
+
+    public void joinMatch(DelayedReturn waitFunc) {
+>>>>>>> Aidan
         addWaitFunc(waitFunc);
         serverConnection.joinChatRoom();
     }
@@ -125,6 +135,7 @@ public class ClientApp {
 
     private void addMessage(ChatMessage msg) {
         messages.add(msg);
+        if (null != messageChangeListener) messageChangeListener.run();
     }
 
     private void addChatMessage(String[] msg) {

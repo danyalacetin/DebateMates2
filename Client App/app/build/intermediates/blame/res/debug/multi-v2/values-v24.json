@@ -1,10 +1,27 @@
 {
     "logs": [
         {
+<<<<<<< HEAD
             "outputFile": "C:\\Users\\Danyal Cetin\\Documents\\GitHub\\DebateMates2\\Client App\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Danyal Cetin\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-27.0.2.aar\\5beb2c525e5e076198f42a27f57b4ce1\\res\\values-v24\\values-v24.xml",
+=======
+            "outputFile": "C:\\Users\\asteh\\Documents\\GitHub\\DebateMates2\\Client App\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\asteh\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0-rc02.aar\\9ce48206d7e07bb65dbeabe6f9047ff6\\res\\values-v24\\values-v24.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,212",
+                        "endColumns": "156,134",
+                        "endOffsets": "207,342"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\asteh\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-27.0.2.aar\\6264bf077054bf816c0e3596d2aa316d\\res\\values-v24\\values-v24.xml",
+>>>>>>> Aidan
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
