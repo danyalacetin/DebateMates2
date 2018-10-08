@@ -44,7 +44,7 @@ public class PlayActivity extends AppCompatActivity {
     }
 
     public void find(View view) {
-        Intent intent = new Intent(this, PrototypeChatRoomActivity.class);
+        Intent intent = new Intent(this, PlayerViewActivity.class);
         startActivity(intent);
 //        loading();
     }

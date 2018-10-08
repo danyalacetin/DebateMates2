@@ -870,6 +870,7 @@ id progress_circular
 id progress_horizontal
 id questionnaireControlBar
 id radio
+id receiveMessage
 id right
 id right_icon
 id right_side
@@ -889,6 +890,8 @@ id search_src_text
 id search_voice_btn
 id seekBar
 id select_dialog_listview
+id sentMessage
+id serverMessage
 id settingsButtonQuestions
 id settingsNickname
 id settingsSwitchOther
@@ -974,7 +977,7 @@ layout activity_login
 layout activity_main_menu
 layout activity_mock_login
 layout activity_play
-layout activity_prototype_chat_room
+layout activity_player_view
 layout activity_set_questions
 layout activity_settings
 layout com_facebook_activity_layout
@@ -998,9 +1001,12 @@ layout notification_template_media_custom
 layout notification_template_part_chronometer
 layout notification_template_part_time
 layout question_layout
+layout recieved_message_layout
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
+layout sent_message_layout
+layout server_message_layout
 layout support_simple_spinner_dropdown_item
 mipmap ic_launcher
 mipmap ic_launcher_round

@@ -2,14 +2,12 @@ package com.example.aleczhong.myapplication.applogic;
 
 import android.util.Log;
 
-import com.example.aleczhong.myapplication.activities.PrototypeChatRoomActivity;
 import com.facebook.AccessToken;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class ClientApp {
@@ -19,11 +17,12 @@ public class ClientApp {
     private AccessToken token;
     private List<DelayedReturn> waitingFunctions;
 
-    private PrototypeChatRoomActivity.DisplayAreaListener displayListener;
+//    private PlayerViewActivity.DisplayAreaListener displayListener;
     private ReentrantLock waitFuncLock;
 
     private String nickname;
     //private int[] scores = new int[]{5,5,5,5,5,5,5,5,5,5,5,5,5,5};
+    private String userID;
     private final List<Question> questions;
     private final List<ChatMessage> messages;
 
@@ -98,19 +97,64 @@ public class ClientApp {
         }
     }
 
+    public List<ChatMessage> getMessages() {
+        return messages;
+    }
+
+    private ChatMessage convertChatMessage(String[] msg) {
+        int id = Integer.parseInt(msg[1]);
+        MessageType type;
+
+        String user = msg[2];
+        if (user.equals(userID)) {
+            type = MessageType.SELF;
+        } else {
+            type = MessageType.OPPONENT;
+        }
+
+        String content = joinString(Arrays.copyOfRange(msg, 3, msg.length));
+        return new ChatMessage(content, id, type);
+    }
+
+    private ChatMessage convertServerMessage(String[] msg) {
+        int id = Integer.parseInt(msg[1]);
+        MessageType type = MessageType.SERVER;
+        String content = joinString(Arrays.copyOfRange(msg, 2, msg.length));
+        return new ChatMessage(content, id, type);
+    }
+
+    private void addMessage(ChatMessage msg) {
+        messages.add(msg);
+    }
+
+    private void addChatMessage(String[] msg) {
+        int id = Integer.parseInt(msg[1]);
+        MessageType type;
+
+        String user = msg[2];
+        if (user.equals(userID)) {
+            type = MessageType.SELF;
+        } else {
+            type = MessageType.OPPONENT;
+        }
+
+        String content = joinString(Arrays.copyOfRange(msg, 3, msg.length));
+        ChatMessage chat = new ChatMessage(content, id, type);
+
+        messages.add(chat);
+    }
+
     void handleInput(String msg) {
         checkWaitingFunctions(msg);
         String[] tokens = msg.split(" ");
         if (tokens[0].equals("chat")) {
-            displayListener.displayMessage(tokens[2]
-                    + ": " + joinString(Arrays.copyOfRange(tokens, 3, tokens.length)));
+            addMessage(convertChatMessage(tokens));
         } else if (tokens[0].equals("announce")) {
-            displayListener.displayMessage(joinString(
-                    Arrays.copyOfRange(tokens, 2, tokens.length)));
-        } else if (tokens[0].equalsIgnoreCase("serverannounce")) {
-            displayListener.displayMessage("SERVER ANNOUNCEMENT: " + joinString(
-                    Arrays.copyOfRange(tokens, 1, tokens.length)
-            ));
+            addMessage(convertServerMessage(tokens));
+//        } else if (tokens[0].equalsIgnoreCase("serverannounce")) {
+//            displayListener.displayMessage("SERVER ANNOUNCEMENT: " + joinString(
+//                    Arrays.copyOfRange(tokens, 1, tokens.length)
+//            ));
         } else if (tokens[0].equalsIgnoreCase("nickname")){
             nickname = tokens[1];
         } //else if (tokens[0].equalsIgnoreCase("setQuestions")){
@@ -120,9 +164,9 @@ public class ClientApp {
         //}
     }
 
-    public void setMessageListener(PrototypeChatRoomActivity.DisplayAreaListener listener) {
-        displayListener = listener;
-    }
+//    public void setMessageListener(PlayerViewActivity.DisplayAreaListener listener) {
+//        displayListener = listener;
+//    }
 
     public void sendChatMessage(String message) {
         String sendString = "chat " + message;
@@ -145,7 +189,7 @@ public class ClientApp {
     {
         addWaitFunc(wf);
         serverConnection.login(id);
-
+        userID = id;
     }
 
     public void updateQuestions(List<Question> newQuestions) {

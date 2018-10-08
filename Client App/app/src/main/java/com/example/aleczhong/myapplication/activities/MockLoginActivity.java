@@ -44,7 +44,6 @@ public class MockLoginActivity extends AppCompatActivity {
     }
 
     private void goToGame() {
-        ClientApp.log("Entering Game");
         Intent intent = new Intent(this, MainMenuActivity.class);
         startActivity(intent);
     }
