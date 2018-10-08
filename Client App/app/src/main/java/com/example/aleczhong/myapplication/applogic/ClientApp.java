@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class ClientApp {
@@ -21,13 +22,34 @@ public class ClientApp {
     private PrototypeChatRoomActivity.DisplayAreaListener displayListener;
     private ReentrantLock waitFuncLock;
 
-    public String nickname;
+    private String nickname;
+    private final List<Question> questions;
+    private final List<ChatMessage> messages;
 
     private ClientApp() {
         serverConnection = new ServerConnection(this);
         token = null;
         waitFuncLock = new ReentrantLock();
         waitingFunctions = new ArrayList<>();
+        questions = Arrays.asList
+                (
+                        new Question("Question 1"),
+                        new Question("Question 2"),
+                        new Question("Question 3"),
+                        new Question("Question 4"),
+                        new Question("Question 5"),
+                        new Question("Question 6"),
+                        new Question("Question 7"),
+                        new Question("Question 8"),
+                        new Question("Question 9"),
+                        new Question("Question 10"),
+                        new Question("Question 11"),
+                        new Question("Question 12"),
+                        new Question("Question 13"),
+                        new Question("Question 14"),
+                        new Question("Question 15")
+                );
+        messages = new ArrayList<>();
     }
 
     public void joinChatRoom(DelayedReturn waitFunc) {
@@ -44,7 +66,7 @@ public class ClientApp {
     }
 
     public void sendData(String data){
-        serverConnection.sendString(data);
+        serverConnection.send(data);
     }
 
     private void addWaitFunc(DelayedReturn waitFunc) {
@@ -115,6 +137,16 @@ public class ClientApp {
         addWaitFunc(wf);
         serverConnection.login(id);
 
+    }
+
+    public void updateQuestions(List<Question> newQuestions) {
+        for (int i = 0; i < questions.size(); ++i) {
+            questions.get(i).setScore(newQuestions.get(i).getScore());
+        }
+    }
+
+    public List<Question> getPreferenceQuestions() {
+        return questions;
     }
 
     public static ClientApp getClientApp() {

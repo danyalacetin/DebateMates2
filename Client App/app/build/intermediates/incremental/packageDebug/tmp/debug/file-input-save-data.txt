@@ -1,13 +1,7 @@
 #Internal package file, do not edit.
-<<<<<<< HEAD
-#Mon Oct 08 15:42:29 NZDT 2018
-0.baseType=DIRECTORY
-0.base=C\:\\Users\\Danyal Cetin\\Documents\\GitHub\\DebateMates2\\Client App\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
-=======
-#Mon Oct 08 16:31:17 NZDT 2018
+#Mon Oct 08 20:17:09 NZDT 2018
 0.baseType=DIRECTORY
 0.base=C\:\\Users\\Demo\\Documents\\GitHub\\DebateMates2\\Client App\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
->>>>>>> Aidan
 0.path=classes.dex
 0.set=DEX
 count=1
