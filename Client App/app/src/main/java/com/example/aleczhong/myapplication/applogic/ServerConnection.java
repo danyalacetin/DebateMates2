@@ -10,12 +10,8 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-class ServerConnection {
-<<<<<<< HEAD
+class ServerConnection {S
     private static final String SERVER_ADDRESS = "192.168.18.49";
-=======
-    private static final String SERVER_ADDRESS = "192.168.0.11";
->>>>>>> Aidan
     private static final int SERVER_PORT = 8818;
 
     private Socket connection;
