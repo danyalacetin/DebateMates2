@@ -130,12 +130,12 @@ public class Database {
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(str);
         return str;
     }
     
-    public void viewDB(){
-        try {
+    public void viewDB(String type){
+        if(type.equals("null") || type.equalsIgnoreCase("full")){
+            try {
             statement = conn.createStatement();
             rs = statement.executeQuery("SELECT *" 
                                      + " FROM " + newTableName);
@@ -150,11 +150,17 @@ public class Database {
                                 "\nLosses: " + rs.getString("LOSSES")+
                                 "\nRank: " + rs.getString("RANKSCORE")+
                                 "\nStatus: " + status);
+                if(type.equalsIgnoreCase("full")){
+                    for(int i = 1; i<16; i++){
+                        System.out.println("Question "+i+": " + rs.getString("Question"+i));
+                    }
+                }
             }
             statement.close();
             statement = null;
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
         }
     }
     

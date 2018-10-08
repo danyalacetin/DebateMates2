@@ -39,9 +39,11 @@ class CommandProcessor {
             else if (command.isCommand("addDB", 5))
                 server.getDB().addItem(command.getArg(0), command.getArg(1), Integer.parseInt(command.getArg(2)), Integer.parseInt(command.getArg(3)), Integer.parseInt(command.getArg(4)), 0);
             else if (command.isCommand("queryDB", 2))
-                server.getDB().getQuery(command.getArg(0), command.getArg(1));
+                System.out.println(server.getDB().getQuery(command.getArg(0), command.getArg(1)));
+            else if (command.isCommand("viewDB", 1))
+                server.getDB().viewDB(command.getArg(0));
             else if (command.isCommand("viewDB", 0))
-                server.getDB().viewDB();
+                server.getDB().viewDB("null");
             else if (command.isCommand("updateDB", 3))
                 server.getDB().updateItem(command.getArg(0), command.getArg(1), "'"+command.getArg(2)+"'");
             else if (command.isCommand("dropDB", 0))
@@ -60,7 +62,13 @@ class CommandProcessor {
                     server.logOutUser(worker);
             }
             else if (command.isCommand("nickname", 1)){
-                server.changeNickname(command.getArg(0), worker);
+                server.updateNickname(command.getArg(0), worker);
+            }
+            else if (command.isCommand("updateQuestion", 2)){
+                server.updateQuestion(command.getArg(0), command.getArg(1), worker);
+            }
+            else if (command.isCommand("getQuestions", 0)){
+                server.getQuestions(worker);
             }
             else if (worker.inMatch()) // in match
             {

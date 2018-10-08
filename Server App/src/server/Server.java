@@ -44,8 +44,32 @@ public class Server implements ServerWorker, ConnectionInitiator {
         return workerManager;
     }
     
-    void changeNickname(String nickname, Worker source){
+    void updateNickname(String nickname, Worker source){
         database.updateItem(source.getLogin(), "NICKNAME", "'"+nickname+"'");
+        source.send("nickname "+nickname);
+    }
+    
+    void updateQuestion(String questionNum, String answerNum, Worker source){
+        database.updateItem(source.getLogin(), "QUESTION"+questionNum, answerNum);
+    }
+    
+    void getQuestions(Worker source){
+        source.send("setQuestions " +database.getQuery(source.getLogin(), "QUESTION1") + " "
+                                    +database.getQuery(source.getLogin(), "QUESTION2") + " "
+                                    +database.getQuery(source.getLogin(), "QUESTION3") + " "
+                                    +database.getQuery(source.getLogin(), "QUESTION4") + " "
+                                    +database.getQuery(source.getLogin(), "QUESTION5") + " "
+                                    +database.getQuery(source.getLogin(), "QUESTION6") + " "
+                                    +database.getQuery(source.getLogin(), "QUESTION7") + " "
+                                    +database.getQuery(source.getLogin(), "QUESTION8") + " "
+                                    +database.getQuery(source.getLogin(), "QUESTION9") + " "
+                                    +database.getQuery(source.getLogin(), "QUESTION10") + " "
+                                    +database.getQuery(source.getLogin(), "QUESTION11") + " "
+                                    +database.getQuery(source.getLogin(), "QUESTION12") + " "
+                                    +database.getQuery(source.getLogin(), "QUESTION13") + " "
+                                    +database.getQuery(source.getLogin(), "QUESTION14") + " "
+                                    +database.getQuery(source.getLogin(), "QUESTION15")
+        );
     }
     
     void logInUser(String id, Worker source) {
@@ -58,7 +82,7 @@ public class Server implements ServerWorker, ConnectionInitiator {
             database.addItem(id, "Nickname", 0, 0, 1000, 1);
         }
         else{
-            database.updateItem(source.getLogin(), "ONLINESTATUS", "1");
+            database.updateItem(id, "ONLINESTATUS", "1");
         }
     }
     
@@ -68,8 +92,8 @@ public class Server implements ServerWorker, ConnectionInitiator {
             processCommand(cmd);
         }
         serverLog(source.getLogin() + " logged out.");
-        source.setLogin(null);
         database.updateItem(source.getLogin(), "ONLINESTATUS", "0");
+        source.setLogin(null);
     }
     
     public void startServer() {

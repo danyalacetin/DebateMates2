@@ -23,6 +23,7 @@ public class ClientApp {
     private ReentrantLock waitFuncLock;
 
     private String nickname;
+    //private int[] scores = new int[]{5,5,5,5,5,5,5,5,5,5,5,5,5,5};
     private final List<Question> questions;
     private final List<ChatMessage> messages;
 
@@ -51,6 +52,10 @@ public class ClientApp {
                 );
         messages = new ArrayList<>();
     }
+
+    //public int getScores(int i){
+    //    return scores[i];
+    //}
 
     public void joinChatRoom(DelayedReturn waitFunc) {
         addWaitFunc(waitFunc);
@@ -108,7 +113,11 @@ public class ClientApp {
             ));
         } else if (tokens[0].equalsIgnoreCase("nickname")){
             nickname = tokens[1];
-        }
+        } //else if (tokens[0].equalsIgnoreCase("setQuestions")){
+            //for(int i = 1; i < 16;i++){
+            //    scores[i-1] = Integer.parseInt(tokens[i]);
+            //}
+        //}
     }
 
     public void setMessageListener(PrototypeChatRoomActivity.DisplayAreaListener listener) {
@@ -142,6 +151,7 @@ public class ClientApp {
     public void updateQuestions(List<Question> newQuestions) {
         for (int i = 0; i < questions.size(); ++i) {
             questions.get(i).setScore(newQuestions.get(i).getScore());
+            currentApp.sendData("updateQuestion "+Integer.toString(i+1)+" "+newQuestions.get(i).getScore());
         }
     }
 

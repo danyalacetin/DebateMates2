@@ -45,7 +45,6 @@ public class SettingsActivity extends AppCompatActivity {
         if (!(newNickname.isEmpty())){
             ClientApp.getClientApp().sendData("nickname "+newNickname);
             Toast.makeText(getApplicationContext(), "Name Changed!", Toast.LENGTH_LONG).show();
-
         }
     }
 

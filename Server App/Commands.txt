@@ -16,7 +16,7 @@ Stop server = exit
 Restart Server = restart
 Server announcement = serverannounce <msg>
 
-Change Nickname = nickname <nickname>
+Change Nickname = nickname <nickname> //Client Only
 Add user to DB = addBD <userID> <nickname> <wins> <losses> <Rankscore>
 Update DB = updateDB <userID> <field> <value>
 Query DB = queryDB <userID> <field>

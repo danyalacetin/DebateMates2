@@ -97,6 +97,7 @@ public class SetQuestionsActivity extends ListActivity {
     }
 
     public void populateQuestions() {
+        //ClientApp.getClientApp().sendData("getQuestions");
         List<Question> questions = ClientApp.getClientApp().getPreferenceQuestions();
         items.clear();
 
@@ -105,7 +106,6 @@ public class SetQuestionsActivity extends ListActivity {
             int score = question.getScore();
             Question newQuestion = new Question(content);
             newQuestion.setScore(score);
-
             items.add(newQuestion);
         }
         adapter.notifyDataSetChanged();
