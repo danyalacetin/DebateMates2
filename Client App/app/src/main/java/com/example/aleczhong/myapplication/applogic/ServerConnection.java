@@ -15,7 +15,7 @@ import java.net.Socket;
 import java.util.function.Consumer;
 
 class ServerConnection {
-    private static final String SERVER_ADDRESS = "192.168.0.11";
+    private static final String SERVER_ADDRESS = "192.168.18.49";
     private static final int SERVER_PORT = 8818;
 
     private Socket connection;

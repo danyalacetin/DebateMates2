@@ -130,7 +130,32 @@ public class Database {
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
+        System.out.println(str);
         return str;
+    }
+    
+    public void viewDB(){
+        try {
+            statement = conn.createStatement();
+            rs = statement.executeQuery("SELECT *" 
+                                     + " FROM " + newTableName);
+            while (rs.next()) {
+                String status = "Offline";
+                if (Integer.parseInt(rs.getString("ONLINESTATUS")) == 1){
+                    status = "Online";
+                }
+            System.out.println( "\nID: " + rs.getString("FACEBOOKID")+
+                                "\nNickname: " + rs.getString("NICKNAME")+
+                                "\nWins: " + rs.getString("WINS")+
+                                "\nLosses: " + rs.getString("LOSSES")+
+                                "\nRank: " + rs.getString("RANKSCORE")+
+                                "\nStatus: " + status);
+            }
+            statement.close();
+            statement = null;
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     //Testing purpose only!

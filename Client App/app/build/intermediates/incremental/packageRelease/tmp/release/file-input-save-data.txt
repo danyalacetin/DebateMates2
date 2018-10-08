@@ -1,0 +1,7 @@
+#Internal package file, do not edit.
+#Mon Oct 08 14:05:58 NZDT 2018
+0.baseType=DIRECTORY
+0.base=C\:\\Users\\Danyal Cetin\\Documents\\GitHub\\DebateMates2\\Client App\\app\\build\\intermediates\\transforms\\dexMerger\\release\\0
+0.path=classes.dex
+0.set=DEX
+count=1

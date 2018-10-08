@@ -22,6 +22,8 @@ public class ClientApp {
     private PrototypeChatRoomActivity.DisplayAreaListener displayListener;
     private ReentrantLock waitFuncLock;
 
+    public String nickname;
+
     private ClientApp() {
         serverConnection = new ServerConnection(this);
         token = null;
@@ -40,6 +42,10 @@ public class ClientApp {
             output += " " + tokens[i];
         }
         return output;
+    }
+
+    public void sendData(String data){
+        serverConnection.sendString(data);
     }
 
     private void addWaitFunc(DelayedReturn waitFunc) {
@@ -79,6 +85,8 @@ public class ClientApp {
             displayListener.displayMessage("SERVER ANNOUNCEMENT: " + joinString(
                     Arrays.copyOfRange(tokens, 1, tokens.length)
             ));
+        } else if (tokens[0].equalsIgnoreCase("nickname")){
+            nickname = tokens[1];
         }
     }
 

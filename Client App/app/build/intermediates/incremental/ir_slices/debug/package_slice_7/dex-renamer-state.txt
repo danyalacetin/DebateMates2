@@ -1,4 +1,0 @@
-#Mon Oct 08 01:37:55 NZDT 2018
-base.0=C\:\\Users\\asteh\\Documents\\GitHub\\DebateMates2\\Client App\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\7
-path.0=classes.dex
-renamed.0=classes.dex

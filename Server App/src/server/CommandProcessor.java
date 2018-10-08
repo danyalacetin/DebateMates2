@@ -36,12 +36,14 @@ class CommandProcessor {
                 server.viewChatRoomInfo();
             
             //Testing commands
-            else if (command.isCommand("addDB", 0))
-                server.getDB().addItem("123", "Nickname123", 1, 1, 1234, 1);
+            else if (command.isCommand("addDB", 5))
+                server.getDB().addItem(command.getArg(0), command.getArg(1), Integer.parseInt(command.getArg(2)), Integer.parseInt(command.getArg(3)), Integer.parseInt(command.getArg(4)), 0);
+            else if (command.isCommand("queryDB", 2))
+                server.getDB().getQuery(command.getArg(0), command.getArg(1));
             else if (command.isCommand("viewDB", 0))
-                server.getDB().getQuery("123", "NICKNAME");
-            else if (command.isCommand("updateDB", 0))
-                server.getDB().updateItem("123", "NICKNAME", "'jamjam'");
+                server.getDB().viewDB();
+            else if (command.isCommand("updateDB", 3))
+                server.getDB().updateItem(command.getArg(0), command.getArg(1), "'"+command.getArg(2)+"'");
             else if (command.isCommand("dropDB", 0))
                 server.getDB().droptable();
             
