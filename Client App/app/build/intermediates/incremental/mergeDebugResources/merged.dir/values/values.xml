@@ -1945,6 +1945,7 @@
     <string name="fb_login_protocol_scheme">fb1557647357715015</string>
     <string name="find_game">Finding Game</string>
     <string name="find_match">FIND A MATCH</string>
+    <string name="finding_match">FINDING MATCH</string>
     <string name="judge_match">JUDGE A MATCH</string>
     <string name="nickname">Nickname</string>
     <string name="ok">OK</string>

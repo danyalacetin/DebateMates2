@@ -54,19 +54,20 @@ public class ClientApp {
         messageChangeListener = null;
     }
 
-<<<<<<< HEAD
+
     //public int getScores(int i){
     //    return scores[i];
     //}
 
     public void joinChatRoom(DelayedReturn waitFunc) {
-=======
+    }
+
     public void addMessageChangeListener(Runnable messageChangeListener) {
         this.messageChangeListener = messageChangeListener;
     }
 
     public void joinMatch(DelayedReturn waitFunc) {
->>>>>>> Aidan
+
         addWaitFunc(waitFunc);
         serverConnection.joinChatRoom();
     }

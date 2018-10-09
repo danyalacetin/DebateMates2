@@ -10,3 +10,5 @@
 .externalNativeBuild
 /Server App/build/
 /ServerConnectionTest/dist/
+*.properties
+*.properties
