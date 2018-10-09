@@ -7,8 +7,6 @@ public class Question {
     public Question(String content) {
         this.content = content;
         this.score = 5;
-        QuestionTest test = new QuestionTest("hello");
-        ChatMessageTest test2 = new ChatMessageTest("test", 1, MessageType.OPPONENT);
     }
 
     public String getContent() {

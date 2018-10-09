@@ -1,7 +1,9 @@
 package com.example.aleczhong.myapplication.activities;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -18,6 +20,7 @@ import java.util.List;
 
 public class PlayerViewActivity extends AppCompatActivity {
     private EditText userInput;
+    private final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +59,7 @@ public class PlayerViewActivity extends AppCompatActivity {
                         layout = R.layout.sent_message_layout;
                         textId = R.id.sentMessage;
                         break;
-                    case SERVER:
+                    case OPPONENT:
                         layout = R.layout.recieved_message_layout;
                         textId = R.id.receiveMessage;
                         break;

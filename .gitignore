@@ -10,4 +10,4 @@
 .externalNativeBuild
 /Server App/build/
 /ServerConnectionTest/dist/
-Client App/app/build
+Client App/app/build/*

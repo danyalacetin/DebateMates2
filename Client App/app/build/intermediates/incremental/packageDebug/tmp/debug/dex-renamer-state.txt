@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-#Tue Oct 09 00:05:48 NZDT 2018
-base.0=C\:\\Users\\Danyal Cetin\\Documents\\GitHub\\DebateMates2\\Client App\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
-=======
-#Tue Oct 09 01:10:24 NZDT 2018
+#Tue Oct 09 19:49:30 NZDT 2018
 path.1=classes.dex
->>>>>>> Aidan
 path.0=classes.dex
 renamed.10=classes11.dex
 renamed.9=classes10.dex
