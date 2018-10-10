@@ -1,10 +1,7 @@
 package com.example.aleczhong.myapplication.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.BaseAdapter;
-import android.widget.EditText;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -16,18 +13,18 @@ import com.example.aleczhong.myapplication.applogic.MessageAdapter;
 
 import java.util.List;
 
-public class PlayerViewActivity extends AppCompatActivity implements MatchDisplayInterface {
-    private EditText userInput;
+public class PanelistViewActivity extends AppCompatActivity implements MatchDisplayInterface {
+
     private TextView matchMessages;
     private MessageAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_player_view);
+        setContentView(R.layout.activity_panelist_view);
         matchMessages = findViewById(R.id.matchInstructions);
-        userInput = findViewById(R.id.inputArea);
         ListView listView = findViewById(R.id.messageArea);
+
         ClientApp.getClientApp().addMatchDisplayInterface(this);
 
         final List<ChatMessage> messages = ClientApp.getClientApp().getMessages();
@@ -55,11 +52,5 @@ public class PlayerViewActivity extends AppCompatActivity implements MatchDispla
                 if (null != adapter) adapter.notifyDataSetChanged();
             }
         });
-    }
-
-    public void sendText(View view) {
-        String text = userInput.getText().toString();
-        userInput.getText().clear();
-        if (!text.equals("")) ClientApp.getClientApp().sendChatMessage(text);
     }
 }

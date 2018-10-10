@@ -9,12 +9,14 @@ import android.widget.Toast;
 
 import com.example.aleczhong.myapplication.R;
 import com.example.aleczhong.myapplication.applogic.ClientApp;
+import com.example.aleczhong.myapplication.applogic.DelayedReturn;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.Profile;
 import com.facebook.ProfileTracker;
+import com.facebook.login.LoginBehavior;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
@@ -37,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
         callbackManager = CallbackManager.Factory.create();
         loginButton =(LoginButton) findViewById(R.id.login_button);
         loginButton.setReadPermissions("public_profile");
-
+        loginButton.setLoginBehavior(LoginBehavior.WEB_ONLY);
         initialiseFacebook();
     }
 
@@ -46,20 +48,35 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-
                 app.setAccessToken(loginResult.getAccessToken());
-                app.login();
-                nextActivity();
+                app.login(new DelayedReturn() {
+                    @Override
+                    public void onSuccess() {
+                        nextActivity();
+                    }
+
+                    @Override
+                    public void onFailure() {
+                        displayLoginError();
+                    }
+
+                    @Override
+                    public int testString(String toTest) {
+                        int compare;
+                        if ("login success".equalsIgnoreCase(toTest)) compare = 1;
+                        else if ("login failed".equalsIgnoreCase(toTest)) compare = -1;
+                        else compare = 0;
+                        return compare;
+                    }
+                });
             }
 
             @Override
             public void onCancel() {
-
             }
 
             @Override
             public void onError(FacebookException exception) {
-
             }
         });
     }
@@ -70,27 +87,11 @@ public class LoginActivity extends AppCompatActivity {
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
-    @Override
-    protected void onResume(){
-        super.onResume();
+    private void displayLoginError() {
+
     }
 
-    @Override
-    protected void onPause(){
-        super.onPause();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    protected void onStop(){
-        super.onStop();
-    }
-
-    private void nextActivity(){
+    private void nextActivity() {
             Intent intent = new Intent(this, MainMenuActivity.class);
             startActivity(intent);
     }

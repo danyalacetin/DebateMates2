@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 class ServerConnection {
-    private static final String SERVER_ADDRESS = "172.28.60.240";
+    private static final String SERVER_ADDRESS = DebugConstants.TESTER_IP_ADDRESS;
     private static final int SERVER_PORT = 8818;
 
     private Socket connection;
@@ -29,8 +29,8 @@ class ServerConnection {
 
 
 
-    void joinChatRoom() {
-        send("join player");
+    void joinChatRoom(String type) {
+        send("join " + type);
     }
 
     private void handleServer(){

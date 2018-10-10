@@ -136,8 +136,9 @@ class Match {
                     toAdd.add(member);
                     member.enterMatch(matchID);
                     member.send(ServerConstants.JOIN_SUCCESS);
-                    processCommand(Command.anonymousCommand("announce "
+                    processCommand(Command.anonymousCommand("matchmessage "
                             + member.getLogin() + " has entered as a " + type));
+                    processCommand(Command.anonymousCommand("announce welcome!"));
                 }
             }
         } finally {
@@ -173,7 +174,7 @@ class Match {
             
             if (isRemoved) {
                 member.leaveMatch();
-                processCommand(Command.anonymousCommand("announce "
+                processCommand(Command.anonymousCommand("matchmessage "
                         + member.getLogin() + " has left"));
             }
         } finally {
