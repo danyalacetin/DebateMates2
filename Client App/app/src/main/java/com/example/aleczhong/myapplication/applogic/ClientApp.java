@@ -25,7 +25,9 @@ public class ClientApp {
     private String userID;
     private final List<Question> questions;
     private final List<ChatMessage> messages;
-    private Runnable messageChangeListener;
+    private MatchDisplayInterface displayInterface;
+    private String currentMatchAnnouncement;
+    private String currentServerAnnouncement;
 
     private ClientApp() {
         serverConnection = new ServerConnection(this);
@@ -51,25 +53,20 @@ public class ClientApp {
                         new Question("Question 15")
                 );
         messages = new ArrayList<>();
-        messageChangeListener = null;
+        displayInterface = null;
     }
 
-
-    //public int getScores(int i){
-    //    return scores[i];
-    //}
-
-    public void joinChatRoom(DelayedReturn waitFunc) {
+    public void addMatchDisplayInterface(MatchDisplayInterface displayInterface) {
+        this.displayInterface = displayInterface;
     }
 
-    public void addMessageChangeListener(Runnable messageChangeListener) {
-        this.messageChangeListener = messageChangeListener;
+    public void updateAnnouncements() {
+        if (null != displayInterface) displayInterface.matchAnnouncement(currentMatchAnnouncement);
     }
 
-    public void joinMatch(DelayedReturn waitFunc) {
-
+    public void joinMatch(String type, DelayedReturn waitFunc) {
         addWaitFunc(waitFunc);
-        serverConnection.joinChatRoom();
+        serverConnection.joinChatRoom(type);
     }
 
     String joinString(String[] tokens) {
@@ -78,6 +75,10 @@ public class ClientApp {
             output += " " + tokens[i];
         }
         return output;
+    }
+
+    String removeTailToString(String[] tokens, int start) {
+        return joinString(Arrays.copyOfRange(tokens, start, tokens.length));
     }
 
     public void sendData(String data){
@@ -123,37 +124,26 @@ public class ClientApp {
             type = MessageType.OPPONENT;
         }
 
-        String content = joinString(Arrays.copyOfRange(msg, 3, msg.length));
+        String content = removeTailToString(msg, 3);
         return new ChatMessage(content, id, type);
     }
 
     private ChatMessage convertServerMessage(String[] msg) {
         int id = Integer.parseInt(msg[1]);
         MessageType type = MessageType.SERVER;
-        String content = joinString(Arrays.copyOfRange(msg, 2, msg.length));
+        String content = removeTailToString(msg, 2);
         return new ChatMessage(content, id, type);
+    }
+
+    private void sendMatchAnnouncement(String[] tokens) {
+        String msg = removeTailToString(tokens, 1);
+        currentMatchAnnouncement = msg;
+        updateAnnouncements();
     }
 
     private void addMessage(ChatMessage msg) {
         messages.add(msg);
-        if (null != messageChangeListener) messageChangeListener.run();
-    }
-
-    private void addChatMessage(String[] msg) {
-        int id = Integer.parseInt(msg[1]);
-        MessageType type;
-
-        String user = msg[2];
-        if (user.equals(userID)) {
-            type = MessageType.SELF;
-        } else {
-            type = MessageType.OPPONENT;
-        }
-
-        String content = joinString(Arrays.copyOfRange(msg, 3, msg.length));
-        ChatMessage chat = new ChatMessage(content, id, type);
-
-        messages.add(chat);
+        if (null != displayInterface) displayInterface.messageUpdate();
     }
 
     void handleInput(String msg) {
@@ -162,6 +152,8 @@ public class ClientApp {
         if (tokens[0].equals("chat")) {
             addMessage(convertChatMessage(tokens));
         } else if (tokens[0].equals("announce")) {
+            sendMatchAnnouncement(tokens);
+        } else if (tokens[0].equalsIgnoreCase("matchmessage")) {
             addMessage(convertServerMessage(tokens));
 //        } else if (tokens[0].equalsIgnoreCase("serverannounce")) {
 //            displayListener.displayMessage("SERVER ANNOUNCEMENT: " + joinString(
@@ -193,7 +185,8 @@ public class ClientApp {
         this.token = token;
     }
 
-    public void login() {
+    public void login(DelayedReturn waitFunction) {
+        addWaitFunc(waitFunction);
         serverConnection.login(token.getUserId());
     }
 

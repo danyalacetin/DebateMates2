@@ -8,19 +8,28 @@ import com.example.aleczhong.myapplication.R;
 import com.example.aleczhong.myapplication.applogic.ClientApp;
 import com.example.aleczhong.myapplication.applogic.DelayedReturn;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class JoiningMatchActivity extends AppCompatActivity {
 
-    private Class clazz;
+    private static final Map<String, Class> classMap = new HashMap<>();
+    static {
+        classMap.put("player", PlayerViewActivity.class);
+        classMap.put("panelist", PanelistViewActivity.class);
+        classMap.put("spectator", SpectatorViewActivity.class);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_joining_match);
-        clazz = (Class) getIntent().getExtras().get("type");
-        ClientApp.getClientApp().joinMatch(new DelayedReturn() {
+        final String type = (String) getIntent().getExtras().get("type");
+
+        ClientApp.getClientApp().joinMatch(type, new DelayedReturn() {
             @Override
             public void onSuccess() {
-                nextActivity();
+                nextActivity(classMap.get(type));
                 finish();
             }
 
@@ -40,7 +49,7 @@ public class JoiningMatchActivity extends AppCompatActivity {
         });
     }
 
-    private void nextActivity() {
+    private void nextActivity(Class clazz) {
         Intent intent = new Intent(this, clazz);
         startActivity(intent);
     }

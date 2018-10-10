@@ -32,19 +32,20 @@ public class PlayActivity extends AppCompatActivity {
     }
 
     public void judge(View view) {
-//        Intent intent = new Intent(this, JudgeActivity.class);
-//        startActivity(intent);
+        Intent intent = new Intent(this, JoiningMatchActivity.class);
+        intent.putExtra("type", "panelist");
+        startActivity(intent);
     }
 
     public void watch(View view) {
-//        Intent intent = new Intent(this, SpectateActivity.class);
-//        startActivity(intent);
+        Intent intent = new Intent(this, JoiningMatchActivity.class);
+        intent.putExtra("type", "spectator");
+        startActivity(intent);
     }
 
     public void find(View view) {
         Intent intent = new Intent(this, JoiningMatchActivity.class);
-        Bundle bun = new Bundle();
-        intent.putExtra("type", PlayerViewActivity.class);
+        intent.putExtra("type", "player");
         startActivity(intent);
     }
 }

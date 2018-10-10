@@ -46,12 +46,14 @@ class ChatProcessor
                 String replyString = String.format("chat %d %s %s", id, user,
                         content);
                 reply = new Command(replyString, cmd.getSource());
-            } else if (cmd.isCommand("announce")) {
+            } else if (cmd.isCommand("matchmessage")) {
                 id = idManager.getId();
                 content = cmd.nextCommand().toString();
-                String replyString = String.format("announce %d %s", id,
+                String replyString = String.format("matchmessage %d %s", id,
                         content);
                 reply = new Command(replyString, cmd.getSource());
+            } else if (cmd.isCommand("announce")) {
+                reply = cmd;
             } else {
                 reply = null;
             }

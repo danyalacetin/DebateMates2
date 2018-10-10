@@ -3,6 +3,7 @@ package com.example.aleczhong.myapplication.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.example.aleczhong.myapplication.R;
 
@@ -10,12 +11,14 @@ import static com.example.aleczhong.myapplication.applogic.ClientApp.getClientAp
 
 public class ConnectingActivity extends AppCompatActivity {
 
+    private TextView error;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connecting);
+        error = findViewById(R.id.connectionError);
         connect();
-//        runLogin();
     }
 
     private void connect() {
@@ -23,21 +26,21 @@ public class ConnectingActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if (getClientApp().establishServerConnection()) {
-                    runLogin();
+                    goToLogin();
                 } else {
-                    showLoginError();
+                    showConnectionError();
                 }
             }
         }).start();
     }
 
-    private void runLogin() {
+    private void goToLogin() {
         Intent intent = new Intent(ConnectingActivity.this, MockLoginActivity.class);
         startActivity(intent);
         finish();
     }
 
-    private void showLoginError() {
-
+    private void showConnectionError() {
+        error.setText("Could not connect to server");
     }
 }

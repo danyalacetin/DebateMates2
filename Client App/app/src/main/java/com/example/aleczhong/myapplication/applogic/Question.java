@@ -9,15 +9,7 @@ public class Question {
         this.score = 5;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
+    public String getContent() { return content; }
+    public int getScore() { return score; }
+    public void setScore(int score) { this.score = score; }
 }

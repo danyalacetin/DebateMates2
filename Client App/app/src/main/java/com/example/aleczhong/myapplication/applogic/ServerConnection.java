@@ -29,8 +29,8 @@ class ServerConnection {
 
 
 
-    void joinChatRoom() {
-        send("join player");
+    void joinChatRoom(String type) {
+        send("join " + type);
     }
 
     private void handleServer(){

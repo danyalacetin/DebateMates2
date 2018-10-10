@@ -1,0 +1,17 @@
+*.iml
+.gradle
+/local.properties
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+/Server App/build/
+/ServerConnectionTest/dist/
+Client App/app/build/
+Client App/build/
+Client App/.idea/
+Client App/app/build
+Client App/app/src/main/java/com/example/aleczhong/myapplication/applogic/DebugConstants
