@@ -11,3 +11,5 @@
 /Server App/build/
 /ServerConnectionTest/dist/
 Client App/app/build/
+Client App/build/
+Client App/.idea/
