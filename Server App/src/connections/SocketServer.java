@@ -16,20 +16,21 @@ import java.util.function.Consumer;
  */
 public class SocketServer
 {
-    private final Consumer<ServerConnection> handlerFunction;
+    private final Consumer<ServerConnection> connectionPasser;
     private final ConnectionManager connectionManager;
     private final ConnectionScanner connectionScanner;
     
-    public SocketServer(Consumer<ServerConnection> handlerFunction)
+    public SocketServer(Consumer<ServerConnection> connectionPasser)
     {
-        this.handlerFunction = handlerFunction;
+        this.connectionPasser = connectionPasser;
         this.connectionManager = new ConnectionManager();
-        this.connectionScanner = new ConnectionScanner();
+        this.connectionScanner = new ConnectionScanner(this::newConnection);
     }
     
     void newConnection(Socket socket)
     {
-        
+        ServerConnection connection = connectionManager.addConnection(socket);
+        connectionPasser.accept(connection);
     }
     
 }

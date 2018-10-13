@@ -16,14 +16,15 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  *
  * @author Demo
  */
-public class ServerConnection
+public class ServerConnection implements Runnable
 {
-    private Socket socket;
+    private final Socket socket;
     private WorkerConnectionInterface worker;
     
     private BufferedWriter outStream;
@@ -43,7 +44,7 @@ public class ServerConnection
         this.worker = worker;
     }
     
-    private void openCommunication()
+    private boolean openCommunication()
     {
         if (null != socket)
         {
@@ -65,6 +66,8 @@ public class ServerConnection
             if (null != in)
                 inStream = new BufferedReader(new InputStreamReader(in));
         }
+        
+        return null != outStream && null != inStream;
     }
     
     private void sendStringToWorker(String str)
@@ -81,11 +84,6 @@ public class ServerConnection
         }
     }
     
-    private void handleSocket()
-    {
-        
-    }
-    
     private void tryCatch(TryRunnable function)
     {
         try
@@ -95,28 +93,35 @@ public class ServerConnection
         catch(IOException ex)
         {
             System.err.println(ex.getMessage());
-            System.err.println(ex.getCause());
         }
     }
     
-    public void send(String output)
+    public void send(String output) throws IOException
     {
-        tryCatch(() ->
-        {
-            outStream.write(output);
-            outStream.flush();
-        });
+        outStream.write(output);
+        outStream.flush();
     }
     
-    private void inputLoop()
+    public void sendHandled(String output)
     {
-        tryCatch(() ->
+        tryCatch(() -> send(output));
+    }
+    
+    private void inputLoop() throws IOException
+    {
+        String line;
+        while (null != (line = inStream.readLine()))
         {
-            String line;
-            while (null != (line = inStream.readLine()))
-            {
-                if (!line.equals("")) sendStringToWorker(line);
-            }
-        });
+            if (!line.equals("")) sendStringToWorker(line);
+        }
+    }
+
+    @Override
+    public void run()
+    {
+        if (openCommunication())
+        {
+            tryCatch(this::inputLoop);
+        }
     }
 }

@@ -22,10 +22,11 @@ class ConnectionManager
         connections = new SyncListWrapper<>(new ArrayList<>());
     }
     
-    void addConnection(Socket socket)
+    ServerConnection addConnection(Socket socket)
     {
         ServerConnection newConnection = new ServerConnection(socket);
         connections.add(newConnection);
+        return newConnection;
     }
     
     void removeConnection(ServerConnection conn)
