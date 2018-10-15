@@ -9,7 +9,7 @@ package server;
  *
  * @author Demo
  */
-enum ServerConstants {
+public enum ServerConstants {
     JOIN_SUCCESS("join success"),
     JOIN_FAILED("join failed"),
     LOGIN_SUCCESS("login success"),

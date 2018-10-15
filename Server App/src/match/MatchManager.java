@@ -3,22 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package server;
+package match;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import utilities.Command;
+import server.Worker;
 import utilities.IdManager;
 
 /**
  *
  * @author Demo
  */
-class MatchManager {
+public class MatchManager {
     private final Map<Integer, Match> matches;
     private final IdManager idManager;
     
-    MatchManager() {
+    public MatchManager() {
         matches = new HashMap<>();
         idManager = new IdManager();
     }
@@ -31,13 +33,13 @@ class MatchManager {
         return id;
     }
     
-    void process(Command cmd) {
+    public void process(Command cmd) {
         final int id = cmd.getSource().getMatchID();
         Match match = matches.get(id);
         if (null != matches) match.processCommand(cmd);
     }
     
-    void joinMatch(Worker worker, String type) {
+    public void joinMatch(Worker worker, String type) {
         int id = findMatch(type);
         joinMatch(worker, type, id);
     }
@@ -66,11 +68,11 @@ class MatchManager {
         return createMatch();
     }
     
-    void leaveMatch(Worker worker) {
+    public void leaveMatch(Worker worker) {
         matches.get(worker.getMatchID()).removeMember(worker);
     }
     
-    String getMatchInfo() {
+    public String getMatchInfo() {
         String info = "# Matches: " + matches.size() + "\n";
         for (Entry<Integer, Match> entry : matches.entrySet()) {
             Match match = entry.getValue();

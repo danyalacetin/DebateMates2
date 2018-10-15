@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package server;
+package match;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
+import utilities.Command;
 import utilities.IdManager;
 
 /**
@@ -42,16 +43,16 @@ class ChatProcessor
             if (cmd.isCommand("chat")) {
                 id = idManager.getId();
                 user = cmd.getSource().getLogin();
-                content = cmd.nextCommand().toString();
+                content = cmd.extractCommand().toString();
                 String replyString = String.format("chat %d %s %s", id, user,
                         content);
-                reply = new Command(replyString, cmd.getSource());
+                reply = Command.create(replyString, cmd.getSource());
             } else if (cmd.isCommand("matchmessage")) {
                 id = idManager.getId();
-                content = cmd.nextCommand().toString();
+                content = cmd.extractCommand().toString();
                 String replyString = String.format("matchmessage %d %s", id,
                         content);
-                reply = new Command(replyString, cmd.getSource());
+                reply = Command.create(replyString, cmd.getSource());
             } else if (cmd.isCommand("announce")) {
                 reply = cmd;
             } else {

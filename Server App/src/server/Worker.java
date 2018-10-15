@@ -5,6 +5,7 @@
  */
 package server;
 
+import utilities.Command;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -17,7 +18,7 @@ import java.net.Socket;
  *
  * @author Demo
  */
-class Worker implements Runnable {
+public class Worker implements Runnable {
     
     private final Socket client;
     private final PrintWriter outStream;
@@ -39,15 +40,15 @@ class Worker implements Runnable {
         matchID = -1;
     }
     
-    int getMatchID() {
+    public int getMatchID() {
         return matchID;
     }
     
-    void enterMatch(int id) {
+    public void enterMatch(int id) {
         matchID = id;
     }
     
-    void leaveMatch() {
+    public void leaveMatch() {
         matchID = -1;
     }
     
@@ -59,7 +60,7 @@ class Worker implements Runnable {
         return -1 != matchID;
     }
     
-    String getLogin() {
+    public String getLogin() {
         return userID;
     }
     
@@ -94,7 +95,7 @@ class Worker implements Runnable {
     }
     
     private void handleInput(String cmdString) {
-        Command command = new Command(cmdString, this);
+        Command command = Command.create(cmdString, this);
         server.processCommand(command);
     }
     
@@ -107,7 +108,7 @@ class Worker implements Runnable {
         }
     }
     
-    void send(Command msg) {
+    public void send(Command msg) {
         if (msg.getSource().getLogin().equals(userID)) {
             String msgString = msg.toString();
             if (msgString.contains(userID))
@@ -118,12 +119,12 @@ class Worker implements Runnable {
         }
     }
     
-    void send(String msg) {
+    public void send(String msg) {
         outStream.println(msg);
         outStream.flush();
     }
     
-    void send(ServerConstants msg) {
+    public void send(ServerConstants msg) {
         send(msg.toString());
     }
 }

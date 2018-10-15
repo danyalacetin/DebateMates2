@@ -5,6 +5,8 @@
  */
 package server;
 
+import utilities.Command;
+
 /**
  * Interface used to define the interaction between the Server and the majority
  * of its parts.

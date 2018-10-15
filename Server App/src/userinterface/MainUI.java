@@ -5,7 +5,7 @@
  */
 package userinterface;
 
-import server.Command;
+import utilities.Command;
 import server.ServerWorker;
 import server.Server;
 
@@ -119,7 +119,7 @@ public class MainUI extends javax.swing.JFrame
         String cmd = inputField.getText();
         inputField.setText("");
         
-        Command command = Command.anonymousCommand(cmd);
+        Command command = Command.createAnonymous(cmd);
         server.processCommand(command);
     }
     

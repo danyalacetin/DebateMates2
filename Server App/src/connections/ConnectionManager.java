@@ -7,7 +7,6 @@ package connections;
 
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Responsible for managing open connections.
@@ -15,21 +14,21 @@ import java.util.List;
  */
 class ConnectionManager
 {
-    private final SyncListWrapper<ServerConnection> connections;
+    private final SyncListWrapper<ClientConnection> connections;
     
     ConnectionManager()
     {
         connections = new SyncListWrapper<>(new ArrayList<>());
     }
     
-    ServerConnection addConnection(Socket socket)
+    ClientConnection addConnection(Socket socket)
     {
-        ServerConnection newConnection = new ServerConnection(socket);
+        ClientConnection newConnection = new ClientConnection(socket);
         connections.add(newConnection);
         return newConnection;
     }
     
-    void removeConnection(ServerConnection conn)
+    void removeConnection(ClientConnection conn)
     {
         connections.remove(conn);
     }

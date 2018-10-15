@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package server;
+package match;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Consumer;
+import utilities.Command;
+import server.Server;
+import server.ServerConstants;
+import server.Worker;
 
 /**
  * 
@@ -27,6 +31,9 @@ class Match {
     private final ChatProcessor processor;
     private final ReentrantLock membersLock;
     private final int matchID;
+    private boolean isStarted;
+    private Thread gameThread;
+    private String currentAnnouncement;
     
     Match(int id) {
         players = new ArrayList<>(2);
@@ -36,6 +43,10 @@ class Match {
         processor = new ChatProcessor();
         membersLock = new ReentrantLock();
         matchID = id;
+        
+        isStarted = false;
+        gameThread = null;
+        currentAnnouncement = "Waiting for members";
     }
     
     /**
@@ -66,6 +77,28 @@ class Match {
                 break;
         }
         return number;
+    }
+    
+    private boolean canStart() {
+        return 1 == players.size() && 3 <= panelists.size() && !isStarted;
+    }
+    
+    private void runGame() {
+        // send start message
+        // wait for everyone to respond
+        // let player one have a turn
+        // wait for response
+        // let player two to have a turn
+        // wait for response
+        // repeat last 4 steps for x times
+        // collect judges votes
+        // declare winner
+    }
+    
+    private void startMatch() {
+        isStarted = true;
+        gameThread = new Thread(this::runGame);
+        gameThread.start();
     }
     
     boolean checkAvailable(String type) {
@@ -136,11 +169,12 @@ class Match {
                     toAdd.add(member);
                     member.enterMatch(matchID);
                     member.send(ServerConstants.JOIN_SUCCESS);
-                    processCommand(Command.anonymousCommand("announce "
-                            + member.getLogin() + " has entered as a " + type));
+                    processCommand(Command.createAnonymous("announce "
+                            + currentAnnouncement));
                 }
             }
         } finally {
+            if (canStart()) startMatch();
             membersLock.unlock();
         }
         
@@ -173,7 +207,7 @@ class Match {
             
             if (isRemoved) {
                 member.leaveMatch();
-                processCommand(Command.anonymousCommand("announce "
+                processCommand(Command.createAnonymous("announce "
                         + member.getLogin() + " has left"));
             }
         } finally {

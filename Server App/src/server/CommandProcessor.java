@@ -5,6 +5,8 @@
  */
 package server;
 
+import utilities.Command;
+
 /**
  * Processes all Server and Client Commands
  *  
@@ -45,7 +47,7 @@ class CommandProcessor {
             server.getDB().droptable();
 
         else if (command.isCommand("post") && 0 != command.getArgs().length)
-            server.getWorkerManager().sendBroadcast(command.nextCommand());
+            server.getWorkerManager().sendBroadcast(command.extractCommand());
     }
     
     private void processMatchCommand(Command command, Worker worker) {

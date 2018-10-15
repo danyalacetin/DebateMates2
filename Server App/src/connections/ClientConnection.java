@@ -22,7 +22,7 @@ import java.util.Scanner;
  *
  * @author Demo
  */
-public class ServerConnection implements Runnable
+public class ClientConnection implements Runnable
 {
     private final Socket socket;
     private WorkerConnectionInterface worker;
@@ -32,7 +32,7 @@ public class ServerConnection implements Runnable
     
     private final List<String> backlog;
     
-    ServerConnection(Socket socket)
+    ClientConnection(Socket socket)
     {
         this.socket = socket;
         openCommunication();

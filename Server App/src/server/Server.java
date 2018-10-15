@@ -1,5 +1,7 @@
 package server;
 
+import utilities.Command;
+import match.MatchManager;
 import database.Database;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
@@ -129,7 +131,7 @@ public class Server implements ServerWorker, ConnectionInitiator {
      */
     void logOutUser(Worker source) {
         if (source.inMatch()) {
-            Command cmd = new Command("leave", source);
+            Command cmd = Command.create("leave", source);
             processCommand(cmd);
         }
         
