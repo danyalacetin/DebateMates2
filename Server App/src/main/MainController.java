@@ -33,6 +33,11 @@ public class MainController
         System.out.println(msg);
     }
     
+    private void errorLog(String msg) {
+        if (null != window) window.errorLog(msg);
+        System.err.println(msg);
+    }
+    
     public static void createTestClient() {
         ClientInstanceTest test = new ClientInstanceTest(ID_MANAGER.getId(),
                 client ->   {
@@ -46,7 +51,7 @@ public class MainController
     
     private void start() {
         
-        Server.initialiseInstance(this::log);
+        Server.initialiseInstance(this::log, this::errorLog);
         server = Server.getInstance();
         window = new MainUI();
         window.setVisible(true);

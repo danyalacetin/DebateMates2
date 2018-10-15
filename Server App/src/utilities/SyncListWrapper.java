@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package connections;
+package utilities;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -23,12 +25,30 @@ public class SyncListWrapper<T>
         lock = new ReentrantLock();
     }
     
+    public SyncListWrapper()
+    {
+        this(new ArrayList<>());
+    }
+    
     public void remove(T item)
     {
         lock.lock();
         try
         {
             data.remove(item);
+        }
+        finally
+        {
+            lock.unlock();
+        }
+    }
+    
+    public void addAll(Collection<T> items)
+    {
+        lock.lock();
+        try
+        {
+            data.addAll(items);
         }
         finally
         {

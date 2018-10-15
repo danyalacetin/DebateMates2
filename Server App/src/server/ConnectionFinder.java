@@ -34,6 +34,11 @@ class ConnectionFinder {
         isOpen = false;
     }
     
+    void restart() {
+        stop();
+        start();
+    }
+    
     void start() {
         open();
         isSearching = true;

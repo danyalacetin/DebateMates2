@@ -17,6 +17,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import server.Server;
 
 /**
  *
@@ -75,7 +76,7 @@ public class ClientConnection implements Runnable
         if (null != worker)
         {
             if (!backlog.isEmpty())
-                backlog.forEach(string -> worker.handleString(string));
+                backlog.forEach(worker::handleString);
             worker.handleString(str);
         }
         else
@@ -84,7 +85,8 @@ public class ClientConnection implements Runnable
         }
     }
     
-    private void tryCatch(TryRunnable function)
+    private void tryCatch(TryRunnable function, TryRunnable finallyFunction,
+            boolean suppressCatchMessage)
     {
         try
         {
@@ -92,19 +94,29 @@ public class ClientConnection implements Runnable
         }
         catch(IOException ex)
         {
-            System.err.println(ex.getMessage());
+            if (!suppressCatchMessage)
+                Server.getInstance().errorLog(ex.getMessage());
+        }
+        finally
+        {
+            if (null!= finallyFunction) tryCatch(finallyFunction::run);
         }
     }
     
-    public void send(String output) throws IOException
+    private void tryCatch(TryRunnable function)
+    {
+        tryCatch(function, null, false);
+    }
+    
+    private void sendString(String output) throws IOException
     {
         outStream.write(output);
         outStream.flush();
     }
     
-    public void sendHandled(String output)
+    public void send(String output)
     {
-        tryCatch(() -> send(output));
+        tryCatch(() -> sendString(output));
     }
     
     private void inputLoop() throws IOException
@@ -115,13 +127,17 @@ public class ClientConnection implements Runnable
             if (!line.equals("")) sendStringToWorker(line);
         }
     }
+    
+    void closeCommunication() throws IOException {
+        outStream.close();
+        inStream.close();
+        socket.close();
+    }
 
     @Override
     public void run()
     {
         if (openCommunication())
-        {
-            tryCatch(this::inputLoop);
-        }
+            tryCatch(this::inputLoop, this::closeCommunication, true);
     }
 }

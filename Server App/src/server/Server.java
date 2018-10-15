@@ -22,15 +22,16 @@ public class Server implements ServerWorker, ConnectionInitiator {
     private final MatchManager matchManager;
     
     private final ExecutorService executor;
-    private final Consumer<String> logFunction;
+    private final Consumer<String> logger;
+    private final Consumer<String> errorLogger;
     
     private final Database database;
     
     /**
      * Constructor for the server class.
-     * @param logFunction function which handles printing output to the gui
+     * @param logger function which handles printing output to the GUI
      */
-    private Server(Consumer<String> logFunction) {
+    private Server(Consumer<String> logger, Consumer<String> errorLogger) {
         
         executor = Executors.newCachedThreadPool();
         database = new Database();  // Testing Purposes Only
@@ -39,7 +40,8 @@ public class Server implements ServerWorker, ConnectionInitiator {
         commandProcessor = new CommandProcessor();
         workerManager = new WorkerManager();
         matchManager = new MatchManager();
-        this.logFunction = logFunction;
+        this.logger = logger;
+        this.errorLogger = errorLogger;
     }
     
     /**
@@ -154,9 +156,10 @@ public class Server implements ServerWorker, ConnectionInitiator {
      * *not implemented and tested yet*
      */
     void stopServer() {
-//        serverLog("Closing server.");
-//        connectionFinder.stop();
-//        executor.shutdown();
+        serverLog("Closing server.");
+        connectionFinder.stop();
+        workerManager.kickAll();
+        executor.shutdown();
     }
     
     /**
@@ -208,9 +211,18 @@ public class Server implements ServerWorker, ConnectionInitiator {
      */
     @Override
     public void serverLog(String str) {
-        logFunction.accept(str);
+        logger.accept(str);
     }
 
+    /**
+     * Displays string to error section of GUI
+     * @param err error string to be displayed
+     */
+    @Override
+    public void errorLog(String err) {
+        errorLogger.accept(err);
+    }
+    
     /**
      * Processes a given command with the set command processor
      * @param command command to be processed
@@ -246,9 +258,10 @@ public class Server implements ServerWorker, ConnectionInitiator {
      * Called to initialise the Server class
      * @param loggerFunction 
      */
-    public static void initialiseInstance(Consumer<String> loggerFunction) {
+    public static void initialiseInstance(Consumer<String> loggerFunction,
+            Consumer<String> errorLoggerFunction) {
         if (null == currentInstance) {
-            currentInstance = new Server(loggerFunction);
+            currentInstance = new Server(loggerFunction, errorLoggerFunction);
             currentInstance.initialise();
         }
     }

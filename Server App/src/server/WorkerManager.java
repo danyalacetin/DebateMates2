@@ -40,6 +40,10 @@ class WorkerManager {
         }
     }
     
+    void kickAll() {
+        workers.forEach(this::removeWorker);
+    }
+    
     void removeWorker(Worker worker) {
         worker.shutdown();
         accessLock.lock();
