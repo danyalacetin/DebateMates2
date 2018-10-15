@@ -38,7 +38,8 @@ public class ConnectionManager
     }
     
     public void start() {
-        connectionScanner.start();
+        Thread scannerThread = new Thread(connectionScanner::start);
+        scannerThread.start();
     }
     
     public void stop() {
@@ -49,5 +50,16 @@ public class ConnectionManager
     {
         ClientConnection connection = new ClientConnection(socket);
         connectionPasser.accept(connection);
+    }
+    
+    public String getServerDetails() {
+        String output = "";
+        
+        output += "Server Details:\n";
+        output += "    Scanning connections: " + connectionScanner.isRunning()+ "\n";
+        output += "    Accepting connections: " + connectionScanner.isOpen()+ "\n";
+        output += "    Open on port: " + connectionScanner.getPort() + "\n";
+        
+        return output;
     }
 }

@@ -74,7 +74,7 @@ public class Command
         return new Command(newCommand + " " + toString(), source);
     }
     
-    public boolean isCommand(String command, int numArgs) {
+    public boolean is(String command, int numArgs) {
         return isCommand(command) && args.length == numArgs;
     }
     

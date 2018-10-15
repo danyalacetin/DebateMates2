@@ -35,6 +35,18 @@ class ConnectionScanner
         isOpen = false;
     }
     
+    int getPort() {
+        return port;
+    }
+    
+    boolean isRunning() {
+        return isRunning;
+    }
+    
+    boolean isOpen() {
+        return isOpen;
+    }
+    
     void initialise() {
         errorLog = Server.getInstance()::errorLog;
     }
@@ -97,6 +109,8 @@ class ConnectionScanner
             {
                 Socket newSocket = serverSocket.accept();
                 if (isOpen) newConnection.accept(newSocket);
+                Server.getInstance().serverLog("Accept connection from "
+                        + newSocket.getInetAddress());
             }
             catch (IOException error)
             {

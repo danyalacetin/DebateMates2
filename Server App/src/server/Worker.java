@@ -6,15 +6,7 @@
 package server;
 
 import connections.ClientConnection;
-import connections.WorkerConnectionInterface;
 import utilities.Command;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.net.Socket;
 
 /**
  *
@@ -32,7 +24,6 @@ public class Worker implements Runnable {
     Worker(ClientConnection connection) {
         client = connection;
         client.setWorker(this::handleString);
-        client.setShutdown(this::disconnect);
         server = Server.getInstance();
         userID = null;
         matchID = -1;

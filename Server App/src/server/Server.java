@@ -5,7 +5,6 @@ import connections.ConnectionManager;
 import utilities.Command;
 import match.MatchManager;
 import database.Database;
-import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
@@ -14,7 +13,7 @@ import java.util.function.Consumer;
  * Main controlling class for the server application.
  * @author DebateMates
  */
-public class Server implements ServerWorker, ConnectionInitiator {
+public class Server implements ServerWorker {
     
     private static Server currentInstance = null;
     
@@ -23,7 +22,6 @@ public class Server implements ServerWorker, ConnectionInitiator {
     private final ConnectionManager connectionManager;
     private final MatchManager matchManager;
     
-    private final ExecutorService executor;
     private final Consumer<String> logger;
     private final Consumer<String> errorLogger;
     
@@ -35,12 +33,11 @@ public class Server implements ServerWorker, ConnectionInitiator {
      */
     private Server(Consumer<String> logger, Consumer<String> errorLogger) {
         
-        executor = Executors.newCachedThreadPool();
         database = new Database();  // Testing Purposes Only
         
-        connectionManager = new ConnectionManager(this::newConnection);
-        commandProcessor = new CommandProcessor();
         workerManager = new WorkerManager();
+        connectionManager = new ConnectionManager(workerManager::addWorker);
+        commandProcessor = new CommandProcessor();
         matchManager = new MatchManager();
         this.logger = logger;
         this.errorLogger = errorLogger;
@@ -65,6 +62,13 @@ public class Server implements ServerWorker, ConnectionInitiator {
      */
     WorkerManager getWorkerManager() {
         return workerManager;
+    }
+    
+    /**
+     * @return manager responsible for managing the client connections
+     */
+    ConnectionManager getConnectionManager() {
+        return connectionManager;
     }
     
     /**
@@ -150,7 +154,7 @@ public class Server implements ServerWorker, ConnectionInitiator {
     public void startServer() {
         serverLog("Server started.");
         database.establishConnection();
-        executor.execute(connectionManager::start);
+        connectionManager.start();
     }
     
     /**
@@ -161,7 +165,7 @@ public class Server implements ServerWorker, ConnectionInitiator {
         serverLog("Closing server.");
         connectionManager.stop();
         workerManager.kickAll();
-        executor.shutdown();
+        workerManager.shutdown();
     }
     
     /**
@@ -176,24 +180,13 @@ public class Server implements ServerWorker, ConnectionInitiator {
      * Displays server connection details
      * *not yet implemented*
      */
-    void printServerConnectionStatus() {
+    void viewServerConnectionInfo() {
+        String output = "";
         
-    }
-    
-    /**
-     * Allows server to accept clients
-     * *not yet implemented and tested*
-     */
-    void acceptClients() {
-//        connectionFinder.open();
-    }
-    
-    /**
-     * Tells server to ignore new connections it receives
-     * *not yet implemented and tested*
-     */
-    void rejectClients() {
-//        connectionFinder.close();
+        output += connectionManager.getServerDetails();
+        output += "    Open Connections: " + workerManager.getNumWorkers();
+        
+        serverLog(output);
     }
 
     /**
@@ -214,6 +207,7 @@ public class Server implements ServerWorker, ConnectionInitiator {
     @Override
     public void serverLog(String str) {
         logger.accept(str);
+        logger.accept("\n");
     }
 
     /**
@@ -223,6 +217,7 @@ public class Server implements ServerWorker, ConnectionInitiator {
     @Override
     public void errorLog(String err) {
         errorLogger.accept(err);
+        logger.accept("\n");
     }
     
     /**
@@ -233,19 +228,6 @@ public class Server implements ServerWorker, ConnectionInitiator {
     public void processCommand(Command command)
     {
         commandProcessor.processCommand(command);
-    }
-    
-    /**
-     * Logic for accepting a new connection
-     * @param connection
-     * @param socket socket representing a new connection
-     */
-    @Override
-    public void newConnection(ClientConnection connection) {
-        serverLog("Accept connection from " + connection.getAddress());
-        Worker newWorker = new Worker(connection);
-        workerManager.addWorker(newWorker);
-        executor.execute(newWorker::run);
     }
     
     // ========================================================================

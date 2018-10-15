@@ -31,13 +31,19 @@ public class SyncListWrapper<T>
         this(new ArrayList<>());
     }
     
-    public void lockSection(Runnable func) {
+    public void lockSection(Runnable func)
+    {
         lock.lock();
         try {
             func.run();
         } finally {
             lock.unlock();
         }
+    }
+    
+    public int size()
+    {
+        return data.size();
     }
     
     public void remove(T item)

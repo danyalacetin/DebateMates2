@@ -29,13 +29,21 @@ public class MainUI extends javax.swing.JFrame
     }
     
     public void log(String msg) {
-        logScreen.append(msg + "\n");
+        logScreen.append(msg);
         logScreen.setCaretPosition(logScreen.getDocument().getLength());
     }
     
     public void errorLog(String msg) {
-        errorLogScreen.append(msg + "\n");
+        errorLogScreen.append(msg);
         errorLogScreen.setCaretPosition(errorLogScreen.getDocument().getLength());
+    }
+    
+    public void clearLog() {
+        logScreen.setText("");
+    }
+    
+    public void clearErrLog() {
+        errorLogScreen.setText("");
     }
 
     /**
@@ -81,7 +89,7 @@ public class MainUI extends javax.swing.JFrame
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(inputField, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
+                .addComponent(inputField, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(enterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -103,6 +111,7 @@ public class MainUI extends javax.swing.JFrame
         displayView.addTab("Main Log", jScrollPane1);
 
         errorLogScreen.setColumns(20);
+        errorLogScreen.setForeground(new java.awt.Color(255, 0, 0));
         errorLogScreen.setRows(5);
         errorLogScreen.setFocusable(false);
         jScrollPane2.setViewportView(errorLogScreen);

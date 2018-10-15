@@ -16,7 +16,6 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.function.Consumer;
 import server.Server;
 
@@ -28,7 +27,6 @@ public class ClientConnection implements Runnable
 {
     private final Socket socket;
     private WorkerConnectionInterface worker;
-    private Runnable shutdown;
     
     private BufferedWriter outStream;
     private BufferedReader inStream;
@@ -42,7 +40,6 @@ public class ClientConnection implements Runnable
         openCommunication();
         backlog = new ArrayList<>();
         errorLog = Server.getInstance()::errorLog;
-        shutdown = null;
         worker = null;
     }
     
@@ -53,10 +50,6 @@ public class ClientConnection implements Runnable
     public void setWorker(WorkerConnectionInterface worker)
     {
         this.worker = worker;
-    }
-    
-    public void setShutdown(Runnable shutdown) {
-        this.shutdown = shutdown;
     }
     
     private boolean openCommunication()
@@ -108,7 +101,6 @@ public class ClientConnection implements Runnable
         }
         catch(IOException ex)
         {
-            System.err.println("error");
             if (!suppressCatchMessage)
                 errorLog.accept(ex.getMessage());
         }
@@ -126,6 +118,7 @@ public class ClientConnection implements Runnable
     private void sendString(String output) throws IOException
     {
         outStream.write(output);
+        outStream.newLine();
         outStream.flush();
     }
     
@@ -158,7 +151,7 @@ public class ClientConnection implements Runnable
     {
         if (openCommunication())
             tryCatch(this::inputLoop, this::closeCommunication, false);
-        shutdown.run();
+        sendStringToWorker("disconnect");
         Server.getInstance().serverLog("Disconnected: " + getAddress());
     }
 }
