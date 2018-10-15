@@ -15,7 +15,7 @@ import server.Server;
  */
 public class MainUI extends javax.swing.JFrame
 {
-    private ServerWorker server;
+    private final ServerWorker server;
 
     /**
      * Creates new form MainUI

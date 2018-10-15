@@ -6,6 +6,7 @@
 package server;
 
 import utilities.Command;
+import main.MainController;
 
 /**
  * Processes all Server and Client Commands
@@ -31,6 +32,8 @@ class CommandProcessor {
             server.unsupportedCommand();
         else if (command.isCommand("matchinfo", 0))
             server.viewChatRoomInfo();
+        else if (command.isCommand("createclient", 0))
+            MainController.createTestClient();
         
         //Testing commands
         else if (command.isCommand("addDB", 5))

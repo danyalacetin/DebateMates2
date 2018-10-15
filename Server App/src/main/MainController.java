@@ -5,17 +5,24 @@
  */
 package main;
 
+import java.util.ArrayList;
+import java.util.List;
 import server.Server;
+import userinterface.ClientInstanceTest;
 import userinterface.MainUI;
+import utilities.IdManager;
 
 /**
  *
  * @author Demo
  */
-class MainController
+public class MainController
 {
     private Server server;
     private MainUI window;
+    
+    private static final List<ClientInstanceTest> TEST_CLIENTS = new ArrayList<>();
+    private static final IdManager ID_MANAGER = new IdManager();
     
     MainController() {
         
@@ -24,6 +31,17 @@ class MainController
     private void log(String msg) {
         if (null != window) window.log(msg);
         System.out.println(msg);
+    }
+    
+    public static void createTestClient() {
+        ClientInstanceTest test = new ClientInstanceTest(ID_MANAGER.getId(),
+                client ->   {
+                                TEST_CLIENTS.remove(client);
+                                ID_MANAGER.recycleID(client.getID());
+                            
+                            });
+        TEST_CLIENTS.add(test);
+        test.setVisible(true);
     }
     
     private void start() {
