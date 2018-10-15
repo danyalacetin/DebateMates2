@@ -44,7 +44,6 @@ class TestClientConnectionHandler implements Runnable
     {
         try
         {
-//            sendMessage("disconnect");
             outStream.close();
             socket.close();
         }
@@ -104,6 +103,7 @@ class TestClientConnectionHandler implements Runnable
         String line;
         while(null != (line = inStream.readLine()))
         {
+            System.out.println(line);
             dataHandler.accept(line);
         }
     }

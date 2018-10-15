@@ -14,15 +14,27 @@ import java.util.function.Consumer;
  * 
  * @author Aidan Stehbens
  */
-public class SocketServer
+public class ConnectionManager
 {
     private final Consumer<ClientConnection> connectionPasser;
     private final ConnectionScanner connectionScanner;
     
-    public SocketServer(Consumer<ClientConnection> connectionPasser)
+    public ConnectionManager(Consumer<ClientConnection> connectionPasser)
     {
         this.connectionPasser = connectionPasser;
         this.connectionScanner = new ConnectionScanner(this::newConnection);
+    }
+    
+    public void initialise() {
+        connectionScanner.initialise();
+    }
+    
+    public void open() {
+        connectionScanner.open();
+    }
+    
+    public void close() {
+        connectionScanner.close();
     }
     
     public void start() {
@@ -38,5 +50,4 @@ public class SocketServer
         ClientConnection connection = new ClientConnection(socket);
         connectionPasser.accept(connection);
     }
-    
 }

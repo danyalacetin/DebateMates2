@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.function.Consumer;
+import server.Server;
 
 /**
  * Responsible for getting new connections.
@@ -25,11 +26,21 @@ class ConnectionScanner
     private boolean isOpen;
     private boolean isRunning;
     
+    private Consumer<String> errorLog;
+    
     ConnectionScanner(Consumer<Socket> func)
     {
         newConnection = func;
         inputLoopThread = null;
         isOpen = false;
+    }
+    
+    void initialise() {
+        errorLog = Server.getInstance()::errorLog;
+    }
+    
+    private void errorLog(String msg) {
+        if (null != errorLog) errorLog.accept(msg);
     }
     
     public void open()
@@ -59,7 +70,7 @@ class ConnectionScanner
         }
         catch (IOException error)
         {
-            System.err.println(error.getMessage());
+            errorLog(error.getMessage());
         }
         inputLoopThread.start();
     }
@@ -74,7 +85,7 @@ class ConnectionScanner
         }
         catch (IOException error)
         {
-            System.err.println(error.getMessage());
+            errorLog(error.getMessage());
         }
     }
     
@@ -89,7 +100,7 @@ class ConnectionScanner
             }
             catch (IOException error)
             {
-            System.err.println(error.getMessage());
+            errorLog(error.getMessage());
             }
         }
     }

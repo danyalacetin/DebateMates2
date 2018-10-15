@@ -5,6 +5,8 @@
  */
 package server;
 
+import connections.ClientConnection;
+import connections.WorkerConnectionInterface;
 import utilities.Command;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -20,22 +22,18 @@ import java.net.Socket;
  */
 public class Worker implements Runnable {
     
-    private final Socket client;
-    private final PrintWriter outStream;
-    private final BufferedReader inStream;
+    private final ClientConnection client;
     
     private String userID;
     private int matchID;
     
     private final ServerWorker server;
     
-    Worker(Socket clientSocket) throws IOException {
-        client = clientSocket;
+    Worker(ClientConnection connection) {
+        client = connection;
+        client.setWorker(this::handleString);
+        client.setShutdown(this::disconnect);
         server = Server.getInstance();
-        
-        outStream = new PrintWriter(new BufferedWriter(
-                new OutputStreamWriter(client.getOutputStream())));
-        inStream = new BufferedReader(new InputStreamReader(client.getInputStream()));
         userID = null;
         matchID = -1;
     }
@@ -66,7 +64,11 @@ public class Worker implements Runnable {
     
     private void logout() {
         if (isLoggedIn())
-            handleInput("logout");
+            handleString("logout");
+    }
+    
+    private void disconnect() {
+        handleString("disconnect");
     }
     
     void setLogin(String login) {
@@ -75,56 +77,28 @@ public class Worker implements Runnable {
     
     @Override
     public void run() {
-        try {
-            handleClient();
-        } catch (IOException ex) {
-            System.err.println("Connection Closed");
-        } finally {
-            handleInput("disconnect");
-            server.serverLog("Disconnected: " + client.getInetAddress());
-        }
+        client.run();
     }
     
     void shutdown() {
-        try {
-            logout();
-            client.close(); 
-        } catch (IOException e) {
-
-        }
-    }
-    
-    private void handleInput(String cmdString) {
-        Command command = Command.create(cmdString, this);
-        server.processCommand(command);
-    }
-    
-    void handleClient() throws IOException {
-        String line;
-        
-        while((line = inStream.readLine()) != null) {
-//            server.serverLog("CLIENT SENT: " +  line);
-            handleInput(line);
-        }
+        logout();
+        client.close();
     }
     
     public void send(Command msg) {
-        if (msg.getSource().getLogin().equals(userID)) {
-            String msgString = msg.toString();
-            if (msgString.contains(userID))
-                send(msgString.replace(userID, "You"));
-        }
-        else {
-            send(msg.toString());
-        }
+        send(msg.toString());
     }
     
     public void send(String msg) {
-        outStream.println(msg);
-        outStream.flush();
+        client.send(msg);
     }
     
     public void send(ServerConstants msg) {
         send(msg.toString());
+    }
+
+    public void handleString(String input) {
+        Command command = Command.create(input, this);
+        server.processCommand(command);
     }
 }

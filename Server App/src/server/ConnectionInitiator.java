@@ -5,7 +5,7 @@
  */
 package server;
 
-import java.net.Socket;
+import connections.ClientConnection;
 
 /**
  * Interface for creating new connections.
@@ -18,5 +18,5 @@ interface ConnectionInitiator
      * Task to complete when a new connection is made with the server.
      * @param socket Socket for the new connection.
      */
-    abstract void newConnection(Socket socket);
+    abstract void newConnection(ClientConnection socket);
 }

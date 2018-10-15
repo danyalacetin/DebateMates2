@@ -11,6 +11,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
+import utilities.SyncListWrapper;
 
 /**
  *
@@ -18,26 +19,14 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 class WorkerManager {
     
-    private final List<Worker> workers;
-    private final ReentrantLock accessLock;
+    private final SyncListWrapper<Worker> workers;
     
     WorkerManager() {
-        workers = new ArrayList<>();
-        accessLock = new ReentrantLock();
+        workers = new SyncListWrapper<>();
     }
     
-    void addWorker(Socket socket) {
-        accessLock.lock();
-        Worker newWorker = null;
-        try {
-            newWorker = new Worker(socket);
-            workers.add(newWorker);
-        } catch (IOException ex) {
-            
-        } finally {
-            accessLock.unlock();
-            if (null != newWorker) newWorker.run();
-        }
+    void addWorker(Worker worker) {
+        workers.add(worker);
     }
     
     void kickAll() {
@@ -46,21 +35,11 @@ class WorkerManager {
     
     void removeWorker(Worker worker) {
         worker.shutdown();
-        accessLock.lock();
-        try {
-            workers.remove(worker);
-        } finally {
-            accessLock.unlock();
-        }
+        workers.remove(worker);
     }
     
     void sendBroadcast(Command cmd) {
         String sendString = "serverannounce " + cmd.toString();
-        accessLock.lock();
-        try {
-            for (Worker worker : workers) worker.send(sendString);
-        } finally {
-            accessLock.unlock();
-        }
+        workers.forEach(worker -> worker.send(sendString));
     }
 }

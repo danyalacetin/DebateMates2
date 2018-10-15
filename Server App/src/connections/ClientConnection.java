@@ -17,6 +17,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.Consumer;
 import server.Server;
 
 /**
@@ -27,22 +28,35 @@ public class ClientConnection implements Runnable
 {
     private final Socket socket;
     private WorkerConnectionInterface worker;
+    private Runnable shutdown;
     
     private BufferedWriter outStream;
     private BufferedReader inStream;
     
     private final List<String> backlog;
+    private final Consumer<String> errorLog;
     
     ClientConnection(Socket socket)
     {
         this.socket = socket;
         openCommunication();
         backlog = new ArrayList<>();
+        errorLog = Server.getInstance()::errorLog;
+        shutdown = null;
+        worker = null;
+    }
+    
+    public InetAddress getAddress() {
+        return socket.getInetAddress();
     }
     
     public void setWorker(WorkerConnectionInterface worker)
     {
         this.worker = worker;
+    }
+    
+    public void setShutdown(Runnable shutdown) {
+        this.shutdown = shutdown;
     }
     
     private boolean openCommunication()
@@ -59,7 +73,7 @@ public class ClientConnection implements Runnable
             }
             catch (IOException openError)
             {
-                System.err.println(openError.getMessage());
+                errorLog.accept(openError.getMessage());
             }
             
             if (null != out)
@@ -94,8 +108,9 @@ public class ClientConnection implements Runnable
         }
         catch(IOException ex)
         {
+            System.err.println("error");
             if (!suppressCatchMessage)
-                Server.getInstance().errorLog(ex.getMessage());
+                errorLog.accept(ex.getMessage());
         }
         finally
         {
@@ -128,16 +143,22 @@ public class ClientConnection implements Runnable
         }
     }
     
-    void closeCommunication() throws IOException {
+    private void closeCommunication() throws IOException {
         outStream.close();
         inStream.close();
         socket.close();
+    }
+    
+    public void close() {
+        tryCatch(this::closeCommunication);
     }
 
     @Override
     public void run()
     {
         if (openCommunication())
-            tryCatch(this::inputLoop, this::closeCommunication, true);
+            tryCatch(this::inputLoop, this::closeCommunication, false);
+        shutdown.run();
+        Server.getInstance().serverLog("Disconnected: " + getAddress());
     }
 }

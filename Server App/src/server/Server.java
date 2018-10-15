@@ -1,5 +1,7 @@
 package server;
 
+import connections.ClientConnection;
+import connections.ConnectionManager;
 import utilities.Command;
 import match.MatchManager;
 import database.Database;
@@ -18,7 +20,7 @@ public class Server implements ServerWorker, ConnectionInitiator {
     
     private final WorkerManager workerManager;
     private final CommandProcessor commandProcessor;
-    private final ConnectionFinder connectionFinder;
+    private final ConnectionManager connectionManager;
     private final MatchManager matchManager;
     
     private final ExecutorService executor;
@@ -36,7 +38,7 @@ public class Server implements ServerWorker, ConnectionInitiator {
         executor = Executors.newCachedThreadPool();
         database = new Database();  // Testing Purposes Only
         
-        connectionFinder = new ConnectionFinder();
+        connectionManager = new ConnectionManager(this::newConnection);
         commandProcessor = new CommandProcessor();
         workerManager = new WorkerManager();
         matchManager = new MatchManager();
@@ -148,7 +150,7 @@ public class Server implements ServerWorker, ConnectionInitiator {
     public void startServer() {
         serverLog("Server started.");
         database.establishConnection();
-        executor.execute(connectionFinder::start);
+        executor.execute(connectionManager::start);
     }
     
     /**
@@ -157,7 +159,7 @@ public class Server implements ServerWorker, ConnectionInitiator {
      */
     void stopServer() {
         serverLog("Closing server.");
-        connectionFinder.stop();
+        connectionManager.stop();
         workerManager.kickAll();
         executor.shutdown();
     }
@@ -235,12 +237,15 @@ public class Server implements ServerWorker, ConnectionInitiator {
     
     /**
      * Logic for accepting a new connection
+     * @param connection
      * @param socket socket representing a new connection
      */
     @Override
-    public void newConnection(Socket socket) {
-        serverLog("Accept connection from " + socket.getInetAddress());
-        executor.execute(() -> workerManager.addWorker(socket));
+    public void newConnection(ClientConnection connection) {
+        serverLog("Accept connection from " + connection.getAddress());
+        Worker newWorker = new Worker(connection);
+        workerManager.addWorker(newWorker);
+        executor.execute(newWorker::run);
     }
     
     // ========================================================================
@@ -250,13 +255,14 @@ public class Server implements ServerWorker, ConnectionInitiator {
      * contains functions that should be run on startup
      */
     private void initialise() {
-        connectionFinder.initialise();
+        connectionManager.initialise();
         commandProcessor.initialise();
     }
     
     /**
      * Called to initialise the Server class
      * @param loggerFunction 
+     * @param errorLoggerFunction 
      */
     public static void initialiseInstance(Consumer<String> loggerFunction,
             Consumer<String> errorLoggerFunction) {

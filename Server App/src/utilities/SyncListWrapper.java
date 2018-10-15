@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.function.Consumer;
 
 /**
  *
@@ -30,42 +31,31 @@ public class SyncListWrapper<T>
         this(new ArrayList<>());
     }
     
-    public void remove(T item)
-    {
+    public void lockSection(Runnable func) {
         lock.lock();
-        try
-        {
-            data.remove(item);
-        }
-        finally
-        {
+        try {
+            func.run();
+        } finally {
             lock.unlock();
         }
+    }
+    
+    public void remove(T item)
+    {
+        lockSection(() -> data.remove(item));
+    }
+    
+    public void forEach(Consumer<? super T> function) {
+        lockSection(() -> data.forEach(function));
     }
     
     public void addAll(Collection<T> items)
     {
-        lock.lock();
-        try
-        {
-            data.addAll(items);
-        }
-        finally
-        {
-            lock.unlock();
-        }
+        lockSection(() -> data.addAll(items));
     }
     
     public void add(T item)
     {
-        lock.lock();
-        try
-        {
-            data.add(item);
-        }
-        finally
-        {
-            lock.unlock();
-        }
+        lockSection(() -> data.add(item));
     }
 }

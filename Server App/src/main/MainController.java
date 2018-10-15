@@ -21,8 +21,7 @@ public class MainController
     private Server server;
     private MainUI window;
     
-    private static final List<ClientInstanceTest> TEST_CLIENTS = new ArrayList<>();
-    private static final IdManager ID_MANAGER = new IdManager();
+    private static final IdManager CLIENT_NUMBER = new IdManager();
     
     MainController() {
         
@@ -39,13 +38,11 @@ public class MainController
     }
     
     public static void createTestClient() {
-        ClientInstanceTest test = new ClientInstanceTest(ID_MANAGER.getId(),
+        ClientInstanceTest test = new ClientInstanceTest(CLIENT_NUMBER.getId(),
                 client ->   {
-                                TEST_CLIENTS.remove(client);
-                                ID_MANAGER.recycleID(client.getID());
+                                CLIENT_NUMBER.recycleID(client.getID());
                             
                             });
-        TEST_CLIENTS.add(test);
         test.setVisible(true);
     }
     
