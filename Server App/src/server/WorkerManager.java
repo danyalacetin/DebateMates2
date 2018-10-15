@@ -5,11 +5,17 @@
  */
 package server;
 
+import connections.ClientConnection;
+import utilities.Command;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.locks.ReentrantLock;
+import utilities.SyncListWrapper;
 
 /**
  *
@@ -17,45 +23,42 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 class WorkerManager {
     
-    private final List<Worker> workers;
-    private final ReentrantLock accessLock;
+    private final SyncListWrapper<Worker> workers;
+    private final ExecutorService executor;
     
     WorkerManager() {
-        workers = new ArrayList<>();
-        accessLock = new ReentrantLock();
+        workers = new SyncListWrapper<>();
+        executor = Executors.newCachedThreadPool();
     }
     
-    void addWorker(Socket socket) {
-        accessLock.lock();
-        Worker newWorker = null;
-        try {
-            newWorker = new Worker(socket);
-            workers.add(newWorker);
-        } catch (IOException ex) {
-            
-        } finally {
-            accessLock.unlock();
-            if (null != newWorker) newWorker.run();
-        }
+    int getNumWorkers() {
+        return workers.size();
+    }
+    
+    void addWorker(ClientConnection connection) {
+        Worker newWorker = new Worker(connection);
+        workers.add(newWorker);
+        executor.execute(newWorker::run);
+    }
+    
+    void kickAll() {
+        workers.forEach(worker -> {
+                    removeWorker(worker);
+                    worker.shutdown();
+                });
     }
     
     void removeWorker(Worker worker) {
         worker.shutdown();
-        accessLock.lock();
-        try {
-            workers.remove(worker);
-        } finally {
-            accessLock.unlock();
-        }
+        workers.remove(worker);
     }
     
     void sendBroadcast(Command cmd) {
         String sendString = "serverannounce " + cmd.toString();
-        accessLock.lock();
-        try {
-            for (Worker worker : workers) worker.send(sendString);
-        } finally {
-            accessLock.unlock();
-        }
+        workers.forEach(worker -> worker.send(sendString));
+    }
+    
+    void shutdown() {
+        executor.shutdown();
     }
 }

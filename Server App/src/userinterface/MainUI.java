@@ -5,7 +5,7 @@
  */
 package userinterface;
 
-import server.Command;
+import utilities.Command;
 import server.ServerWorker;
 import server.Server;
 
@@ -15,7 +15,7 @@ import server.Server;
  */
 public class MainUI extends javax.swing.JFrame
 {
-    private ServerWorker server;
+    private final ServerWorker server;
 
     /**
      * Creates new form MainUI
@@ -29,8 +29,21 @@ public class MainUI extends javax.swing.JFrame
     }
     
     public void log(String msg) {
-        logScreen.append(msg + "\n");
+        logScreen.append(msg);
         logScreen.setCaretPosition(logScreen.getDocument().getLength());
+    }
+    
+    public void errorLog(String msg) {
+        errorLogScreen.append(msg);
+        errorLogScreen.setCaretPosition(errorLogScreen.getDocument().getLength());
+    }
+    
+    public void clearLog() {
+        logScreen.setText("");
+    }
+    
+    public void clearErrLog() {
+        errorLogScreen.setText("");
     }
 
     /**
@@ -43,18 +56,16 @@ public class MainUI extends javax.swing.JFrame
     private void initComponents()
     {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        logScreen = new javax.swing.JTextArea();
         jPanel1 = new javax.swing.JPanel();
         inputField = new javax.swing.JTextField();
         enterButton = new javax.swing.JButton();
+        displayView = new javax.swing.JTabbedPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        logScreen = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        errorLogScreen = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        logScreen.setEditable(false);
-        logScreen.setColumns(20);
-        logScreen.setRows(5);
-        jScrollPane1.setViewportView(logScreen);
 
         inputField.addKeyListener(new java.awt.event.KeyAdapter()
         {
@@ -78,7 +89,7 @@ public class MainUI extends javax.swing.JFrame
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(inputField)
+                .addComponent(inputField, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(enterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -87,10 +98,25 @@ public class MainUI extends javax.swing.JFrame
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(enterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(inputField))
+                    .addComponent(inputField)
+                    .addComponent(enterButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
+
+        logScreen.setEditable(false);
+        logScreen.setColumns(20);
+        logScreen.setRows(5);
+        jScrollPane1.setViewportView(logScreen);
+
+        displayView.addTab("Main Log", jScrollPane1);
+
+        errorLogScreen.setColumns(20);
+        errorLogScreen.setForeground(new java.awt.Color(255, 0, 0));
+        errorLogScreen.setRows(5);
+        errorLogScreen.setFocusable(false);
+        jScrollPane2.setViewportView(errorLogScreen);
+
+        displayView.addTab("Error Log", jScrollPane2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -99,30 +125,23 @@ public class MainUI extends javax.swing.JFrame
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 988, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(displayView, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(displayView, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void handleCommandGiven() {
-        String cmd = inputField.getText();
-        inputField.setText("");
-        
-        Command command = Command.anonymousCommand(cmd);
-        server.processCommand(command);
-    }
-    
     private void enterButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_enterButtonActionPerformed
     {//GEN-HEADEREND:event_enterButtonActionPerformed
         handleCommandGiven();
@@ -133,11 +152,22 @@ public class MainUI extends javax.swing.JFrame
         if (evt.getKeyChar() == '\n') handleCommandGiven();
     }//GEN-LAST:event_inputFieldKeyPressed
 
+    private void handleCommandGiven() {
+        String cmd = inputField.getText();
+        inputField.setText("");
+        
+        Command command = Command.createAnonymous(cmd);
+        server.processCommand(command);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTabbedPane displayView;
     private javax.swing.JButton enterButton;
+    private javax.swing.JTextArea errorLogScreen;
     private javax.swing.JTextField inputField;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea logScreen;
     // End of variables declaration//GEN-END:variables
 

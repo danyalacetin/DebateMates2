@@ -5,6 +5,9 @@
  */
 package server;
 
+import utilities.Command;
+import main.MainController;
+
 /**
  * Processes all Server and Client Commands
  *  
@@ -18,68 +21,84 @@ class CommandProcessor {
         server = Server.getInstance();
     }
     
+    private void processServerCommand(Command command) {
+        if (command.is("open", 0))
+            server.unsupportedCommand();
+        else if (command.is("close", 0))
+            server.unsupportedCommand();
+        else if (command.is("exit", 0))
+            server.unsupportedCommand();
+        else if (command.is("start", 0))
+            server.unsupportedCommand();
+        else if (command.is("matchinfo", 0))
+            server.viewChatRoomInfo();
+        else if(command.is("connectioninfo", 0))
+            server.viewServerConnectionInfo();
+        else if (command.is("createclient", 0))
+            MainController.createTestClient();
+        else if (command.is("clear", 0))
+            server.serverLog(null);
+        else if (command.is("clearerr", 0))
+            server.errorLog(null);
+        
+        //Testing commands
+        else if (command.is("addDB", 5))
+            server.getDB().addItem(command.getArg(0), command.getArg(1), Integer.parseInt(command.getArg(2)), Integer.parseInt(command.getArg(3)), Integer.parseInt(command.getArg(4)), 0);
+        else if (command.is("queryDB", 2))
+            System.out.println(server.getDB().getQuery(command.getArg(0), command.getArg(1)));
+        else if (command.is("viewDB", 1))
+            server.getDB().viewDB(command.getArg(0));
+        else if (command.is("viewDB", 0))
+            server.getDB().viewDB("null");
+        else if (command.is("updateDB", 3))
+            server.getDB().updateItem(command.getArg(0), command.getArg(1), "'"+command.getArg(2)+"'");
+        else if (command.is("dropDB", 0))
+            server.getDB().droptable();
+
+        else if (command.isCommand("post") && 0 != command.getArgs().length)
+            server.getWorkerManager().sendBroadcast(command.extractCommand());
+    }
+    
+    private void processMatchCommand(Command command, Worker worker) {
+        if (command.is("leave", 0))
+            server.getMatchManager().leaveMatch(worker);
+        else if (command.isCommand("chat") && 0 != command.getArgs().length)
+            server.getMatchManager().process(command);
+    }
+    
     void processCommand(Command command) {
         
         Worker worker = command.getSource();
         
         if (null == worker) // server commands
         {
-            if (command.isCommand("open", 0))
-                server.unsupportedCommand();
-            else if (command.isCommand("close", 0))
-                server.unsupportedCommand();
-            else if (command.isCommand("exit", 0))
-                server.unsupportedCommand();
-            else if (command.isCommand("start", 0))
-                server.unsupportedCommand();
-            else if (command.isCommand("matchinfo", 0))
-                server.viewChatRoomInfo();
-            
-            //Testing commands
-            else if (command.isCommand("addDB", 5))
-                server.getDB().addItem(command.getArg(0), command.getArg(1), Integer.parseInt(command.getArg(2)), Integer.parseInt(command.getArg(3)), Integer.parseInt(command.getArg(4)), 0);
-            else if (command.isCommand("queryDB", 2))
-                System.out.println(server.getDB().getQuery(command.getArg(0), command.getArg(1)));
-            else if (command.isCommand("viewDB", 1))
-                server.getDB().viewDB(command.getArg(0));
-            else if (command.isCommand("viewDB", 0))
-                server.getDB().viewDB("null");
-            else if (command.isCommand("updateDB", 3))
-                server.getDB().updateItem(command.getArg(0), command.getArg(1), "'"+command.getArg(2)+"'");
-            else if (command.isCommand("dropDB", 0))
-                server.getDB().droptable();
-            
-            else if (command.isCommand("post") && 0 != command.getArgs().length)
-                server.getWorkerManager().sendBroadcast(command.nextCommand());
+            processServerCommand(command);
         }
-        else if (command.isCommand("disconnect", 0)) { // close connection
+        else if (command.is("disconnect", 0)) { // close connection
             server.getWorkerManager().removeWorker(worker);
         }
         else if (worker.isLoggedIn()) // logged in
         {
-            if (command.isCommand("logout", 0)) {
+            if (command.is("logout", 0)) {
                 System.out.println("logging out user");
                     server.logOutUser(worker);
             }
-            else if (command.isCommand("nickname", 1)){
+            else if (command.is("nickname", 1)){
                 server.updateNickname(command.getArg(0), worker);
             }
-            else if (command.isCommand("updateQuestion", 2)){
+            else if (command.is("updateQuestion", 2)){
                 server.updateQuestion(command.getArg(0), command.getArg(1), worker);
             }
-            else if (command.isCommand("getQuestions", 0)){
+            else if (command.is("getQuestions", 0)){
                 server.getQuestions(worker);
             }
             else if (worker.inMatch()) // in match
             {
-                if (command.isCommand("leave", 0))
-                    server.getMatchManager().leaveMatch(worker);
-                else if (command.isCommand("chat") && 0 != command.getArgs().length)
-                    server.getMatchManager().process(command);
+                processMatchCommand(command, worker);
             }
             else // not in match
             {
-                if (command.isCommand("join", 1)) {
+                if (command.is("join", 1)) {
                     String type = command.getArg(0);
                     server.getMatchManager().joinMatch(worker, type);
                 }
@@ -87,7 +106,7 @@ class CommandProcessor {
         }
         else // not logged in
         {
-            if (command.isCommand("login", 1))
+            if (command.is("login", 1))
                 server.logInUser(command.getArg(0), worker);
         }   
     }

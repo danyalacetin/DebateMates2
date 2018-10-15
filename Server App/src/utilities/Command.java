@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package server;
+package utilities;
 
 import java.util.Arrays;
+import server.Worker;
 
 /**
  *
@@ -17,7 +18,7 @@ public class Command
     private final String[] args;
     private final Worker source;
     
-    Command(String[] command, Worker source) {
+    private Command(String[] command, Worker source) {
         if (0 == command.length) {
             label = null;
             args = null;
@@ -28,40 +29,52 @@ public class Command
         this.source = source;
     }
     
-    Command(String command, Worker source) {
+    private Command(String command, Worker source) {
         this(command.split(" "), source);
     }
     
-    public static Command anonymousCommand(String command) {
-        return new Command(command.split(" "), null);
+    public static Command createAnonymous(String command) {
+        return new Command(command, null);
     }
     
-    Worker getSource() {
+    public static Command create(String command, Worker worker) {
+        return new Command(command, worker);
+    }
+    
+    public Worker getSource() {
         return source;
     }
     
-    String getLabel() {
+    public String getLabel() {
         return label;
     }
     
-    String[] getArgs() {
+    public String[] getArgs() {
         return args;
     }
     
-    String getArg(int index) {
+    public int getNumArgs() {
+        return args.length;
+    }
+    
+    public String getArg(int index) {
         if (index < 0 || index >= args.length) return null;
         return args[index];
     }
     
-    boolean isCommand(String command) {
+    public boolean isCommand(String command) {
         return null != label && label.equalsIgnoreCase(command);
     }
     
-    Command nextCommand() {
+    public Command extractCommand() {
         return new Command(args, source);
     }
     
-    boolean isCommand(String command, int numArgs) {
+    public Command wrapCommand(String newCommand) {
+        return new Command(newCommand + " " + toString(), source);
+    }
+    
+    public boolean is(String command, int numArgs) {
         return isCommand(command) && args.length == numArgs;
     }
     

@@ -5,6 +5,8 @@
  */
 package server;
 
+import utilities.Command;
+
 /**
  * Interface used to define the interaction between the Server and the majority
  * of its parts.
@@ -23,4 +25,10 @@ public interface ServerWorker { // needs a new name
      * @param command Command to be processed.
      */
     abstract void processCommand(Command command);
+    
+    /**
+     * Displays a message to the error server screen.
+     * @param err Error text to be displayed.
+     */
+    abstract void errorLog(String err);
 }
