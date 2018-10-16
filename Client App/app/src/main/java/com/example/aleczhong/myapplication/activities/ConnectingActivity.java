@@ -35,7 +35,7 @@ public class ConnectingActivity extends AppCompatActivity {
     }
 
     private void goToLogin() {
-        Intent intent = new Intent(ConnectingActivity.this, MockLoginActivity.class);
+        Intent intent = new Intent(ConnectingActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
     }

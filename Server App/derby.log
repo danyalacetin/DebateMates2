@@ -1,23 +1,13 @@
 ----------------------------------------------------------------
-<<<<<<< HEAD
-Mon Oct 08 23:42:27 NZDT 2018:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0166-5345-6001-000006d4c170 
-on database directory C:\Users\Danyal Cetin\Documents\GitHub\DebateMates2\Server App\DebatemateDB with class loader sun.misc.Launcher$AppClassLoader@3d4eac69 
-Loaded from file:/C:/Users/Danyal%20Cetin/Documents/GitHub/DebateMates2/Server%20App/lib/derby.jar
+Fri Oct 12 13:39:29 NZDT 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0166-65b6-ba13-000006bb2ab8 
+on database directory C:\Users\Alec Zhong\Documents\GitHub\DebateMates2\Server App\DebatemateDB with class loader sun.misc.Launcher$AppClassLoader@3d4eac69 
+Loaded from file:/C:/Users/Alec%20Zhong/Documents/GitHub/DebateMates2/Server%20App/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_161-b12
-user.dir=C:\Users\Danyal Cetin\Documents\GitHub\DebateMates2\Server App
-=======
-Mon Oct 08 23:03:26 NZDT 2018:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0166-5321-a02c-000006befca0 
-on database directory C:\Users\asteh\Documents\GitHub\DebateMates2\Server App\DebatemateDB with class loader sun.misc.Launcher$AppClassLoader@3d4eac69 
-Loaded from file:/C:/Users/asteh/Documents/GitHub/DebateMates2/Server%20App/lib/derby.jar
-java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_161-b12
-user.dir=C:\Users\asteh\Documents\GitHub\DebateMates2\Server App
->>>>>>> Aidan
-os.name=Windows 10
+user.dir=C:\Users\Alec Zhong\Documents\GitHub\DebateMates2\Server App
+os.name=Windows 8.1
 os.arch=amd64
-os.version=10.0
+os.version=6.3
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''

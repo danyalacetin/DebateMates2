@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 class ServerConnection {
-    private static final String SERVER_ADDRESS = "192.168.18.49";
+    private static final String SERVER_ADDRESS = "172.28.124.198";
     private static final int SERVER_PORT = 8818;
 
     private Socket connection;
@@ -96,7 +96,7 @@ class ServerConnection {
         @Override
         protected Void doInBackground(String... strings) {
             for (String s : strings) {
-                outStream.println(s);
+                 outStream.println(s);
                 outStream.flush();
             }
 
