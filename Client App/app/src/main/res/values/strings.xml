@@ -4,7 +4,7 @@
     <string name="fb_login_protocol_scheme">fb1557647357715015</string>
     <string name="connecting_label">Connecting</string>
     <string name="finding_match">FINDING MATCH</string>
-
+    <string name="MainMenu">MainMenuActivity</string>
     <string name="play">Play</string>
     <string name="settings">Settings</string>
     <string name="debate_mate">Debate Mate</string>
@@ -21,6 +21,8 @@
     <string name="sound_effects">Sound Effects</string>
     <string name="ok">OK</string>
     <string name="nickname">Nickname</string>
+    <string name="todo">TODO</string>
+    <string name="textview">TextView</string>
 
 </resources>
 

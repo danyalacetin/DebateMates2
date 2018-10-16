@@ -96,7 +96,7 @@ class ServerConnection {
         @Override
         protected Void doInBackground(String... strings) {
             for (String s : strings) {
-                outStream.println(s);
+                 outStream.println(s);
                 outStream.flush();
             }
 

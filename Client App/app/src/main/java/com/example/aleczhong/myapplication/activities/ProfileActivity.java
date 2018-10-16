@@ -20,46 +20,37 @@ import com.facebook.share.widget.ShareDialog;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class MainMenuActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity {
+
     private ShareDialog shareDialog;
     private Button logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_menu);
-
         FacebookSdk.sdkInitialize(this);
+        setContentView(R.layout.activity_profile);
         shareDialog=new ShareDialog(this);
-        Button logout=(Button) findViewById(R.id.button4);
+
+        Bundle inBundle =getIntent().getExtras();
+        if (inBundle!=null){
+        String name=inBundle.get("name").toString();
+        String Surname=inBundle.get("Surname").toString();
+        String imageUrl=inBundle.get("imageURL").toString();
+
+        TextView username=(TextView)findViewById(R.id.textView5);
+        username.setText(""+name+" "+Surname);
+        Button logout=(Button) findViewById(R.id.button2);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LoginManager.getInstance().logOut();
-                Intent login=new Intent (MainMenuActivity.this,LoginActivity.class);
+                Intent login=new Intent (ProfileActivity.this,LoginActivity.class);
                 startActivity(login);
                 finish();
 
             }
         });
-        Bundle inBundle =getIntent().getExtras();
-        if (inBundle!=null ){
-            String name = inBundle.get("name").toString();
-            String Surname = inBundle.get("Surname").toString();
-            String imageUrl = inBundle.get("imageURL").toString();
-
-            TextView username = (TextView) findViewById(R.id.textView4);
-            username.setText("" + name + " " + Surname);
-
-        new DownloadImage((ImageView)findViewById(R.id.imageView)).execute(imageUrl);
-        DownloadImage view=new DownloadImage((ImageView)findViewById(R.id.imageView));
-        view.bmimage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent1=new Intent(MainMenuActivity.this,ProfileActivity.class);
-                startActivity(intent1);
-            }
-        });
-        }
+        new DownloadImage((ImageView)findViewById(R.id.imageView)).execute(imageUrl);}
 
     }
     public class DownloadImage extends AsyncTask<String,Void,Bitmap> {
@@ -84,15 +75,5 @@ public class MainMenuActivity extends AppCompatActivity {
         protected void onpostExecute(Bitmap result){
             bmimage.setImageBitmap(result);
         }
-    }
-    public void play(View view)
-    {
-        Intent intent = new Intent(this, PlayActivity.class);
-        startActivity(intent);
-    }
-
-    public void settings(View view) {
-        Intent intent = new Intent(this, SettingsActivity.class);
-        startActivity(intent);
     }
 }

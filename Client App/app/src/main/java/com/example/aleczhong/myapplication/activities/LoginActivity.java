@@ -1,24 +1,30 @@
 package com.example.aleczhong.myapplication.activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.example.aleczhong.myapplication.R;
 import com.example.aleczhong.myapplication.applogic.ClientApp;
 import com.example.aleczhong.myapplication.applogic.DelayedReturn;
+import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphRequestAsyncTask;
+import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.login.LoginBehavior;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+
+import org.json.JSONObject;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -40,7 +46,22 @@ public class LoginActivity extends AppCompatActivity {
         loginButton =(LoginButton) findViewById(R.id.login_button);
         loginButton.setReadPermissions("public_profile");
         loginButton.setLoginBehavior(LoginBehavior.WEB_ONLY);
+
         initialiseFacebook();
+        FacebookSdk.getApplicationContext();
+        accessTokenTracker =new AccessTokenTracker() {
+            @Override
+            protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
+
+            }
+        };
+        profileTracker= new ProfileTracker() {
+            @Override
+            protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
+                nextActivity(currentProfile);
+            }
+        };
+        accessTokenTracker.startTracking();
     }
 
     private void initialiseFacebook() {
@@ -48,11 +69,22 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
+                final Profile profile=Profile.getCurrentProfile();
+                nextActivity(profile);
+                final AccessToken accessToken = loginResult.getAccessToken();
+                GraphRequestAsyncTask request = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
+                    @Override
+                    public void onCompleted(JSONObject user, GraphResponse graphResponse) {
+                        LoginManager.getInstance().logOut();
+                        String name = (user.optString("name"));
+                    }
+                }).executeAsync();
+                Toast.makeText(getApplicationContext(), "Login Success with facebook", Toast.LENGTH_SHORT).show();
                 app.setAccessToken(loginResult.getAccessToken());
                 app.login(new DelayedReturn() {
                     @Override
                     public void onSuccess() {
-                        nextActivity();
+                        nextActivity(profile);
                     }
 
                     @Override
@@ -90,9 +122,28 @@ public class LoginActivity extends AppCompatActivity {
     private void displayLoginError() {
 
     }
-
-    private void nextActivity() {
+    protected void onResume(){
+        super.onResume();
+        Profile profile=Profile.getCurrentProfile();
+        nextActivity(profile);
+    }
+    @Override
+    protected void onStop(){
+        super.onStop();
+        accessTokenTracker.stopTracking();
+        profileTracker.stopTracking();
+    }
+    @Override
+    protected void onPause(){
+        super.onPause();
+    }
+    private void nextActivity(Profile profile) {
+        if (profile != null) {
             Intent intent = new Intent(this, MainMenuActivity.class);
+            intent.putExtra("name", profile.getFirstName());
+            intent.putExtra("Surname", profile.getLastName());
+            final Intent imageURL = intent.putExtra("imageURL", profile.getProfilePictureUri(200, 200).toString());
             startActivity(intent);
+        }
     }
 }
