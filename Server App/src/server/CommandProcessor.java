@@ -81,7 +81,7 @@ class CommandProcessor {
         {
             if (command.is("logout", 0)) {
                 System.out.println("logging out user");
-                    server.logOutUser(worker);
+                    server.logoutUser(worker);
             }
             else if (command.is("nickname", 1)){
                 server.updateNickname(command.getArg(0), worker);
@@ -107,7 +107,7 @@ class CommandProcessor {
         else // not logged in
         {
             if (command.is("login", 1))
-                server.logInUser(command.getArg(0), worker);
+                server.loginUser(command.getArg(0), worker);
         }   
     }
 }

@@ -1,12 +1,9 @@
 package server;
 
-import connections.ClientConnection;
 import connections.ConnectionManager;
 import utilities.Command;
 import match.MatchManager;
 import database.Database;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
 /**
@@ -119,10 +116,8 @@ public class Server implements ServerWorker {
      * @param id id given to the user from FaceBook API
      * @param source worker associated with the user
      */
-    void logInUser(String id, Worker source) {
-        serverLog("User logged in as: " + id);
-        source.setLogin(id);
-        source.send(ServerConstants.LOGIN_SUCCESS);
+    void loginUser(String id, Worker source) {
+        workerManager.loginWorker(id, source);
         //Checks if user is new
         if(database.getQuery(id, "FACEBOOKID") == null) {
             //Adds user to database
@@ -137,15 +132,9 @@ public class Server implements ServerWorker {
      * Handles logout for the given user
      * @param source worker associated with the user
      */
-    void logOutUser(Worker source) {
-        if (source.inMatch()) {
-            Command cmd = Command.create("leave", source);
-            processCommand(cmd);
-        }
+    void logoutUser(Worker source) {
         
-        serverLog(source.getLogin() + " logged out.");
         database.updateItem(source.getLogin(), "ONLINESTATUS", "0");
-        source.setLogin(null);
     }
     
     /**
@@ -239,6 +228,7 @@ public class Server implements ServerWorker {
     private void initialise() {
         connectionManager.initialise();
         commandProcessor.initialise();
+        workerManager.initialise();
     }
     
     /**

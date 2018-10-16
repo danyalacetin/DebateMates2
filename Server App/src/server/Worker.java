@@ -14,7 +14,7 @@ import utilities.Command;
  */
 public class Worker implements Runnable {
     
-    private final ClientConnection client;
+    private ClientConnection client;
     
     private String userID;
     private int matchID;
@@ -27,6 +27,10 @@ public class Worker implements Runnable {
         server = Server.getInstance();
         userID = null;
         matchID = -1;
+    }
+    
+    public void setConnection() {
+       
     }
     
     public int getMatchID() {
@@ -56,10 +60,6 @@ public class Worker implements Runnable {
     private void logout() {
         if (isLoggedIn())
             handleString("logout");
-    }
-    
-    private void disconnect() {
-        handleString("disconnect");
     }
     
     void setLogin(String login) {
