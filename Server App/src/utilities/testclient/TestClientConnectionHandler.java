@@ -28,10 +28,10 @@ class TestClientConnectionHandler implements Runnable
     private final Socket socket;
     private PrintWriter outStream;
     private BufferedReader inStream;
-    
+
     private final Consumer<String> dataHandler;
     private final Consumer<String> errorHandler;
-
+    
     public TestClientConnectionHandler(Consumer<String> dataHandler,
             Consumer<String> errorHandler) throws IOException
     {
@@ -103,7 +103,6 @@ class TestClientConnectionHandler implements Runnable
         String line;
         while(null != (line = inStream.readLine()))
         {
-            System.out.println(line);
             dataHandler.accept(line);
         }
     }

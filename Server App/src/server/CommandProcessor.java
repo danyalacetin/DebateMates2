@@ -36,10 +36,12 @@ class CommandProcessor {
             server.viewServerConnectionInfo();
         else if (command.is("createclient", 0))
             MainController.createTestClient();
+        else if (command.is("createclient", 1))
+            MainController.createTestClient(command.getArg(0));
         else if (command.is("clear", 0))
-            server.serverLog(null);
+            MainController.clear();
         else if (command.is("clearerr", 0))
-            server.errorLog(null);
+            MainController.clearErr();
         
         //Testing commands
         else if (command.is("addDB", 5))
@@ -55,15 +57,17 @@ class CommandProcessor {
         else if (command.is("dropDB", 0))
             server.getDB().droptable();
 
-        else if (command.isCommand("post") && 0 != command.getArgs().length)
+        else if (command.is("post") && 0 != command.getArgs().length)
             server.getWorkerManager().sendBroadcast(command.extractCommand());
     }
     
     private void processMatchCommand(Command command, Worker worker) {
         if (command.is("leave", 0))
             server.getMatchManager().leaveMatch(worker);
-        else if (command.isCommand("chat") && 0 != command.getArgs().length)
+        else if (command.is("chat") && 0 != command.getArgs().length)
             server.getMatchManager().process(command);
+        else if (command.is("vote", 1))
+            server.getMatchManager().vote(command.getSource().getMatchID(), command.getArg(0));
     }
     
     void processCommand(Command command) {
@@ -81,7 +85,7 @@ class CommandProcessor {
         {
             if (command.is("logout", 0)) {
                 System.out.println("logging out user");
-                    server.logOutUser(worker);
+                    server.logoutUser(worker);
             }
             else if (command.is("nickname", 1)){
                 server.updateNickname(command.getArg(0), worker);
@@ -107,7 +111,7 @@ class CommandProcessor {
         else // not logged in
         {
             if (command.is("login", 1))
-                server.logInUser(command.getArg(0), worker);
+                server.loginUser(command.getArg(0), worker);
         }   
     }
 }

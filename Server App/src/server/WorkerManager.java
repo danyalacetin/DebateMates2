@@ -7,14 +7,8 @@ package server;
 
 import connections.ClientConnection;
 import utilities.Command;
-import java.io.IOException;
-import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.locks.ReentrantLock;
 import utilities.SyncListWrapper;
 
 /**
@@ -24,11 +18,19 @@ import utilities.SyncListWrapper;
 class WorkerManager {
     
     private final SyncListWrapper<Worker> workers;
+    private final SyncListWrapper<Worker> reconnecting;
     private final ExecutorService executor;
+    private Server server;
     
     WorkerManager() {
         workers = new SyncListWrapper<>();
+        reconnecting = new SyncListWrapper<>();
         executor = Executors.newCachedThreadPool();
+        server = null;
+    }
+    
+    void initialise() {
+        server = Server.getInstance();
     }
     
     int getNumWorkers() {
@@ -38,7 +40,7 @@ class WorkerManager {
     void addWorker(ClientConnection connection) {
         Worker newWorker = new Worker(connection);
         workers.add(newWorker);
-        executor.execute(newWorker::run);
+        executor.execute(newWorker);
     }
     
     void kickAll() {
@@ -51,6 +53,22 @@ class WorkerManager {
     void removeWorker(Worker worker) {
         worker.shutdown();
         workers.remove(worker);
+    }
+    
+    void logoutWorker(Worker worker) {
+        if (worker.inMatch()) {
+            Command cmd = Command.create("leave", worker);
+            server.processCommand(cmd);
+        }
+        
+        System.out.println(worker.getLogin() + " logged out.");
+        worker.setLogin(null);
+    }
+    
+    void loginWorker(String id, Worker worker) {
+        System.out.println("User logged in as: " + id);
+        worker.setLogin(id);
+        worker.send(ServerConstants.LOGIN_SUCCESS);
     }
     
     void sendBroadcast(Command cmd) {

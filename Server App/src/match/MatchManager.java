@@ -8,6 +8,7 @@ package match;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import server.Server;
 import utilities.Command;
 import server.Worker;
 import utilities.IdManager;
@@ -70,6 +71,16 @@ public class MatchManager {
     
     public void leaveMatch(Worker worker) {
         matches.get(worker.getMatchID()).removeMember(worker);
+    }
+    
+    public void vote(int id, String vote) {
+        int voteInt = -1;
+        try {
+            voteInt = Integer.parseInt(vote);
+        } catch (NumberFormatException err) {
+            System.err.println(err.getMessage());
+        }
+        matches.get(id).voteReceived(voteInt);
     }
     
     public String getMatchInfo() {

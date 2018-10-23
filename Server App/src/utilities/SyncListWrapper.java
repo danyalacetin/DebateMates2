@@ -19,18 +19,18 @@ public class SyncListWrapper<T>
 {
     private final List<T> data;
     private final ReentrantLock lock;
-    
+
     public SyncListWrapper(List<T> data)
     {
         this.data = data;
         lock = new ReentrantLock();
     }
-    
+
     public SyncListWrapper()
     {
         this(new ArrayList<>());
     }
-    
+
     public void lockSection(Runnable func)
     {
         lock.lock();
@@ -40,26 +40,26 @@ public class SyncListWrapper<T>
             lock.unlock();
         }
     }
-    
+
     public int size()
     {
         return data.size();
     }
-    
+
     public void remove(T item)
     {
         lockSection(() -> data.remove(item));
     }
-    
+
     public void forEach(Consumer<? super T> function) {
         lockSection(() -> data.forEach(function));
     }
-    
+
     public void addAll(Collection<T> items)
     {
         lockSection(() -> data.addAll(items));
     }
-    
+
     public void add(T item)
     {
         lockSection(() -> data.add(item));

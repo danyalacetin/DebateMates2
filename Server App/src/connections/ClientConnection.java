@@ -32,14 +32,12 @@ public class ClientConnection implements Runnable
     private BufferedReader inStream;
     
     private final List<String> backlog;
-    private final Consumer<String> errorLog;
     
     ClientConnection(Socket socket)
     {
         this.socket = socket;
         openCommunication();
         backlog = new ArrayList<>();
-        errorLog = Server.getInstance()::errorLog;
         worker = null;
     }
     
@@ -66,7 +64,7 @@ public class ClientConnection implements Runnable
             }
             catch (IOException openError)
             {
-                errorLog.accept(openError.getMessage());
+                System.err.println(openError.getMessage());
             }
             
             if (null != out)
@@ -102,7 +100,7 @@ public class ClientConnection implements Runnable
         catch(IOException ex)
         {
             if (!suppressCatchMessage)
-                errorLog.accept(ex.getMessage());
+                System.err.println(ex.getMessage());
         }
         finally
         {
@@ -152,6 +150,6 @@ public class ClientConnection implements Runnable
         if (openCommunication())
             tryCatch(this::inputLoop, this::closeCommunication, false);
         sendStringToWorker("disconnect");
-        Server.getInstance().serverLog("Disconnected: " + getAddress());
+        System.out.println("Disconnected: " + getAddress());
     }
 }

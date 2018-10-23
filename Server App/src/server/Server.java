@@ -1,12 +1,9 @@
 package server;
 
-import connections.ClientConnection;
 import connections.ConnectionManager;
 import utilities.Command;
 import match.MatchManager;
 import database.Database;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
 /**
@@ -119,10 +116,8 @@ public class Server implements ServerWorker {
      * @param id id given to the user from FaceBook API
      * @param source worker associated with the user
      */
-    void logInUser(String id, Worker source) {
-        serverLog("User logged in as: " + id);
-        source.setLogin(id);
-        source.send(ServerConstants.LOGIN_SUCCESS);
+    void loginUser(String id, Worker source) {
+        workerManager.loginWorker(id, source);
         //Checks if user is new
         if(database.getQuery(id, "FACEBOOKID") == null) {
             //Adds user to database
@@ -137,22 +132,16 @@ public class Server implements ServerWorker {
      * Handles logout for the given user
      * @param source worker associated with the user
      */
-    void logOutUser(Worker source) {
-        if (source.inMatch()) {
-            Command cmd = Command.create("leave", source);
-            processCommand(cmd);
-        }
+    void logoutUser(Worker source) {
         
-        serverLog(source.getLogin() + " logged out.");
         database.updateItem(source.getLogin(), "ONLINESTATUS", "0");
-        source.setLogin(null);
     }
     
     /**
      * Opens the server, searching for new connections
      */
     public void startServer() {
-        serverLog("Server started.");
+        System.out.println("Server started.");
         database.establishConnection();
         connectionManager.start();
     }
@@ -162,7 +151,7 @@ public class Server implements ServerWorker {
      * *not implemented and tested yet*
      */
     void stopServer() {
-        serverLog("Closing server.");
+        System.out.println("Closing server.");
         connectionManager.stop();
         workerManager.kickAll();
         workerManager.shutdown();
@@ -173,7 +162,7 @@ public class Server implements ServerWorker {
      * is not yet implemented is called from the gui
      */
     void unsupportedCommand() {
-        serverLog("Not yet implemented");
+        System.out.println("Not yet implemented");
     }
     
     /**
@@ -186,7 +175,7 @@ public class Server implements ServerWorker {
         output += connectionManager.getServerDetails();
         output += "    Open Connections: " + workerManager.getNumWorkers();
         
-        serverLog(output);
+        System.out.println(output);
     }
 
     /**
@@ -194,31 +183,11 @@ public class Server implements ServerWorker {
      */
     void viewChatRoomInfo()
     {
-        serverLog(matchManager.getMatchInfo());
+        System.out.println(matchManager.getMatchInfo());
     }
     
     // ========================================================================
     // Override Methods
-    
-    /**
-     * Displays string to the GUI
-     * @param str string to be displayed
-     */
-    @Override
-    public void serverLog(String str) {
-        logger.accept(str);
-        logger.accept("\n");
-    }
-
-    /**
-     * Displays string to error section of GUI
-     * @param err error string to be displayed
-     */
-    @Override
-    public void errorLog(String err) {
-        errorLogger.accept(err);
-        logger.accept("\n");
-    }
     
     /**
      * Processes a given command with the set command processor
@@ -237,8 +206,8 @@ public class Server implements ServerWorker {
      * contains functions that should be run on startup
      */
     private void initialise() {
-        connectionManager.initialise();
         commandProcessor.initialise();
+        workerManager.initialise();
     }
     
     /**

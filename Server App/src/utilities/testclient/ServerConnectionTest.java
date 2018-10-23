@@ -18,9 +18,9 @@ public class ServerConnectionTest
     private final TestClientConnectionHandler handler;
     private boolean isRunning;
     
-    public ServerConnectionTest(Consumer<String> display, Consumer<String> error)
+    public ServerConnectionTest(Consumer<String> data, Consumer<String> error)
             throws IOException {
-        handler = new TestClientConnectionHandler(display, error);
+        handler = new TestClientConnectionHandler(data, error);
         isRunning = false;
     }
 

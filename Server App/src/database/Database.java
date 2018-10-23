@@ -7,8 +7,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Database {
     
@@ -35,7 +33,7 @@ public class Database {
             System.out.println(url+"   connected....");
             
         } catch (SQLException ex) {
-            System.out.println("could not connect: " + ex.getMessage());
+            System.err.println("could not connect: " + ex.getMessage());
         }
     }
     
@@ -49,7 +47,7 @@ public class Database {
                 conn = null;
             }
             catch (SQLException ex) {
-                System.out.println("Could not close connection: " + ex.getMessage());
+                System.err.println("Could not close connection: " + ex.getMessage());
             }
         }
     }
@@ -75,7 +73,7 @@ public class Database {
             System.out.println("tablecreated");
             
         } catch (SQLException ex) {
-            System.out.println("Problem creating table: " + ex.getMessage());
+            System.err.println("Problem creating table: " + ex.getMessage());
         }
     }
     
@@ -96,7 +94,7 @@ public class Database {
             System.out.println("New User Added To Database");
             
         } catch (SQLException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex.getMessage());
         }
     }
     
@@ -111,7 +109,7 @@ public class Database {
             
             System.out.println("User " + facebookID + " Updated " + field + " With " + value);
         } catch (SQLException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex.getMessage());
         }
     }
     
@@ -122,13 +120,13 @@ public class Database {
             rs = statement.executeQuery("SELECT " + field 
                                      + " FROM " + newTableName 
                                      + " WHERE FACEBOOKID = '" + facebookID + "'");
-            while (rs.next()) {
+            if (rs.next()) {
             str = rs.getString(field);
             }
             statement.close();
             statement = null;
         } catch (SQLException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex.getMessage());
         }
         return str;
     }
@@ -159,7 +157,7 @@ public class Database {
             statement.close();
             statement = null;
         } catch (SQLException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex.getMessage());
         }
         }
     }
@@ -172,7 +170,7 @@ public class Database {
             statement.close();
             statement = null;
         } catch (SQLException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex.getMessage());
         }
     }
     
@@ -208,7 +206,7 @@ public class Database {
             try {
                 conn.close();
             } catch (SQLException ex) {
-                Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println(ex.getMessage());
             }
         }
     }

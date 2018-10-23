@@ -7,10 +7,10 @@ package match;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Consumer;
 import utilities.Command;
-import server.Server;
 import server.ServerConstants;
 import server.Worker;
 
@@ -22,7 +22,7 @@ import server.Worker;
 class Match {
     private static final int MAX_PLAYERS = 2;
     private static final int MAX_SPECTATORS = 3;
-    private static final int MAX_PANELISTS = 3;
+    private static final int MAX_PANELISTS = 1;
     
     private final List<Worker> players;
     private final List<Worker> panelists;
@@ -31,9 +31,17 @@ class Match {
     private final ChatProcessor processor;
     private final ReentrantLock membersLock;
     private final int matchID;
-    private boolean isStarted;
-    private Thread gameThread;
+    private boolean isRunning;
+    private final Thread gameThread;
+    
+    private Worker player1;
+    private Worker player2;
+    
     private String currentAnnouncement;
+    private final List<Integer> votes;
+    private final List<Worker> winners;
+    private Worker voteWinner;
+    private String question;
     
     Match(int id) {
         players = new ArrayList<>(2);
@@ -44,9 +52,13 @@ class Match {
         membersLock = new ReentrantLock();
         matchID = id;
         
-        isStarted = false;
-        gameThread = null;
-        currentAnnouncement = "Waiting for members";
+        isRunning = false;
+        gameThread = new Thread(this::runGame);
+        currentAnnouncement = "Waiting for members...";
+        votes = new ArrayList<>(MAX_PANELISTS);
+        winners = new ArrayList<>(3);
+        voteWinner = null;
+        question = null;
     }
     
     /**
@@ -79,25 +91,111 @@ class Match {
         return number;
     }
     
+    private void setCurrentAnnouncement(String announce) {
+        currentAnnouncement = announce;
+        processCommand(Command.createAnonymous("announce " + currentAnnouncement));
+    }
+    
     private boolean canStart() {
-        return 1 == players.size() && 3 <= panelists.size() && !isStarted;
+        return 2 == players.size() && MAX_PANELISTS == panelists.size() && !isRunning;
+    }
+    
+    private void getPanelistsVotes() {
+        votes.clear();
+        panelists.forEach(worker -> worker.send(Command.createAnonymous("vote")));
+    }
+    
+    public synchronized void voteReceived(int vote) {
+        votes.add(vote);
+        if (MAX_PANELISTS == votes.size()) {
+            voteWinner = votes.stream()
+                    .filter(v -> v == 1)
+                    .count() >= (MAX_PANELISTS / 2) + (MAX_PANELISTS % 2)
+                    ? player1
+                    : player2;
+            votes.clear();
+            winners.add(voteWinner);
+            inputRecieved();
+        }
+    }
+    
+    private void waitForInput() {
+        synchronized(gameThread) {
+            try {
+                gameThread.wait();
+            } catch (InterruptedException error) {
+                System.err.println(error.getMessage());
+            }
+        }
+    }
+    
+    private void inputRecieved() {
+        synchronized(gameThread) {
+            gameThread.notify();
+        }
+    }
+    
+    private Worker getWinner() {
+        int player1Count = (int) winners.stream().filter(p -> p == player1).count();
+        int player2Count = (int) winners.stream().filter(p -> p == player2).count();
+        
+        if (player1Count == player2Count) return null;
+        else if(player1Count > player2Count) return player1;
+        else return player2;
+    }
+    
+    private void announceWinner(Worker winner) {
+        String cmd = winner.getNickname()+ " Wins!";
+        processCommand(Command.createAnonymous("end " + winner.getLogin()));
+        setCurrentAnnouncement(cmd);
     }
     
     private void runGame() {
-        // send start message
-        // wait for everyone to respond
-        // let player one have a turn
-        // wait for response
-        // let player two to have a turn
-        // wait for response
-        // repeat last 4 steps for x times
-        // collect judges votes
-        // declare winner
+        question = "question";
+        processCommand(Command.createAnonymous("start"));
+        processCommand(Command.createAnonymous("display " + question));
+        boolean startPlayer = new Random().nextBoolean();
+        player1 = startPlayer ? players.get(0) : players.get(1);
+        player2 = startPlayer ? players.get(1) : players.get(0);
+        
+        player1.send(processor.processCommand(Command.createAnonymous("matchmessage Present your agrument for")));
+        player1.send(Command.createAnonymous("enable 120"));
+        waitForInput();
+        player2.send(processor.processCommand(Command.createAnonymous("matchmessage Rebute")));
+        player2.send(Command.createAnonymous("enable 90"));
+        waitForInput();
+        processCommand(Command.createAnonymous("matchmessage Time to Vote!"));
+        panelists.forEach(p -> p.send(Command.createAnonymous("enable 30")));
+        getPanelistsVotes();
+        waitForInput();
+        
+        player2.send(processor.processCommand(Command.createAnonymous("matchmessage Present your argument against")));
+        player2.send(Command.createAnonymous("enable 120"));
+        waitForInput();
+        player1.send(processor.processCommand(Command.createAnonymous("matchmessage Rebute")));
+        player1.send(Command.createAnonymous("enable 90"));
+        waitForInput();
+        processCommand(Command.createAnonymous("matchmessage Time to Vote!"));
+        panelists.forEach(p -> p.send(Command.createAnonymous("enable 30")));
+        getPanelistsVotes();
+        waitForInput();
+        
+        Worker winner = getWinner();
+        if (null == winner) {
+            processCommand(Command.createAnonymous("matchmessage It is a Tie!"));
+            processCommand(Command.createAnonymous("matchmessage Vote Again!"));
+            panelists.forEach(p -> p.send(Command.createAnonymous("enable 30")));
+            getPanelistsVotes();
+            waitForInput();
+            winner = getWinner();
+        }
+        
+        announceWinner(winner);
+        endMatch();
     }
     
     private void startMatch() {
-        isStarted = true;
-        gameThread = new Thread(this::runGame);
+        isRunning = true;
         gameThread.start();
     }
     
@@ -125,6 +223,7 @@ class Match {
     void processCommand(Command cmd) {
         Command processed = processor.processCommand(cmd);
         post(processed.toString());
+        if (cmd.is("chat")) inputRecieved();
     }
     
     private void post(String msg) {
@@ -139,7 +238,7 @@ class Match {
     }
     
     private void postToServer(String msg) {
-        Server.getInstance().serverLog("Match: " + matchID + ") " +  msg);
+        System.out.println("Match: " + matchID + ") " +  msg);
     }
     
     boolean addMember(Worker member, String type) {
@@ -169,8 +268,9 @@ class Match {
                     toAdd.add(member);
                     member.enterMatch(matchID);
                     member.send(ServerConstants.JOIN_SUCCESS);
-                    processCommand(Command.createAnonymous("announce "
+                    member.send(Command.createAnonymous("announce "
                             + currentAnnouncement));
+                    if (isRunning) member.send("display " + question);
                 }
             }
         } finally {
@@ -207,8 +307,6 @@ class Match {
             
             if (isRemoved) {
                 member.leaveMatch();
-                processCommand(Command.createAnonymous("announce "
-                        + member.getLogin() + " has left"));
             }
         } finally {
             membersLock.unlock();

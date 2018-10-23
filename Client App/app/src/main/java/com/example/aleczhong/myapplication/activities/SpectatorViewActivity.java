@@ -53,4 +53,9 @@ public class SpectatorViewActivity extends AppCompatActivity implements MatchDis
             }
         });
     }
+
+    @Override
+    public void enableInput(boolean value) {
+
+    }
 }
