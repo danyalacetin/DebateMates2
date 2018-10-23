@@ -8,8 +8,6 @@ package main;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
 import server.Server;
 import userinterface.ClientInstanceTest;
 import userinterface.MainUI;
@@ -21,29 +19,41 @@ import utilities.IdManager;
  */
 public class MainController
 {
+    private static MainController instance = null;
+    
     private Server server;
     private MainUI window;
     
     private static final IdManager CLIENT_NUMBER = new IdManager();
     
-    MainController() {
-        
+    private MainController() {
+        instance = this;
+    }
+    
+    
+    
+    public static void clear() {
+        if (null != instance) {
+            instance.window.clearLog();
+        }
+    }
+    
+    public static void clearErr() {
+        if (null != instance) {
+            instance.window.clearErrLog();
+        }
     }
     
     private void log(String msg) {
         if (null != window) {
-            if (null == msg) window.clearLog();
-            else window.log(msg);
+            window.log(msg);
         }
-        System.out.println(msg);
     }
     
     private void errLog(String msg) {
         if (null != window) {
-            if (null == msg) window.clearErrLog();
-            else window.errorLog(msg);
+            window.errorLog(msg);
         }
-        System.err.println(msg);
     }
     
     public static void createTestClient() {
@@ -53,6 +63,15 @@ public class MainController
                             
                             });
         test.setVisible(true);
+    }
+    
+    public static void createTestClient(String number) {
+        try {
+            int num = Integer.parseInt(number);
+            for (int i = 0; i < num; ++i) createTestClient();
+        } catch (NumberFormatException error) {
+            System.err.println("invalid command");
+        }
     }
     
     /**
@@ -113,7 +132,7 @@ public class MainController
         server = Server.getInstance();
         window = new MainUI();
         window.setVisible(true);
-//        redirectOutputStreams();
+        redirectOutputStreams();
         
         server.startServer();
     }

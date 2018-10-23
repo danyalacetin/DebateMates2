@@ -62,7 +62,7 @@ public class Command
         return args[index];
     }
     
-    public boolean isCommand(String command) {
+    public boolean is(String command) {
         return null != label && label.equalsIgnoreCase(command);
     }
     
@@ -75,11 +75,12 @@ public class Command
     }
     
     public boolean is(String command, int numArgs) {
-        return isCommand(command) && args.length == numArgs;
+        return is(command) && args.length == numArgs;
     }
     
     @Override
     public String toString() {
+        if (0 == getNumArgs()) return label;
         return label + " " + String.join(" ", args);
     }
 }

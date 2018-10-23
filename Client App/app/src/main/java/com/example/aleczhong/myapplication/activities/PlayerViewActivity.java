@@ -35,6 +35,7 @@ public class PlayerViewActivity extends AppCompatActivity implements MatchDispla
         listView.setAdapter(adapter);
 
         ClientApp.getClientApp().updateAnnouncements();
+        userInput.setEnabled(false);
     }
 
     @Override
@@ -55,6 +56,11 @@ public class PlayerViewActivity extends AppCompatActivity implements MatchDispla
                 if (null != adapter) adapter.notifyDataSetChanged();
             }
         });
+    }
+
+    @Override
+    public void enableInput(boolean value) {
+        userInput.setEnabled(value);
     }
 
     public void sendText(View view) {

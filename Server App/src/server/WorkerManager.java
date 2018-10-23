@@ -61,12 +61,12 @@ class WorkerManager {
             server.processCommand(cmd);
         }
         
-        server.serverLog(worker.getLogin() + " logged out.");
+        System.out.println(worker.getLogin() + " logged out.");
         worker.setLogin(null);
     }
     
     void loginWorker(String id, Worker worker) {
-        server.serverLog("User logged in as: " + id);
+        System.out.println("User logged in as: " + id);
         worker.setLogin(id);
         worker.send(ServerConstants.LOGIN_SUCCESS);
     }

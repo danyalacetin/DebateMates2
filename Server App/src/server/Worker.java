@@ -29,8 +29,8 @@ public class Worker implements Runnable {
         matchID = -1;
     }
     
-    public void setConnection() {
-       
+    public void setConnection(ClientConnection conn) {
+       client = conn;
     }
     
     public int getMatchID() {
@@ -55,6 +55,10 @@ public class Worker implements Runnable {
     
     public String getLogin() {
         return userID;
+    }
+    
+    public String getNickname() {
+        return Server.getInstance().getDB().getQuery(userID, "NICKNAME");
     }
     
     private void logout() {

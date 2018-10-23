@@ -141,7 +141,7 @@ public class Server implements ServerWorker {
      * Opens the server, searching for new connections
      */
     public void startServer() {
-        serverLog("Server started.");
+        System.out.println("Server started.");
         database.establishConnection();
         connectionManager.start();
     }
@@ -151,7 +151,7 @@ public class Server implements ServerWorker {
      * *not implemented and tested yet*
      */
     void stopServer() {
-        serverLog("Closing server.");
+        System.out.println("Closing server.");
         connectionManager.stop();
         workerManager.kickAll();
         workerManager.shutdown();
@@ -162,7 +162,7 @@ public class Server implements ServerWorker {
      * is not yet implemented is called from the gui
      */
     void unsupportedCommand() {
-        serverLog("Not yet implemented");
+        System.out.println("Not yet implemented");
     }
     
     /**
@@ -175,7 +175,7 @@ public class Server implements ServerWorker {
         output += connectionManager.getServerDetails();
         output += "    Open Connections: " + workerManager.getNumWorkers();
         
-        serverLog(output);
+        System.out.println(output);
     }
 
     /**
@@ -183,31 +183,11 @@ public class Server implements ServerWorker {
      */
     void viewChatRoomInfo()
     {
-        serverLog(matchManager.getMatchInfo());
+        System.out.println(matchManager.getMatchInfo());
     }
     
     // ========================================================================
     // Override Methods
-    
-    /**
-     * Displays string to the GUI
-     * @param str string to be displayed
-     */
-    @Override
-    public void serverLog(String str) {
-        logger.accept(str);
-        logger.accept("\n");
-    }
-
-    /**
-     * Displays string to error section of GUI
-     * @param err error string to be displayed
-     */
-    @Override
-    public void errorLog(String err) {
-        errorLogger.accept(err);
-        logger.accept("\n");
-    }
     
     /**
      * Processes a given command with the set command processor
@@ -226,7 +206,6 @@ public class Server implements ServerWorker {
      * contains functions that should be run on startup
      */
     private void initialise() {
-        connectionManager.initialise();
         commandProcessor.initialise();
         workerManager.initialise();
     }

@@ -13,22 +13,10 @@ import utilities.Command;
  * 
  * @author Aidan Stehbens
  */
-public interface ServerWorker { // needs a new name
-    /**
-     * Displays a message to the main server screen.
-     * @param txt Text to be displayed.
-     */
-    abstract void serverLog(String txt);
-    
+public interface ServerWorker {
     /**
      * Processes a command to be carried out by the Server.
      * @param command Command to be processed.
      */
     abstract void processCommand(Command command);
-    
-    /**
-     * Displays a message to the error server screen.
-     * @param err Error text to be displayed.
-     */
-    abstract void errorLog(String err);
 }

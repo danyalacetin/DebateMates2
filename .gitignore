@@ -15,3 +15,4 @@ Client App/build/
 Client App/.idea/
 Client App/app/build
 Client App/app/src/main/java/com/example/aleczhong/myapplication/applogic/DebugConstants
+/Server App/dist/

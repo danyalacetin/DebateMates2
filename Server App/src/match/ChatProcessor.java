@@ -40,23 +40,23 @@ class ChatProcessor
         chatLock.lock();
         
         try {
-            if (cmd.isCommand("chat")) {
+            if (cmd.is("chat")) {
                 id = idManager.getId();
                 user = cmd.getSource().getLogin();
                 content = cmd.extractCommand().toString();
                 String replyString = String.format("chat %d %s %s", id, user,
                         content);
                 reply = Command.create(replyString, cmd.getSource());
-            } else if (cmd.isCommand("matchmessage")) {
+            } else if (cmd.is("matchmessage")) {
                 id = idManager.getId();
                 content = cmd.extractCommand().toString();
                 String replyString = String.format("matchmessage %d %s", id,
                         content);
                 reply = Command.create(replyString, cmd.getSource());
-            } else if (cmd.isCommand("announce")) {
+            } else if (cmd.is("announce")) {
                 reply = cmd;
             } else {
-                reply = null;
+                reply = cmd;
             }
             
             if (null != reply) logPost(reply); // change later?

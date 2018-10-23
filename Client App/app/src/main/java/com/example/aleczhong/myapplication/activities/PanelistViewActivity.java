@@ -53,4 +53,9 @@ public class PanelistViewActivity extends AppCompatActivity implements MatchDisp
             }
         });
     }
+
+    @Override
+    public void enableInput(boolean value) {
+
+    }
 }

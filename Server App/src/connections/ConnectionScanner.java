@@ -26,8 +26,6 @@ class ConnectionScanner
     private boolean isOpen;
     private boolean isRunning;
     
-    private Consumer<String> errorLog;
-    
     ConnectionScanner(Consumer<Socket> func)
     {
         newConnection = func;
@@ -45,14 +43,6 @@ class ConnectionScanner
     
     boolean isOpen() {
         return isOpen;
-    }
-    
-    void initialise() {
-        errorLog = Server.getInstance()::errorLog;
-    }
-    
-    private void errorLog(String msg) {
-        if (null != errorLog) errorLog.accept(msg);
     }
     
     public void open()
@@ -82,7 +72,7 @@ class ConnectionScanner
         }
         catch (IOException error)
         {
-            errorLog(error.getMessage());
+            System.err.println(error.getMessage());
         }
         inputLoopThread.start();
     }
@@ -97,7 +87,7 @@ class ConnectionScanner
         }
         catch (IOException error)
         {
-            errorLog(error.getMessage());
+            System.err.println(error.getMessage());
         }
     }
     
@@ -109,12 +99,12 @@ class ConnectionScanner
             {
                 Socket newSocket = serverSocket.accept();
                 if (isOpen) newConnection.accept(newSocket);
-                Server.getInstance().serverLog("Accept connection from "
+                System.out.println("Accept connection from "
                         + newSocket.getInetAddress());
             }
             catch (IOException error)
             {
-            errorLog(error.getMessage());
+            System.err.println(error.getMessage());
             }
         }
     }

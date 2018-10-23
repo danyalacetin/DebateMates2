@@ -25,10 +25,6 @@ public class ConnectionManager
         this.connectionScanner = new ConnectionScanner(this::newConnection);
     }
     
-    public void initialise() {
-        connectionScanner.initialise();
-    }
-    
     public void open() {
         connectionScanner.open();
     }

@@ -85,7 +85,7 @@ public class ClientApp {
         serverConnection.send(data);
     }
 
-    private void addWaitFunc(DelayedReturn waitFunc) {
+    public void addWaitFunc(DelayedReturn waitFunc) {
         waitFuncLock.lock();
         try {
             waitingFunctions.add(waitFunc);
@@ -146,6 +146,21 @@ public class ClientApp {
         if (null != displayInterface) displayInterface.messageUpdate();
     }
 
+    private void enable(final int time) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                displayInterface.enableInput(true);
+                try {
+                    Thread.sleep(time * 1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                displayInterface.enableInput(false);
+            }
+        }).start();
+    }
+
     void handleInput(String msg) {
         checkWaitingFunctions(msg);
         String[] tokens = msg.split(" ");
@@ -153,6 +168,8 @@ public class ClientApp {
             addMessage(convertChatMessage(tokens));
         } else if (tokens[0].equals("announce")) {
             sendMatchAnnouncement(tokens);
+        } else if (tokens[0].equalsIgnoreCase("enable")) {
+            enable(Integer.parseInt(tokens[1]));
         } else if (tokens[0].equalsIgnoreCase("matchmessage")) {
             addMessage(convertServerMessage(tokens));
 //        } else if (tokens[0].equalsIgnoreCase("serverannounce")) {
@@ -168,13 +185,10 @@ public class ClientApp {
         //}
     }
 
-//    public void setMessageListener(PlayerViewActivity.DisplayAreaListener listener) {
-//        displayListener = listener;
-//    }
-
     public void sendChatMessage(String message) {
         String sendString = "chat " + message;
         serverConnection.send(sendString);
+        displayInterface.enableInput(false);
     }
 
     public boolean establishServerConnection() {
