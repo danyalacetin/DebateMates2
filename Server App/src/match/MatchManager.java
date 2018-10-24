@@ -26,12 +26,22 @@ public class MatchManager {
         idManager = new IdManager();
     }
     
-    int createMatch() {
+    private int createMatch() {
         final int id = idManager.getId();
         Match match = new Match(id);
         matches.put(id, match);
-        
+        System.out.println("creating match");
         return id;
+    }
+    
+    public void deleteMatch(String idString) {
+        try {
+            int id = Integer.parseInt(idString);
+            matches.remove(id);
+            idManager.recycleID(id);
+        } catch (NumberFormatException e) {
+            System.err.println("'deleteMatch' argument invalid");
+        }
     }
     
     public void process(Command cmd) {
@@ -41,7 +51,9 @@ public class MatchManager {
     }
     
     public void joinMatch(Worker worker, String type) {
+        System.out.println("finding match...");
         int id = findMatch(type);
+        System.out.println("match found...joining match");
         joinMatch(worker, type, id);
     }
     

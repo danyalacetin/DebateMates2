@@ -58,12 +58,8 @@ public class Worker implements Runnable {
     }
     
     public String getNickname() {
-        return Server.getInstance().getDB().getQuery(userID, "NICKNAME");
-    }
-    
-    private void logout() {
-        if (isLoggedIn())
-            handleString("logout");
+        String nickname = Server.getInstance().getDB().getQuery(userID, "NICKNAME");
+        return nickname.equalsIgnoreCase("nickname") ? userID : nickname;
     }
     
     void setLogin(String login) {
@@ -76,7 +72,6 @@ public class Worker implements Runnable {
     }
     
     void shutdown() {
-        logout();
         client.close();
     }
     

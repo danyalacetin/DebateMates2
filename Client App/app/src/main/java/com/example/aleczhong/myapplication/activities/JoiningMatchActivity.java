@@ -34,7 +34,6 @@ public class JoiningMatchActivity extends AppCompatActivity {
         ClientApp.getClientApp().joinMatch(type, new DelayedReturn() {
             @Override
             public void onSuccess() {
-                ClientApp.log("Join: join");
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -78,7 +77,6 @@ public class JoiningMatchActivity extends AppCompatActivity {
                 if (toTest.equalsIgnoreCase("start")) compare = 1;
                 else if (toTest.equalsIgnoreCase("fail")) compare = -1;
                 else compare = 0;
-                if (toTest.equalsIgnoreCase("start")) ClientApp.log("Passed: " + compare);
                 return compare;
             }
         });

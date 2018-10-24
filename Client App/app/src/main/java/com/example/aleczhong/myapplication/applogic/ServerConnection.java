@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 class ServerConnection {
-    private static final String SERVER_ADDRESS = "192.168.18.49";
+    private static final String SERVER_ADDRESS = "192.168.0.3";
     private static final int SERVER_PORT = 8818;
 
     private Socket connection;
@@ -70,6 +70,7 @@ class ServerConnection {
             isSuccessful = true;
 
         } catch (IOException ex) {
+            ClientApp.log(ex.getMessage());
             if (null != connection) {
                 try {
                     connection.close();

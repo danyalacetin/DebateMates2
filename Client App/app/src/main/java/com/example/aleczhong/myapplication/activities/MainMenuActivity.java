@@ -29,7 +29,7 @@ public class MainMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-        FacebookSdk.sdkInitialize(this);
+//        FacebookSdk.sdkInitialize(this);
         shareDialog=new ShareDialog(this);
         Button logout=(Button) findViewById(R.id.Logout_Button);
         logout.setOnClickListener(new View.OnClickListener() {
@@ -39,11 +39,12 @@ public class MainMenuActivity extends AppCompatActivity {
                 ClientApp.getClientApp().sendData("logout");
                 Intent login=new Intent (MainMenuActivity.this,LoginActivity.class);
                 startActivity(login);
+                ClientApp.getClientApp().sendData("logout");
                 finish();
 
             }
         });
-        Bundle inBundle =getIntent().getExtras();
+        Bundle inBundle = getIntent().getExtras();
         if (inBundle!=null ){
             String name = inBundle.get("name").toString();
             String Surname = inBundle.get("Surname").toString();
