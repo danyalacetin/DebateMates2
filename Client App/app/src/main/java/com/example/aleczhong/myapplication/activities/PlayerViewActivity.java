@@ -132,7 +132,7 @@ public class PlayerViewActivity extends AppCompatActivity implements MatchDispla
         if (winner.equals(ClientApp.getClientApp().getLogin())) winlose = "win";
         else winlose = "lose";
         Intent intent = new Intent(this, MatchEndActivity.class);
-        intent.getExtras().putString("winlose", winner);
+        intent.putExtra("winlose", winlose);
         startActivity(intent);
     }
 }

@@ -106,6 +106,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private synchronized void loginUser() {
         if (null != profile && null != token && !isLoggedIn) {
+            String nameString = profile.getFirstName() + profile.getLastName();
+            String imageUri = profile.getProfilePictureUri(200, 200).toString();
+            ClientApp.getClientApp().setDetails(nameString);
+            ClientApp.getClientApp().setImageUrl(imageUri);
             app.setAccessToken(token);
             isLoggedIn = true;
             app.login(new DelayedReturn() {
@@ -158,9 +162,6 @@ public class LoginActivity extends AppCompatActivity {
         ClientApp.log("next activity attempted");
         if (profile != null) {
             Intent intent = new Intent(this, MainMenuActivity.class);
-            intent.putExtra("name", profile.getFirstName());
-            intent.putExtra("Surname", profile.getLastName());
-            final Intent imageURL = intent.putExtra("imageURL", profile.getProfilePictureUri(200, 200).toString());
             startActivity(intent);
         }
     }

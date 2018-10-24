@@ -28,12 +28,11 @@ public class MainMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
 
         Bundle inBundle = getIntent().getExtras();
-        if (inBundle!=null ){
-            String name = inBundle.getString("name");
-            String Surname = inBundle.getString("Surname");
-            String imageUrl = inBundle.getString("imageURL");
+        if (inBundle!=null ) {
+            String imageUrl = ClientApp.getClientApp().getImageUrl();
+            String nameString = ClientApp.getClientApp().getDetails();
 
-            ((TextView) findViewById(R.id.textView4)).setText("" + name + " " + Surname);
+            ((TextView) findViewById(R.id.textView4)).setText(nameString);
 
             new DownloadImage((ImageView)findViewById(R.id.imageView)).execute(imageUrl);
             DownloadImage view = new DownloadImage((ImageView)findViewById(R.id.imageView));

@@ -20,14 +20,15 @@ public class MatchEndActivity extends AppCompatActivity {
         String winLose = getIntent().getExtras().getString("winlose");
         if ("win".equals(winLose)) showWin();
         else if ("lose".equals(winLose)) showLose();
+        else display.setText("Error: " + winLose);
     }
 
     private void showWin() {
-        
+        display.setText(R.string.winLabel);
     }
 
     private void showLose() {
-
+        display.setText(R.string.loseLabel);
     }
 
     public void continuePressed(View view) {

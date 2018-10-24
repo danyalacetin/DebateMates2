@@ -30,6 +30,9 @@ public class ClientApp {
     private String currentQuestion;
     private boolean isEnabled;
     private String winner;
+    private String name;
+    private String imageUrl;
+    private String details;
 
     private ClientApp() {
         serverConnection = new ServerConnection(this);
@@ -63,6 +66,14 @@ public class ClientApp {
         this.displayInterface = displayInterface;
         displayInterface.enableInput(isEnabled);
         if (null != currentQuestion) displayInterface.displayQuestion(currentQuestion);
+    }
+
+    public void setDetails(String name) {
+        this.details = name;
+    }
+
+    public String getDetails() {
+        return details;
     }
 
     public void updateAnnouncements() {
@@ -242,5 +253,13 @@ public class ClientApp {
 
     public static void log(String msg) {
         Log.d("APP_DEBUG_TAG", msg);
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
     }
 }
