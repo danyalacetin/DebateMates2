@@ -25,7 +25,7 @@ public class JoiningMatchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_joining_match);
-
+        String type = getIntent().getExtras().getString("type");
         joinMatch(type);
         enter(type);
     }

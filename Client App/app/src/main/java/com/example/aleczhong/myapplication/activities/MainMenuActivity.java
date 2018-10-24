@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.aleczhong.myapplication.R;
+import com.example.aleczhong.myapplication.applogic.ClientApp;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.share.widget.ShareDialog;
@@ -30,11 +31,12 @@ public class MainMenuActivity extends AppCompatActivity {
 
         FacebookSdk.sdkInitialize(this);
         shareDialog=new ShareDialog(this);
-        Button logout=(Button) findViewById(R.id.button4);
+        Button logout=(Button) findViewById(R.id.Logout_Button);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LoginManager.getInstance().logOut();
+                ClientApp.getClientApp().sendData("logout");
                 Intent login=new Intent (MainMenuActivity.this,LoginActivity.class);
                 startActivity(login);
                 finish();
