@@ -52,7 +52,7 @@ public class SpectatorViewActivity extends AppCompatActivity implements MatchDis
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                matchMessages.setText(question);
+                matchQuestion.setText(question);
             }
         });
     }
