@@ -36,33 +36,37 @@ public class LoginActivity extends AppCompatActivity {
     private AccessTokenTracker accessTokenTracker;
     private ProfileTracker profileTracker;
     private AccessToken token;
+    private Profile profile;
+    private boolean isLoggedIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         app = ClientApp.getClientApp();
+        isLoggedIn = false;
 
         callbackManager = CallbackManager.Factory.create();
         loginButton =(LoginButton) findViewById(R.id.login_button);
         loginButton.setReadPermissions("public_profile");
         loginButton.setLoginBehavior(LoginBehavior.WEB_ONLY);
 
-        initialiseFacebook();
-        FacebookSdk.getApplicationContext();
         accessTokenTracker = new AccessTokenTracker() {
             @Override
             protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
-
+                token = currentAccessToken;
+                loginUser();
             }
         };
         profileTracker= new ProfileTracker() {
             @Override
             protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
-                loginUser(currentProfile);
+                profile = currentProfile;
+                loginUser();
             }
         };
         accessTokenTracker.startTracking();
+        initialiseFacebook();
     }
 
     private void initialiseFacebook() {
@@ -70,10 +74,8 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                ClientApp.log("Logged in successfully");
-                final Profile profile=Profile.getCurrentProfile();
                 token = loginResult.getAccessToken();
-                loginUser(profile);
+                profile = Profile.getCurrentProfile();
                 GraphRequest.newMeRequest(token, new GraphRequest.GraphJSONObjectCallback() {
                     @Override
                     public void onCompleted(JSONObject user, GraphResponse graphResponse) {
@@ -82,6 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }).executeAsync();
                 Toast.makeText(getApplicationContext(), "Login Success with facebook", Toast.LENGTH_SHORT).show();
+                loginUser();
             }
 
             @Override
@@ -94,28 +97,33 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void loginUser(final Profile profile) {
-        app.setAccessToken(token);
-        app.login(new DelayedReturn() {
-            @Override
-            public void onSuccess() {
-                nextActivity(profile);
-            }
+    private synchronized void loginUser() {
+        if (null != profile && null != token && !isLoggedIn) {
+            app.setAccessToken(token);
+            isLoggedIn = true;
+            app.login(new DelayedReturn() {
+                @Override
+                public void onSuccess() {
+                    ClientApp.log("onSuccess called");
+                    nextActivity();
+                }
 
-            @Override
-            public void onFailure() {
-                displayLoginError();
-            }
+                @Override
+                public void onFailure() {
+                    isLoggedIn = false;
+                    displayLoginError();
+                }
 
-            @Override
-            public int testString(String toTest) {
-                int compare;
-                if ("login success".equalsIgnoreCase(toTest)) compare = 1;
-                else if ("login failed".equalsIgnoreCase(toTest)) compare = -1;
-                else compare = 0;
-                return compare;
-            }
-        });
+                @Override
+                public int testString(String toTest) {
+                    int compare;
+                    if ("login success".equalsIgnoreCase(toTest)) compare = 1;
+                    else if ("login failed".equalsIgnoreCase(toTest)) compare = -1;
+                    else compare = 0;
+                    return compare;
+                }
+            });
+        }
     }
 
     @Override
@@ -139,9 +147,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onPause();
     }
 
-    private void nextActivity(Profile profile) {
+    private void nextActivity() {
+        ClientApp.log("next activity attempted");
         if (profile != null) {
-
             Intent intent = new Intent(this, MainMenuActivity.class);
             intent.putExtra("name", profile.getFirstName());
             intent.putExtra("Surname", profile.getLastName());

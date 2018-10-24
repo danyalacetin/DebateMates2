@@ -27,7 +27,7 @@ public class ClientApp {
     private final List<ChatMessage> messages;
     private MatchDisplayInterface displayInterface;
     private String currentMatchAnnouncement;
-    private String currentServerAnnouncement;
+    private String currentQuestion;
     private boolean isEnabled;
 
     private ClientApp() {
@@ -61,6 +61,7 @@ public class ClientApp {
     public void addMatchDisplayInterface(MatchDisplayInterface displayInterface) {
         this.displayInterface = displayInterface;
         displayInterface.enableInput(isEnabled);
+        if (null != currentQuestion) displayInterface.displayQuestion(currentQuestion);
     }
 
     public void updateAnnouncements() {
@@ -72,7 +73,7 @@ public class ClientApp {
         serverConnection.joinChatRoom(type);
     }
 
-    String joinString(String[] tokens) {
+    private String joinString(String[] tokens) {
         String output = tokens[0];
         for (int i = 1; i < tokens.length; ++i) {
             output += " " + tokens[i];
@@ -80,7 +81,7 @@ public class ClientApp {
         return output;
     }
 
-    String removeTailToString(String[] tokens, int start) {
+    private String removeTailToString(String[] tokens, int start) {
         return joinString(Arrays.copyOfRange(tokens, start, tokens.length));
     }
 
@@ -95,6 +96,12 @@ public class ClientApp {
         } finally {
             waitFuncLock.unlock();
         }
+    }
+
+    public void logout() {
+        sendData("logout");
+        token = null;
+        userID = null;
     }
 
     private void checkWaitingFunctions(String msg) {
@@ -121,8 +128,6 @@ public class ClientApp {
         MessageType type;
 
         String user = msg[2];
-        log("|" + user + "|");
-        log("|" + userID + "|");
         if (user.equals(userID)) {
             type = MessageType.SELF;
         } else {
@@ -157,18 +162,9 @@ public class ClientApp {
         if (null != displayInterface) displayInterface.enableInput(isEnabled);
     }
 
-    private void enable(final int time) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                try {
-                    setEnabled(true);
-                    Thread.sleep(time * 1000);
-                    setEnabled(false);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }}).start();
+    private void setCurrentQuestion(String question) {
+        currentQuestion = question;
+        if (null != displayInterface) displayInterface.displayQuestion(currentQuestion);
     }
 
     void handleInput(String msg) {
@@ -178,8 +174,12 @@ public class ClientApp {
             addMessage(convertChatMessage(tokens));
         } else if (tokens[0].equals("announce")) {
             sendMatchAnnouncement(tokens);
+        } else if (tokens[0].equalsIgnoreCase("display")) {
+            setCurrentQuestion(removeTailToString(tokens, 1));
         } else if (tokens[0].equalsIgnoreCase("enable")) {
-            enable(Integer.parseInt(tokens[1]));
+            setEnabled(true);
+        } else if (tokens[0].equalsIgnoreCase("disable")) {
+            setEnabled(false);
         } else if (tokens[0].equalsIgnoreCase("matchmessage")) {
             addMessage(convertServerMessage(tokens));
 //        } else if (tokens[0].equalsIgnoreCase("serverannounce")) {
@@ -213,13 +213,6 @@ public class ClientApp {
     public void login(DelayedReturn waitFunction) {
         addWaitFunc(waitFunction);
         serverConnection.login(userID);
-    }
-
-    public void login(String id, DelayedReturn wf)
-    {
-        addWaitFunc(wf);
-        serverConnection.login(id);
-        userID = id;
     }
 
     public void updateQuestions(List<Question> newQuestions) {

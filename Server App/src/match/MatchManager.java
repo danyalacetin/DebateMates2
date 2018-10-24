@@ -30,7 +30,6 @@ public class MatchManager {
         final int id = idManager.getId();
         Match match = new Match(id);
         matches.put(id, match);
-        System.out.println("creating match");
         return id;
     }
     
@@ -51,9 +50,7 @@ public class MatchManager {
     }
     
     public void joinMatch(Worker worker, String type) {
-        System.out.println("finding match...");
         int id = findMatch(type);
-        System.out.println("match found...joining match");
         joinMatch(worker, type, id);
     }
     

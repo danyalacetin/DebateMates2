@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Wed Oct 24 17:55:22 NZDT 2018:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0166-a46d-5d97-000006cab080 
+Wed Oct 24 22:46:48 NZDT 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0166-a578-2beb-000006d52d80 
 on database directory C:\Users\Demo\Documents\GitHub\DebateMates2\Server App\DebatemateDB with class loader sun.misc.Launcher$AppClassLoader@55f96302 
 Loaded from file:/C:/Users/Demo/Documents/GitHub/DebateMates2/Server%20App/lib/derby.jar
 java.vendor=Oracle Corporation

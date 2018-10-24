@@ -22,48 +22,48 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class MainMenuActivity extends AppCompatActivity {
-    private ShareDialog shareDialog;
-    private Button logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-//        FacebookSdk.sdkInitialize(this);
-        shareDialog=new ShareDialog(this);
-        Button logout=(Button) findViewById(R.id.Logout_Button);
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LoginManager.getInstance().logOut();
-                ClientApp.getClientApp().sendData("logout");
-                Intent login=new Intent (MainMenuActivity.this,LoginActivity.class);
-                startActivity(login);
-                ClientApp.getClientApp().sendData("logout");
-                finish();
-
-            }
-        });
         Bundle inBundle = getIntent().getExtras();
         if (inBundle!=null ){
-            String name = inBundle.get("name").toString();
-            String Surname = inBundle.get("Surname").toString();
-            String imageUrl = inBundle.get("imageURL").toString();
+            String name = inBundle.getString("name");
+            String Surname = inBundle.getString("Surname");
+            String imageUrl = inBundle.getString("imageURL");
 
             ((TextView) findViewById(R.id.textView4)).setText("" + name + " " + Surname);
 
             new DownloadImage((ImageView)findViewById(R.id.imageView)).execute(imageUrl);
-            DownloadImage view=new DownloadImage((ImageView)findViewById(R.id.imageView));
+            DownloadImage view = new DownloadImage((ImageView)findViewById(R.id.imageView));
             view.bmimage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent1=new Intent(MainMenuActivity.this,ProfileActivity.class);
-                    startActivity(intent1);
+//                    Intent intent1 = new Intent(MainMenuActivity.this,ProfileActivity.class);
+//                    startActivity(intent1);
                 }
             });
         }
 
     }
+
+    public void onImageClick(View view) {
+        Intent intent1 = new Intent(MainMenuActivity.this,ProfileActivity.class);
+        startActivity(intent1);
+    }
+
+    public void logoutPressed(View view) {
+        LoginManager.getInstance().logOut();
+        ClientApp.getClientApp().logout();
+        back();
+    }
+
+    @Override
+    public void onBackPressed() {
+
+    }
+
     public class DownloadImage extends AsyncTask<String,Void,Bitmap> {
         ImageView bmimage;
 
@@ -91,6 +91,12 @@ public class MainMenuActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(this, PlayActivity.class);
         startActivity(intent);
+    }
+
+    public void back() {
+        Intent login=new Intent (MainMenuActivity.this,LoginActivity.class);
+        startActivity(login);
+        finish();
     }
 
     public void settings(View view) {

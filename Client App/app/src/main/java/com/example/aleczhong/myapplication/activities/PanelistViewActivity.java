@@ -15,14 +15,16 @@ import java.util.List;
 
 public class PanelistViewActivity extends AppCompatActivity implements MatchDisplayInterface {
 
-    private TextView matchMessages;
+    private TextView matchAnnouncements;
+    private TextView matchQuestion;
     private MessageAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_panelist_view);
-        matchMessages = findViewById(R.id.matchInstructions);
+        matchAnnouncements = findViewById(R.id.matchAnnouncements);
+        matchQuestion = findViewById(R.id.matchQuestions);
         ListView listView = findViewById(R.id.messageArea);
 
         ClientApp.getClientApp().addMatchDisplayInterface(this);
@@ -39,7 +41,17 @@ public class PanelistViewActivity extends AppCompatActivity implements MatchDisp
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                matchMessages.setText(msg);
+                matchAnnouncements.setText(msg);
+            }
+        });
+    }
+
+    @Override
+    public void displayQuestion(final String question) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                matchAnnouncements.setText(question);
             }
         });
     }

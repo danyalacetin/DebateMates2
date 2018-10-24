@@ -121,10 +121,18 @@ class Match {
         }
     }
     
-    private void waitForInput() {
+    private void waitTime(final long time) {
+        try {
+            Thread.sleep(time * 1000);
+        } catch (InterruptedException ex) {
+            
+        }
+    }
+    
+    private void waitForInput(final int timeout) {
         synchronized(gameThread) {
             try {
-                gameThread.wait();
+                gameThread.wait(timeout * 1000);
             } catch (InterruptedException error) {
                 System.err.println(error.getMessage());
             }
@@ -155,40 +163,55 @@ class Match {
     private void runGame() {
         question = "question";
         processCommand(Command.createAnonymous("start"));
+        processCommand(Command.createAnonymous("announce Game has started!"));
+        waitTime(4);
         processCommand(Command.createAnonymous("display " + question));
+        processCommand(Command.createAnonymous("announce Look at the statement."));
+        waitTime(7);
         boolean startPlayer = new Random().nextBoolean();
         player1 = startPlayer ? players.get(0) : players.get(1);
         player2 = startPlayer ? players.get(1) : players.get(0);
         
-        player1.send(processor.processCommand(Command.createAnonymous("matchmessage Present your agrument for")));
-        player1.send(Command.createAnonymous("enable 120"));
-        waitForInput();
-        player2.send(processor.processCommand(Command.createAnonymous("matchmessage Rebute")));
-        player2.send(Command.createAnonymous("enable 90"));
-        waitForInput();
-        processCommand(Command.createAnonymous("matchmessage Time to Vote!"));
-        panelists.forEach(p -> p.send(Command.createAnonymous("enable 30")));
+        player1.send(processor.processCommand(Command.createAnonymous("announce "
+                + player1.getNickname() + " please present your agrument for")));
+        player1.send(Command.createAnonymous("enable"));
+        waitForInput(120);
+        player1.send(Command.createAnonymous("disable"));
+        player2.send(processor.processCommand(Command.createAnonymous("announce "
+                + player2.getNickname() + " present your rebutle")));
+        player2.send(Command.createAnonymous("enable"));
+        waitForInput(90);
+        player2.send(Command.createAnonymous("disable"));
+        processCommand(Command.createAnonymous("announce Time to Vote!"));
+        panelists.forEach(p -> p.send(Command.createAnonymous("enable")));
         getPanelistsVotes();
-        waitForInput();
+        waitForInput(30);
+        panelists.forEach(p -> p.send(Command.createAnonymous("disable")));
         
-        player2.send(processor.processCommand(Command.createAnonymous("matchmessage Present your argument against")));
-        player2.send(Command.createAnonymous("enable 120"));
-        waitForInput();
-        player1.send(processor.processCommand(Command.createAnonymous("matchmessage Rebute")));
-        player1.send(Command.createAnonymous("enable 90"));
-        waitForInput();
-        processCommand(Command.createAnonymous("matchmessage Time to Vote!"));
-        panelists.forEach(p -> p.send(Command.createAnonymous("enable 30")));
+        player2.send(processor.processCommand(Command.createAnonymous("announce "
+                + player2.getNickname() +  " Present your argument against")));
+        player2.send(Command.createAnonymous("enable"));
+        waitForInput(120);
+        player2.send(Command.createAnonymous("disable"));
+        player1.send(processor.processCommand(Command.createAnonymous("announce "
+                + player1.getNickname() + " present your rebutle")));
+        player1.send(Command.createAnonymous("enable"));
+        waitForInput(90);
+        player1.send(Command.createAnonymous("disable"));
+        processCommand(Command.createAnonymous("announce Time to Vote!"));
+        panelists.forEach(p -> p.send(Command.createAnonymous("enable")));
         getPanelistsVotes();
-        waitForInput();
+        waitForInput(30);
+        panelists.forEach(p -> p.send(Command.createAnonymous("disable")));
         
         Worker winner = getWinner();
         if (null == winner) {
-            processCommand(Command.createAnonymous("matchmessage It is a Tie!"));
-            processCommand(Command.createAnonymous("matchmessage Vote Again!"));
-            panelists.forEach(p -> p.send(Command.createAnonymous("enable 30")));
+            processCommand(Command.createAnonymous("announce It is a Tie!"));
+            processCommand(Command.createAnonymous("announce Vote Again!"));
+            panelists.forEach(p -> p.send(Command.createAnonymous("enable")));
             getPanelistsVotes();
-            waitForInput();
+            waitForInput(30);
+            panelists.forEach(p -> p.send(Command.createAnonymous("disable")));
             winner = getWinner();
         }
         
@@ -299,33 +322,41 @@ class Match {
     private void endMatch(Worker reason) {
         isRunning = false;
         final List<Command> joinCommands = new ArrayList<>();
-        players.forEach(worker -> {
-            joinCommands.add(Command.create("join player", worker));
-        });
-        panelists.forEach(worker -> {
-            joinCommands.add(Command.create("join panelist", worker));
-        });
-        spectators.forEach(worker -> {
-            joinCommands.add(Command.create("join spectator", worker));
-        });
         
+        if (null != reason) {
+            players.forEach(worker -> {
+                joinCommands.add(Command.create("join player", worker));
+            });
+            panelists.forEach(worker -> {
+                joinCommands.add(Command.create("join panelist", worker));
+            });
+            spectators.forEach(worker -> {
+                joinCommands.add(Command.create("join spectator", worker));
+            });
+        }
+        shutdown();
+        if (null != reason) joinCommands.forEach(Server.getInstance()::processCommand);
+    }
+    
+    private void shutdown() {
         kickAll();
-        joinCommands.forEach(Server.getInstance()::processCommand);
+        Server.getInstance().processCommand(Command.createAnonymous("deletematch " + matchID));
     }
     
     boolean removeMember(Worker member) {
         boolean isRemoved = false;
+        Worker left = null;
         
         membersLock.lock();
         try {
             if (players.contains(member)) {
                 players.remove(member);
                 isRemoved = true;
-                if(isRunning) endMatch(member); // end the match
+                if(isRunning) left = member; // end the match
             } else if (panelists.contains(member)) {
                 panelists.remove(member);
                 isRemoved = true;
-                if(isRunning) endMatch(member); // end the match
+                if(isRunning) left = member; // end the match
             } else if (spectators.contains(member)) {
                 spectators.remove(member);
                 isRemoved = true;
@@ -333,9 +364,8 @@ class Match {
             
             if (isRemoved) member.leaveMatch();
         } finally {
-            if (0 == getNumMembers("")) 
-                Server.getInstance().processCommand(Command.createAnonymous("deletematch " + matchID));
             membersLock.unlock();
+            if (null != left) endMatch(left);
         }
         
         return isRemoved; 

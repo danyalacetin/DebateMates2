@@ -1,7 +1,8 @@
 package com.example.aleczhong.myapplication.applogic;
 
 public interface MatchDisplayInterface {
-    public abstract void matchAnnouncement(final String msg);
-    public abstract void messageUpdate();
-    public abstract void enableInput(boolean value);
+    void matchAnnouncement(final String msg);
+    void displayQuestion(final String question);
+    void messageUpdate();
+    void enableInput(boolean value);
 }

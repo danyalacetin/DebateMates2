@@ -27,15 +27,14 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(this);
         setContentView(R.layout.activity_profile);
-        shareDialog=new ShareDialog(this);
+        shareDialog = new ShareDialog(this);
 
-        Bundle inBundle =getIntent().getExtras();
-        if (inBundle!=null){
-        String name=inBundle.get("name").toString();
-        String Surname=inBundle.get("Surname").toString();
-        String imageUrl=inBundle.get("imageURL").toString();
+        Bundle inBundle = getIntent().getExtras();
+        if (inBundle != null){
+        String name = inBundle.getString("name");
+        String Surname = inBundle.getString("Surname");
+        String imageUrl = inBundle.getString("imageURL");
 
         TextView username=(TextView)findViewById(R.id.textView5);
         username.setText(""+name+" "+Surname);

@@ -58,7 +58,6 @@
         <activity
             android:name=".activities.PlayerViewActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity android:name=".activities.MockLoginActivity" />
         <activity android:name=".activities.SetQuestionsActivity" />
         <activity android:name=".activities.JoiningMatchActivity" />
         <activity android:name=".activities.PanelistViewActivity" />

@@ -90,7 +90,7 @@ class CommandProcessor {
                 server.updateNickname(command.getArg(0), worker);
             }
             if (command.is("logout")) {
-                
+                server.getWorkerManager().logoutWorker(worker);
             }
             else if (command.is("updateQuestion", 2)){
                 server.updateQuestion(command.getArg(0), command.getArg(1), worker);

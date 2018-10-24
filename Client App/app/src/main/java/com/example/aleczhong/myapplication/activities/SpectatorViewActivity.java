@@ -2,6 +2,7 @@ package com.example.aleczhong.myapplication.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -17,12 +18,14 @@ public class SpectatorViewActivity extends AppCompatActivity implements MatchDis
 
     private TextView matchMessages;
     private MessageAdapter adapter;
+    private TextView matchQuestion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spectator_view);
-        matchMessages = findViewById(R.id.matchInstructions);
+        matchMessages = findViewById(R.id.matchAnnouncements);
+        matchQuestion = findViewById(R.id.matchQuestions);
         ListView listView = findViewById(R.id.messageArea);
 
         ClientApp.getClientApp().addMatchDisplayInterface(this);
@@ -40,6 +43,16 @@ public class SpectatorViewActivity extends AppCompatActivity implements MatchDis
             @Override
             public void run() {
                 matchMessages.setText(msg);
+            }
+        });
+    }
+
+    @Override
+    public void displayQuestion(final String question) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                matchMessages.setText(question);
             }
         });
     }

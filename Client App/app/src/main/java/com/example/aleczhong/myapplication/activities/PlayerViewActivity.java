@@ -3,7 +3,6 @@ package com.example.aleczhong.myapplication.activities;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -18,14 +17,16 @@ import java.util.List;
 
 public class PlayerViewActivity extends AppCompatActivity implements MatchDisplayInterface {
     private EditText userInput;
-    private TextView matchMessages;
+    private TextView matchAnnouncements;
+    private TextView matchQuestions;
     private MessageAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_view);
-        matchMessages = findViewById(R.id.matchInstructions);
+        matchAnnouncements = findViewById(R.id.matchAnnouncements);
+        matchQuestions = findViewById(R.id.matchQuestions);
         userInput = findViewById(R.id.inputArea);
         ListView listView = findViewById(R.id.messageArea);
         userInput.setEnabled(false);
@@ -43,7 +44,17 @@ public class PlayerViewActivity extends AppCompatActivity implements MatchDispla
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                matchMessages.setText(msg);
+                matchAnnouncements.setText(msg);
+            }
+        });
+    }
+
+    @Override
+    public void displayQuestion(final String question) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                matchQuestions.setText(question);
             }
         });
     }
@@ -59,8 +70,13 @@ public class PlayerViewActivity extends AppCompatActivity implements MatchDispla
     }
 
     @Override
-    public void enableInput(boolean value) {
-        userInput.setEnabled(value);
+    public void enableInput(final boolean value) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                userInput.setEnabled(value);
+            }
+        });
     }
 
     public void sendText(View view) {
