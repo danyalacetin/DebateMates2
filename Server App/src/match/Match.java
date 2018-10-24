@@ -174,13 +174,13 @@ class Match {
         player1 = startPlayer ? players.get(0) : players.get(1);
         player2 = startPlayer ? players.get(1) : players.get(0);
         
-        processCommand(Command.createAnonymous(player1.getNickname()+" Is forming thier argument."));
+        processCommand(Command.createAnonymous("announce "+ player1.getNickname()+" Is forming thier argument."));
         player1.send(processor.processCommand(Command.createAnonymous("announce "
                 + player1.getNickname() + " please present your agrument for")));
         player1.send(Command.createAnonymous("enable"));
         waitForInput(120);
         player1.send(Command.createAnonymous("disable"));
-        processCommand(Command.createAnonymous(player2.getNickname()+" Is forming their rebutle."));
+        processCommand(Command.createAnonymous("announce "+ player2.getNickname()+" Is forming their rebutle."));
         player2.send(processor.processCommand(Command.createAnonymous("announce "
                 + player2.getNickname() + " present your rebutle")));
         player2.send(Command.createAnonymous("enable"));
@@ -192,13 +192,13 @@ class Match {
         waitForInput(30);
         panelists.forEach(p -> p.send(Command.createAnonymous("disable")));
         
-        processCommand(Command.createAnonymous(player2.getNickname()+" Is forming their argument."));
+        processCommand(Command.createAnonymous("announce "+ player2.getNickname()+" Is forming their argument."));
         player2.send(processor.processCommand(Command.createAnonymous("announce "
                 + player2.getNickname() +  " Present your argument against")));
         player2.send(Command.createAnonymous("enable"));
         waitForInput(120);
         player2.send(Command.createAnonymous("disable"));
-        processCommand(Command.createAnonymous(player1.getNickname()+" Is forming their rebutle."));
+        processCommand(Command.createAnonymous("announce "+ player1.getNickname()+" Is forming their rebutle."));
         player1.send(processor.processCommand(Command.createAnonymous("announce "
                 + player1.getNickname() + " present your rebutle")));
         player1.send(Command.createAnonymous("enable"));
