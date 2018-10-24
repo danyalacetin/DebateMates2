@@ -28,6 +28,7 @@ public class PlayerViewActivity extends AppCompatActivity implements MatchDispla
         matchMessages = findViewById(R.id.matchInstructions);
         userInput = findViewById(R.id.inputArea);
         ListView listView = findViewById(R.id.messageArea);
+        userInput.setEnabled(false);
         ClientApp.getClientApp().addMatchDisplayInterface(this);
 
         final List<ChatMessage> messages = ClientApp.getClientApp().getMessages();
@@ -35,7 +36,6 @@ public class PlayerViewActivity extends AppCompatActivity implements MatchDispla
         listView.setAdapter(adapter);
 
         ClientApp.getClientApp().updateAnnouncements();
-        userInput.setEnabled(false);
     }
 
     @Override

@@ -310,13 +310,7 @@ class Match {
         });
         
         kickAll();
-        System.out.println("==================================");
-        System.out.println(Server.getInstance().getMatchManager().getMatchInfo());
-        System.out.println("==================================");
         joinCommands.forEach(Server.getInstance()::processCommand);
-        System.out.println("==================================");
-        System.out.println(Server.getInstance().getMatchManager().getMatchInfo());
-        System.out.println("==================================");
     }
     
     boolean removeMember(Worker member) {

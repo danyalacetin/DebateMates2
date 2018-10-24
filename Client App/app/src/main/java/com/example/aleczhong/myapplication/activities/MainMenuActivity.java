@@ -50,25 +50,24 @@ public class MainMenuActivity extends AppCompatActivity {
             String Surname = inBundle.get("Surname").toString();
             String imageUrl = inBundle.get("imageURL").toString();
 
-            TextView username = (TextView) findViewById(R.id.textView4);
-            username.setText("" + name + " " + Surname);
+            ((TextView) findViewById(R.id.textView4)).setText("" + name + " " + Surname);
 
-        new DownloadImage((ImageView)findViewById(R.id.imageView)).execute(imageUrl);
-        DownloadImage view=new DownloadImage((ImageView)findViewById(R.id.imageView));
-        view.bmimage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent1=new Intent(MainMenuActivity.this,ProfileActivity.class);
-                startActivity(intent1);
-            }
-        });
+            new DownloadImage((ImageView)findViewById(R.id.imageView)).execute(imageUrl);
+            DownloadImage view=new DownloadImage((ImageView)findViewById(R.id.imageView));
+            view.bmimage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent1=new Intent(MainMenuActivity.this,ProfileActivity.class);
+                    startActivity(intent1);
+                }
+            });
         }
 
     }
     public class DownloadImage extends AsyncTask<String,Void,Bitmap> {
         ImageView bmimage;
 
-        public DownloadImage(ImageView bmimage){
+        DownloadImage(ImageView bmimage){
             this.bmimage=bmimage;
         }
         protected Bitmap doInBackground(String...Url){
