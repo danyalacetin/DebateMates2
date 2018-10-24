@@ -25,9 +25,6 @@ public class Command
         } else {
             label = command[0].toLowerCase();
             args = Arrays.copyOfRange(command, 1, command.length);
-            for (int i = 0; i < args.length; ++i) {
-                args[i] = args[i].toLowerCase();
-            }
         }
         this.source = source;
     }

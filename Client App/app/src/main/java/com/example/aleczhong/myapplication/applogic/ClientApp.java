@@ -29,6 +29,7 @@ public class ClientApp {
     private String currentMatchAnnouncement;
     private String currentQuestion;
     private boolean isEnabled;
+    private String winner;
 
     private ClientApp() {
         serverConnection = new ServerConnection(this);
@@ -73,7 +74,7 @@ public class ClientApp {
         serverConnection.joinChatRoom(type);
     }
 
-    private String joinString(String[] tokens) {
+    public static String joinString(String[] tokens) {
         String output = tokens[0];
         for (int i = 1; i < tokens.length; ++i) {
             output += " " + tokens[i];
@@ -81,7 +82,7 @@ public class ClientApp {
         return output;
     }
 
-    private String removeTailToString(String[] tokens, int start) {
+    public static String removeTailToString(String[] tokens, int start) {
         return joinString(Arrays.copyOfRange(tokens, start, tokens.length));
     }
 
@@ -98,10 +99,18 @@ public class ClientApp {
         }
     }
 
+    public String getLogin() {
+        return userID;
+    }
+
     public void logout() {
         sendData("logout");
         token = null;
         userID = null;
+    }
+
+    public String getWinner() {
+        return winner;
     }
 
     private void checkWaitingFunctions(String msg) {

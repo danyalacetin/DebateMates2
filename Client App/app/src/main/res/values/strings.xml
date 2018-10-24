@@ -14,6 +14,8 @@
     <string name="judge_match">JUDGE A MATCH</string>
     <string name="spectate_match">WATCH A MATCH</string>
 
+    <string name="continueLabel">Continue</string>
+
     <string name="confirm_questions">Confirm</string>
     <string name="cancel_questions">Cancel</string>
 

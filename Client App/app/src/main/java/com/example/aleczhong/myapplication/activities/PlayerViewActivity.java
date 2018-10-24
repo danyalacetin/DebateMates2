@@ -1,5 +1,6 @@
 package com.example.aleczhong.myapplication.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import com.example.aleczhong.myapplication.R;
 import com.example.aleczhong.myapplication.applogic.ChatMessage;
 import com.example.aleczhong.myapplication.applogic.ClientApp;
+import com.example.aleczhong.myapplication.applogic.DelayedReturn;
 import com.example.aleczhong.myapplication.applogic.MatchDisplayInterface;
 import com.example.aleczhong.myapplication.applogic.MessageAdapter;
 
@@ -20,6 +22,7 @@ public class PlayerViewActivity extends AppCompatActivity implements MatchDispla
     private TextView matchAnnouncements;
     private TextView matchQuestions;
     private MessageAdapter adapter;
+    private String winner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,27 @@ public class PlayerViewActivity extends AppCompatActivity implements MatchDispla
         listView.setAdapter(adapter);
 
         ClientApp.getClientApp().updateAnnouncements();
+        ClientApp.getClientApp().addWaitFunc(new DelayedReturn() {
+            @Override
+            public void onSuccess() {
+                showEnd();
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+
+            @Override
+            public int testString(String toTest) {
+                String[] tokens = toTest.split(" ");
+                if (tokens[0].equalsIgnoreCase("end")) {
+                    winner = ClientApp.removeTailToString(tokens, 1);
+                    return 1;
+                }
+                return 0;
+            }
+        });
     }
 
     @Override
@@ -101,5 +125,14 @@ public class PlayerViewActivity extends AppCompatActivity implements MatchDispla
     protected void onPause() {
         super.onPause();
         ClientApp.getClientApp().sendData("leave");
+    }
+
+    private void showEnd() {
+        String winlose;
+        if (winner.equals(ClientApp.getClientApp().getLogin())) winlose = "win";
+        else winlose = "lose";
+        Intent intent = new Intent(this, MatchEndActivity.class);
+        intent.getExtras().putString("winlose", winner);
+        startActivity(intent);
     }
 }
