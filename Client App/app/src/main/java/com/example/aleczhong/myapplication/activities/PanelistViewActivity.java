@@ -51,7 +51,7 @@ public class PanelistViewActivity extends AppCompatActivity implements MatchDisp
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                matchAnnouncements.setText(question);
+                matchQuestion.setText(question);
             }
         });
     }

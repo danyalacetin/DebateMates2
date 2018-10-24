@@ -62,6 +62,11 @@ public class ClientApp {
         isEnabled = false;
     }
 
+    public void clearMessages() {
+        messages.clear();
+        if (null != displayInterface) displayInterface.messageUpdate();
+    }
+
     public void addMatchDisplayInterface(MatchDisplayInterface displayInterface) {
         this.displayInterface = displayInterface;
         displayInterface.enableInput(isEnabled);
@@ -85,7 +90,7 @@ public class ClientApp {
         serverConnection.joinChatRoom(type);
     }
 
-    public static String joinString(String[] tokens) {
+    private static String joinString(String[] tokens) {
         String output = tokens[0];
         for (int i = 1; i < tokens.length; ++i) {
             output += " " + tokens[i];
@@ -166,8 +171,7 @@ public class ClientApp {
     }
 
     private void sendMatchAnnouncement(String[] tokens) {
-        String msg = removeTailToString(tokens, 1);
-        currentMatchAnnouncement = msg;
+        currentMatchAnnouncement = removeTailToString(tokens, 1);
         updateAnnouncements();
     }
 

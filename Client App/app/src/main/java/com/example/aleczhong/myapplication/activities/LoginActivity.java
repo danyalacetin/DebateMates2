@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
                 loginUser();
             }
         };
-        profileTracker= new ProfileTracker() {
+        profileTracker = new ProfileTracker() {
             @Override
             protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
                 profile = currentProfile;
@@ -159,10 +159,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void nextActivity() {
-        ClientApp.log("next activity attempted");
-        if (profile != null) {
-            Intent intent = new Intent(this, MainMenuActivity.class);
-            startActivity(intent);
-        }
+        Intent intent = new Intent(this, MainMenuActivity.class);
+        startActivity(intent);
     }
 }

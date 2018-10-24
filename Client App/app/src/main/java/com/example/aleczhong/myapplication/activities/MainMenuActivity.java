@@ -63,8 +63,8 @@ public class MainMenuActivity extends AppCompatActivity {
 
     }
 
-    public class DownloadImage extends AsyncTask<String,Void,Bitmap> {
-        ImageView bmimage;
+    private class DownloadImage extends AsyncTask<String,Void,Bitmap> {
+        private ImageView bmimage;
 
         DownloadImage(ImageView bmimage){
             this.bmimage=bmimage;

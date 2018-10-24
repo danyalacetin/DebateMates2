@@ -7,9 +7,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.aleczhong.myapplication.R;
+import com.example.aleczhong.myapplication.applogic.ClientApp;
 
 public class MatchEndActivity extends AppCompatActivity {
-
     private TextView display;
 
     @Override
@@ -18,6 +18,7 @@ public class MatchEndActivity extends AppCompatActivity {
         setContentView(R.layout.activity_match_end);
         display = findViewById(R.id.endGameMessage);
         String winLose = getIntent().getExtras().getString("winlose");
+        ClientApp.getClientApp().clearMessages();
         if ("win".equals(winLose)) showWin();
         else if ("lose".equals(winLose)) showLose();
         else display.setText("Error: " + winLose);
