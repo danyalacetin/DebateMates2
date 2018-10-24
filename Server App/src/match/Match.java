@@ -6,10 +6,12 @@
 package match;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Consumer;
+import server.Server;
 import utilities.Command;
 import server.ServerConstants;
 import server.Worker;
@@ -191,6 +193,7 @@ class Match {
         }
         
         announceWinner(winner);
+        isRunning = false;
         endMatch();
     }
     
@@ -282,7 +285,38 @@ class Match {
     }
     
     private void endMatch() {
+        endMatch(null);
+    }
+    
+    private void kickAll() {
+        final List<Worker> toRemove = new ArrayList<>();
+        players.forEach(toRemove::add);
+        panelists.forEach(toRemove::add);
+        spectators.forEach(toRemove::add);
+        toRemove.forEach(this::removeMember);
+    }
+    
+    private void endMatch(Worker reason) {
+        isRunning = false;
+        final List<Command> joinCommands = new ArrayList<>();
+        players.forEach(worker -> {
+            joinCommands.add(Command.create("join player", worker));
+        });
+        panelists.forEach(worker -> {
+            joinCommands.add(Command.create("join panelist", worker));
+        });
+        spectators.forEach(worker -> {
+            joinCommands.add(Command.create("join spectator", worker));
+        });
         
+        kickAll();
+        System.out.println("==================================");
+        System.out.println(Server.getInstance().getMatchManager().getMatchInfo());
+        System.out.println("==================================");
+        joinCommands.forEach(Server.getInstance()::processCommand);
+        System.out.println("==================================");
+        System.out.println(Server.getInstance().getMatchManager().getMatchInfo());
+        System.out.println("==================================");
     }
     
     boolean removeMember(Worker member) {
@@ -293,22 +327,20 @@ class Match {
             if (players.contains(member)) {
                 players.remove(member);
                 isRemoved = true;
-                member.leaveMatch();
-                endMatch(); // end the match
+                if(isRunning) endMatch(member); // end the match
             } else if (panelists.contains(member)) {
                 panelists.remove(member);
                 isRemoved = true;
-                member.leaveMatch();
+                if(isRunning) endMatch(member); // end the match
             } else if (spectators.contains(member)) {
                 spectators.remove(member);
                 isRemoved = true;
-                member.leaveMatch();
             }
             
-            if (isRemoved) {
-                member.leaveMatch();
-            }
+            if (isRemoved) member.leaveMatch();
         } finally {
+            if (0 == getNumMembers("")) 
+                Server.getInstance().processCommand(Command.createAnonymous("deletematch " + matchID));
             membersLock.unlock();
         }
         

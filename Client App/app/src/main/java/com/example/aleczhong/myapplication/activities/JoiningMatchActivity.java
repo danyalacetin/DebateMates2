@@ -25,6 +25,7 @@ public class JoiningMatchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_joining_match);
+        String type = getIntent().getExtras().getString("type");
 
         joinMatch(type);
         enter(type);
@@ -34,7 +35,6 @@ public class JoiningMatchActivity extends AppCompatActivity {
         ClientApp.getClientApp().joinMatch(type, new DelayedReturn() {
             @Override
             public void onSuccess() {
-                ClientApp.log("Join: join");
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -78,7 +78,6 @@ public class JoiningMatchActivity extends AppCompatActivity {
                 if (toTest.equalsIgnoreCase("start")) compare = 1;
                 else if (toTest.equalsIgnoreCase("fail")) compare = -1;
                 else compare = 0;
-                if (toTest.equalsIgnoreCase("start")) ClientApp.log("Passed: " + compare);
                 return compare;
             }
         });

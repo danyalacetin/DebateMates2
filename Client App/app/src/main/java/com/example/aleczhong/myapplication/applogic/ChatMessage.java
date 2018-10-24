@@ -29,4 +29,9 @@ public class ChatMessage implements Comparable<Integer> {
     public int compareTo(@NonNull Integer integer) {
         return id.compareTo(integer);
     }
+
+    @Override
+    public String toString() {
+        return String.format("%d, %s, %s", id, type.toString(), content);
+    }
 }

@@ -50,7 +50,7 @@ public class Server implements ServerWorker {
     /**
      * @return the manager responsible for running matches
      */
-    MatchManager getMatchManager() {
+    public MatchManager getMatchManager() {
         return matchManager;
     }
     
@@ -133,7 +133,6 @@ public class Server implements ServerWorker {
      * @param source worker associated with the user
      */
     void logoutUser(Worker source) {
-        
         database.updateItem(source.getLogin(), "ONLINESTATUS", "0");
     }
     

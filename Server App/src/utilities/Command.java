@@ -23,8 +23,11 @@ public class Command
             label = null;
             args = null;
         } else {
-            label = command[0];
+            label = command[0].toLowerCase();
             args = Arrays.copyOfRange(command, 1, command.length);
+            for (int i = 0; i < args.length; ++i) {
+                args[i] = args[i].toLowerCase();
+            }
         }
         this.source = source;
     }

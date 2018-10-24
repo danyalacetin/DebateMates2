@@ -68,4 +68,22 @@ public class PlayerViewActivity extends AppCompatActivity implements MatchDispla
         userInput.getText().clear();
         if (!text.equals("")) ClientApp.getClientApp().sendChatMessage(text);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ClientApp.getClientApp().sendData("leave");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        ClientApp.getClientApp().sendData("leave");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        ClientApp.getClientApp().sendData("leave");
+    }
 }

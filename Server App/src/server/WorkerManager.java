@@ -51,6 +51,7 @@ class WorkerManager {
     }
     
     void removeWorker(Worker worker) {
+        logoutWorker(worker);
         worker.shutdown();
         workers.remove(worker);
     }
@@ -60,7 +61,7 @@ class WorkerManager {
             Command cmd = Command.create("leave", worker);
             server.processCommand(cmd);
         }
-        
+        Server.getInstance().logoutUser(worker);
         System.out.println(worker.getLogin() + " logged out.");
         worker.setLogin(null);
     }

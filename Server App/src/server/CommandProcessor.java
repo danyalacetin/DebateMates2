@@ -42,7 +42,10 @@ class CommandProcessor {
             MainController.clear();
         else if (command.is("clearerr", 0))
             MainController.clearErr();
-        
+        else if (command.is("deletematch", 1)) {
+            server.getMatchManager().deleteMatch(command.getArg(0));
+        }
+            
         //Testing commands
         else if (command.is("addDB", 5))
             server.getDB().addItem(command.getArg(0), command.getArg(1), Integer.parseInt(command.getArg(2)), Integer.parseInt(command.getArg(3)), Integer.parseInt(command.getArg(4)), 0);
@@ -83,12 +86,11 @@ class CommandProcessor {
         }
         else if (worker.isLoggedIn()) // logged in
         {
-            if (command.is("logout", 0)) {
-                System.out.println("logging out user");
-                    server.logoutUser(worker);
-            }
-            else if (command.is("nickname", 1)){
+            if (command.is("nickname", 1)){
                 server.updateNickname(command.getArg(0), worker);
+            }
+            if (command.is("logout")) {
+                
             }
             else if (command.is("updateQuestion", 2)){
                 server.updateQuestion(command.getArg(0), command.getArg(1), worker);

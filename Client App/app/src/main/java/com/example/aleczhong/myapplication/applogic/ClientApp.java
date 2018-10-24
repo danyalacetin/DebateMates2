@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class ClientApp {
@@ -28,6 +29,7 @@ public class ClientApp {
     private MatchDisplayInterface displayInterface;
     private String currentMatchAnnouncement;
     private String currentServerAnnouncement;
+    private boolean isEnabled;
 
     private ClientApp() {
         serverConnection = new ServerConnection(this);
@@ -54,10 +56,12 @@ public class ClientApp {
                 );
         messages = new ArrayList<>();
         displayInterface = null;
+        isEnabled = false;
     }
 
     public void addMatchDisplayInterface(MatchDisplayInterface displayInterface) {
         this.displayInterface = displayInterface;
+        displayInterface.enableInput(isEnabled);
     }
 
     public void updateAnnouncements() {
@@ -118,6 +122,8 @@ public class ClientApp {
         MessageType type;
 
         String user = msg[2];
+        log("|" + user + "|");
+        log("|" + userID + "|");
         if (user.equals(userID)) {
             type = MessageType.SELF;
         } else {
@@ -142,23 +148,28 @@ public class ClientApp {
     }
 
     private void addMessage(ChatMessage msg) {
+        log(msg.toString());
         messages.add(msg);
         if (null != displayInterface) displayInterface.messageUpdate();
     }
 
+    private void setEnabled(boolean value) {
+        isEnabled = value;
+        if (null != displayInterface) displayInterface.enableInput(isEnabled);
+    }
+
     private void enable(final int time) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                displayInterface.enableInput(true);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
                 try {
+                    setEnabled(true);
                     Thread.sleep(time * 1000);
+                    setEnabled(false);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                displayInterface.enableInput(false);
-            }
-        }).start();
+            }}).start();
     }
 
     void handleInput(String msg) {
@@ -197,11 +208,12 @@ public class ClientApp {
 
     public void setAccessToken(AccessToken token) {
         this.token = token;
+        userID = token.getUserId();
     }
 
     public void login(DelayedReturn waitFunction) {
         addWaitFunc(waitFunction);
-        serverConnection.login(token.getUserId());
+        serverConnection.login(userID);
     }
 
     public void login(String id, DelayedReturn wf)
