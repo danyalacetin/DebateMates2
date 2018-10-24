@@ -8,12 +8,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:minEms="1"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/matchAnnouncements"/>
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/matchAnnouncements" />
 
     <TextView
         android:id="@+id/matchAnnouncements"

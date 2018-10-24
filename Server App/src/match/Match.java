@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Consumer;
 import server.Server;
@@ -60,7 +61,7 @@ class Match {
         votes = new ArrayList<>(MAX_PANELISTS);
         winners = new ArrayList<>(3);
         voteWinner = null;
-        question = null;
+        question = getQuestion();
     }
     
     /**
@@ -161,44 +162,49 @@ class Match {
     }
     
     private void runGame() {
-        question = "question";
         processCommand(Command.createAnonymous("start"));
-        processCommand(Command.createAnonymous("announce Game has started!"));
-        waitTime(4);
+        for(int i = 5; i > -1; i--){
+            processCommand(Command.createAnonymous("announce The Game is about to begin in "+i));
+            waitTime(1);
+        }
         processCommand(Command.createAnonymous("display " + question));
-        processCommand(Command.createAnonymous("announce Look at the statement."));
-        waitTime(7);
+        processCommand(Command.createAnonymous("announce Please read the statement."));
+        waitTime(5);
         boolean startPlayer = new Random().nextBoolean();
         player1 = startPlayer ? players.get(0) : players.get(1);
         player2 = startPlayer ? players.get(1) : players.get(0);
         
+        processCommand(Command.createAnonymous(player1.getNickname()+" Is forming thier argument."));
         player1.send(processor.processCommand(Command.createAnonymous("announce "
                 + player1.getNickname() + " please present your agrument for")));
         player1.send(Command.createAnonymous("enable"));
         waitForInput(120);
         player1.send(Command.createAnonymous("disable"));
+        processCommand(Command.createAnonymous(player2.getNickname()+" Is forming their rebutle."));
         player2.send(processor.processCommand(Command.createAnonymous("announce "
                 + player2.getNickname() + " present your rebutle")));
         player2.send(Command.createAnonymous("enable"));
         waitForInput(90);
         player2.send(Command.createAnonymous("disable"));
-        processCommand(Command.createAnonymous("announce Time to Vote!"));
+        processCommand(Command.createAnonymous("announce Panelists are voting!"));
         panelists.forEach(p -> p.send(Command.createAnonymous("enable")));
         getPanelistsVotes();
         waitForInput(30);
         panelists.forEach(p -> p.send(Command.createAnonymous("disable")));
         
+        processCommand(Command.createAnonymous(player2.getNickname()+" Is forming their argument."));
         player2.send(processor.processCommand(Command.createAnonymous("announce "
                 + player2.getNickname() +  " Present your argument against")));
         player2.send(Command.createAnonymous("enable"));
         waitForInput(120);
         player2.send(Command.createAnonymous("disable"));
+        processCommand(Command.createAnonymous(player1.getNickname()+" Is forming their rebutle."));
         player1.send(processor.processCommand(Command.createAnonymous("announce "
                 + player1.getNickname() + " present your rebutle")));
         player1.send(Command.createAnonymous("enable"));
         waitForInput(90);
         player1.send(Command.createAnonymous("disable"));
-        processCommand(Command.createAnonymous("announce Time to Vote!"));
+        processCommand(Command.createAnonymous("announce Panelists are voting!"));
         panelists.forEach(p -> p.send(Command.createAnonymous("enable")));
         getPanelistsVotes();
         waitForInput(30);
@@ -207,7 +213,7 @@ class Match {
         Worker winner = getWinner();
         if (null == winner) {
             processCommand(Command.createAnonymous("announce It is a Tie!"));
-            processCommand(Command.createAnonymous("announce Vote Again!"));
+            processCommand(Command.createAnonymous("announce Who's debated best overall?"));
             panelists.forEach(p -> p.send(Command.createAnonymous("enable")));
             getPanelistsVotes();
             waitForInput(30);
@@ -369,5 +375,53 @@ class Match {
         }
         
         return isRemoved; 
+    }
+    
+    public String getQuestion(){
+        int rand = ThreadLocalRandom.current().nextInt(1, 20 + 1);
+        switch (rand){
+            case 1:
+                return "Mac is better than Pc";
+            case 2:
+                return "Donald Trump is a good president";
+            case 3:
+                return "The great pyramids were built using alien technology";
+            case 4:
+                return "Racism is rampant in western society";
+            case 5:
+                return "The theory of evolution is fake";
+            case 6:
+                return "Video games cause violence";
+            case 7:
+                return "There are more than two genders";
+            case 8:
+                return "There needs to be proper gun control in places like America";
+            case 9:
+                return "Global warming isn’t real";
+            case 10:
+                return "The earth is flat";
+            case 11:
+                return "9/11 was an inside job";
+            case 12:
+                return "High school is a waste of time";
+            case 13:
+                return "Morality comes from god";
+            case 14:
+                return "Aliens regularly come to earth";
+            case 15:
+                return "Woman get paid less than men purely due to gender inequality";
+            case 16:
+                return "Artificial Intelligence is dangerous";
+            case 17:
+                return "Private schools are better than public schools";
+            case 18:
+                return "Executing prisoners should be ilegal";
+            case 19:
+                return "Celebrities don't deserve a private life";
+            case 20:
+                return "Cigarettes should be banned";
+            default:
+                return "Error";
+        }
     }
 }

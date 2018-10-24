@@ -74,6 +74,13 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
+                //Gives time to retrieve Profile and Token
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
                 token = loginResult.getAccessToken();
                 profile = Profile.getCurrentProfile();
                 GraphRequest.newMeRequest(token, new GraphRequest.GraphJSONObjectCallback() {
